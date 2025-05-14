@@ -45,17 +45,52 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 
 <body>
-    <div class="login-page vh-100">
-        <video loop autoplay muted id="vid">
-            <source src="img/bg.mp4" type="video/mp4">
-            <source src="img/bg.mp4" type="video/ogg">
-            Your browser does not support the video tag.
-        </video>
-        <div class="d-flex align-items-center justify-content-center vh-100">
-            <div class="px-5 col-md-6 ms-auto">
-                <div class="px-5 col-10 mx-auto">
-                    <h2 class="text-dark my-0">Welcome Back</h2>
-                    <p class="text-50">Sign in to continue</p>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+  }
+
+  .login-wrapper {
+    display: flex;
+    height: 100vh;
+    align-items: center; /* Dikey ortalama */
+    justify-content: center; /* İki tarafı ortala */
+  }
+
+  .logo-container, .form-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .logo-container {
+    align-items: flex-start; /* form ile aynı hizadan başla */
+    padding-top: 100px; /* logo yukarıda değil, formla aynı hizada olur */
+  }
+
+  .form-box {
+    width: 75%;
+  }
+
+  .logo-img {
+    max-width: 500px;
+  }
+</style>
+
+<body>
+  <div class="login-wrapper">
+    <!-- Sol: Logo -->
+    <div class="logo-container">
+      <img src="img/logo.png" alt="Featsy Logo" class="logo-img">
+    </div>
+
+    <!-- Sağ: Form -->
+    <div class="form-container">
+      <div class="form-box">
+        <h2 class="text-dark my-0">Welcome Back</h2>
+        <p class="text-50">Sign in to continue</p>
 
                     <!-- HATA MESAJI -->
                     <?php if (!empty($message)): ?>
