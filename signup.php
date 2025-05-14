@@ -103,12 +103,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <label class="text-dark pb-1">Password</label>
                             <input type="password" placeholder="Enter Password" class="form-control py-1" name="password" id="password">
                         </div>
-                        <button type="submit" class="btn btn-primary btn-lg w-100">
+                        <button type="submit" class="btn btn-primary btn-lg w-100 my-3">
                             SIGN UP
                         </button>
-                        <div class="py-2">
-                            <button type="button" class="btn btn-facebook btn-lg w-100"><i class="feather-facebook"></i> Connect with Facebook</button>
-                        </div>
                     </form>
 
                     <div class="new-acc d-flex align-items-center justify-content-center">
