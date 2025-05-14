@@ -625,3 +625,72 @@ function get_popular_restaurants_in_user_city($user_id) {
     return $popular;
 }
 
+function get_restaurant_details($restaurant_id) {
+    global $conn;
+
+    $sql = "
+        SELECT 
+            r.*,
+            counties.name AS county,
+            (
+                SELECT categories.name
+                FROM restaurant_categories rc
+                JOIN categories ON rc.category_id = categories.id
+                WHERE rc.restaurant_id = r.id
+                LIMIT 1
+            ) AS category,
+            price_ranges.label AS price_range
+        FROM restaurants r
+        LEFT JOIN counties ON r.county_id = counties.id
+        LEFT JOIN price_ranges ON r.price_range_id = price_ranges.id
+        WHERE r.id = ?
+    ";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $restaurant_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc();
+}
+
+
+
+function get_restaurant_average_rating($restaurant_id) {
+    global $conn;
+
+    $sql = "SELECT AVG(rating) as average_rating FROM actions WHERE restaurant_id = ? AND rating IS NOT NULL";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $restaurant_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return round($row['average_rating'] ?? 0, 1);
+}
+
+function get_restaurant_menu($restaurant_id) {
+    global $conn;
+
+    $sql = "SELECT * FROM restaurant_menus WHERE restaurant_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $restaurant_id);
+    $stmt->execute();
+    return $stmt->get_result();
+}
+
+function get_restaurant_comments($restaurant_id) {
+    global $conn;
+
+    $sql = "
+        SELECT c.description AS comment_text, c.created_at, u.username, a.rating
+        FROM comments c
+        LEFT JOIN users u ON c.user_id = u.id
+        LEFT JOIN actions a ON c.user_id = a.user_id AND c.restaurant_id = a.restaurant_id
+        WHERE c.restaurant_id = ?
+        ORDER BY c.created_at DESC
+    ";
+    
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $restaurant_id);
+    $stmt->execute();
+    return $stmt->get_result();
+}
