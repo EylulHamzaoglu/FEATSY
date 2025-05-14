@@ -22,38 +22,30 @@ function sign_up($username, $password, $email) {
 }
 
 
+
 // ✅ login($username, $password)
 // Verilen kullanıcı adı ve şifre ile giriş yapmayı dener. Şifreyi hash'lenmiş veriyle karşılaştırır.
 // Başarılıysa kullanıcı verilerini döner, değilse false döner.
 
-function login($username, $password) {
+function sign_in($email, $password) {
     global $conn;
 
-    $stmt = $conn->prepare("SELECT id, username, password, role FROM users WHERE username = ?");
-    $stmt->bind_param("s", $username);
+    if (empty($email) || empty($password)) {
+        return ['success' => false, 'message' => 'Lütfen tüm alanları doldurun.'];
+    }
+
+    $stmt = $conn->prepare("SELECT * FROM users WHERE mail = ? AND password = ?");
+    $stmt->bind_param("ss", $email, $password);
     $stmt->execute();
-
     $result = $stmt->get_result();
+
     if ($result->num_rows === 1) {
-        $user = $result->fetch_assoc();
-
-        if (password_verify($password, $user['password'])) {
-            session_start();
-            $_SESSION['username'] = $user['username'];
-
-            return $user; // Başarılı giriş: kullanıcı bilgilerini döner
-        } else {
-            return false; // Şifre hatalı
-        }
+        return ['success' => true];
     } else {
-        return false; // Kullanıcı bulunamadı
+        return ['success' => false, 'message' => 'Geçersiz email veya şifre.'];
     }
 }
-function logout() {
-    session_destroy();
-    header("Location: ../index.php");
-    exit();
-}
+
 // ✅ get_user_by_id($id)
 // Verilen kullanıcı ID’sine göre kullanıcı bilgilerini döner.
 

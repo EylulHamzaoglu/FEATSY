@@ -1,8 +1,11 @@
 <?php
-include '../php/functions.php';
+session_start();
+include 'db/functions.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+<p>Hoş geldin, <?php echo $_SESSION['user_name'] ?? 'misafir'; ?>!</p>
+
 
 <head>
     <meta charset="utf-8">
