@@ -1,26 +1,27 @@
 <?php
-include '../config/config_db.php';
+include 'db/config_db.php';
 
 // ✅ sign_up($username, $password, $email)
 // Kullanıcıyı veritabanına ekler. Şifreyi hash'ler ve varsayılan olarak 'customer' rolüyle kaydeder.
+
 function sign_up($username, $password, $email) {
     global $conn;
 
     if (empty($username) || empty($password) || empty($email)) {
-        return "Tüm alanları doldurmalısınız.";
+        return ['success' => false, 'message' => 'Tüm alanları doldurmalısınız.'];
     }
-
-    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
     $stmt = $conn->prepare("INSERT INTO users (username, password, mail, role, status) VALUES (?, ?, ?, 'customer', 'active')");
-    $stmt->bind_param("sss", $username, $hashed_password, $email);
+    $stmt->bind_param("sss", $username, $password, $email);
 
     if ($stmt->execute()) {
-        return 1;
+        return ['success' => true];
     } else {
-        return "Hata: " . $stmt->error;
+        return ['success' => false, 'message' => 'Kayıt sırasında hata oluştu: ' . $stmt->error];
     }
 }
+
+
 // ✅ login($username, $password)
 // Verilen kullanıcı adı ve şifre ile giriş yapmayı dener. Şifreyi hash'lenmiş veriyle karşılaştırır.
 // Başarılıysa kullanıcı verilerini döner, değilse false döner.

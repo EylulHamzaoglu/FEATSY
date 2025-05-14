@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "featsy";
+$database = "featsydb";
 
 // Bağlantıyı oluştur
 $conn = new mysqli($servername, $username, $password, $database);
