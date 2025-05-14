@@ -96,6 +96,41 @@ function get_all_restaurants() {
 
     return $restaurants;
 }
+// ✅ get_most_popular_restaurants()
+// Tüm restoranları getirir. Varsayılan olarak aktif restoranları döner.
+
+function get_popular_restaurants($limit = 8) {
+    global $conn;
+    $sql = "
+        SELECT 
+            r.id,
+            r.name,
+            r.profile_picture,
+            c.name AS category_name,
+            ROUND(AVG(a.rating), 1) AS average_rating,
+            COUNT(a.rating) AS total_ratings
+        FROM restaurants r
+        LEFT JOIN restaurant_categories rc ON r.id = rc.restaurant_id
+        LEFT JOIN categories c ON rc.category_id = c.id
+        LEFT JOIN actions a ON r.id = a.restaurant_id
+        WHERE r.is_active = 1
+        GROUP BY r.id
+        ORDER BY average_rating DESC
+        LIMIT ?
+    ";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $limit);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $restaurants = [];
+    while ($row = $result->fetch_assoc()) {
+        $restaurants[] = $row;
+    }
+    return $restaurants;
+}
+
+
+
 // ✅ get_restaurants_by_category($category_ids)
 // Belirtilen kategori ID’lerine sahip restoranları döner.
 // $category_ids bir dizi (array) olmalıdır.
