@@ -1,7 +1,9 @@
 <?php
 session_start();
 include 'db/functions.php';
+$popular_restaurants = get_popular_restaurants(8);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,6 +28,30 @@ include 'db/functions.php';
 </head>
 
 <body class="fixed-bottom-bar">
+    <style>
+.cat-item a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px; /* kutular eşit yükseklikte olsun */
+  height: 100%;
+  text-align: center;
+}
+
+.cat-item img {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+  margin-bottom: 5px;
+}
+
+.cat-item p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.2;
+}
+</style>
 
     <!-- Hoş geldin mesajı -->
     <div class="container pt-3">
@@ -36,117 +62,107 @@ include 'db/functions.php';
 
     <header class="section-header">
         <section class="header-main shadow-sm bg-white">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-1">
-                        <a href="home.html" class="brand-wrap mb-0">
-                            <img alt="#" class="img-fluid" src="img/logo_web.png">
-                        </a>
-                    </div>
-                    <div class="col-8">
-                        <div class="d-flex align-items-center justify-content-end pe-5">
+  <div class="container">
+    <div class="row align-items-center justify-content-between py-2">
+      <!-- ✅ Sol: Logo -->
+      <div class="col-auto">
+  <a href="home.php" class="brand-wrap mb-0">
+    <img alt="logo" src="img/logo.png" class="img-fluid" style="height: 80px;">
+  </a>
+</div>
 
-                            <!-- Sign in butonu yerine session'dan gelen kullanıcı -->
-                            <div class="dropdown me-4 m-none">
-                                <a href="#" class="dropdown-toggle text-dark py-3 d-block" id="dropdownMenuButton"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img alt="#" src="img/user/1.jpg"
-                                        class="img-fluid rounded-circle header-user me-2 header-user">
-                                    <?php echo $_SESSION['user_email'] ?? 'Guest'; ?>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="profile.html">My account</a>
-                                    <a class="dropdown-item" href="faq.html">Delivery support</a>
-                                    <a class="dropdown-item" href="contact-us.html">Contact us</a>
-                                    <a class="dropdown-item" href="terms.html">Terms of use</a>
-                                    <a class="dropdown-item" href="privacy.html">Privacy policy</a>
-                                    <a class="dropdown-item" href="logout.php">Logout</a> <!-- NOT: login.html yerine logout.php -->
-                                </div>
-                            </div>
+      <!-- ✅ Sağ: Search ve Guest -->
+      <div class="col-auto d-flex align-items-center gap-4">
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Search -->
+        <a href="search.php" class="d-flex align-items-center text-dark text-decoration-none">
+          <i class="feather-search h5 mb-0 me-1"></i>
+          <span class="fw-semibold">Search</span>
+        </a>
+
+        <!-- Guest dropdown -->
+        <div class="dropdown">
+          <a href="#" class="dropdown-toggle d-flex align-items-center text-dark text-decoration-none"
+             id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="img/homelogo/guestlogo.png" alt="User" class="rounded-circle me-2"
+                 style="width: 32px; height: 32px;">
+            <span class="fw-semibold"><?php echo $_SESSION['user_email'] ?? 'Guest'; ?></span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end">
+            <a class="dropdown-item" href="profile.html">My account</a>
+            <a class="dropdown-item" href="faq.html">Delivery support</a>
+            <a class="dropdown-item" href="contact-us.html">Contact us</a>
+            <a class="dropdown-item" href="terms.html">Terms of use</a>
+            <a class="dropdown-item" href="privacy.html">Privacy policy</a>
+            <a class="dropdown-item" href="logout.php">Logout</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
     </header>
 
     <!-- Devamında gelen sayfa içeriğini aynen bırakabilirsin -->
 
-    <div class="osahan-home-page">
-        <div class="bg-primary p-3 d-none">
-            <div class="text-white">
-                <div class="title d-flex align-items-center">
-                    <a class="toggle" href="#">
-                        <span></span>
-                    </a>
-                    <h4 class="fw-bold m-0 ps-5">Browse</h4>
-                    <a class="text-white fw-bold ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                        href="#">Filter</a>
-                </div>
-            </div>
-            <div class="input-group bg-white rounded shadow-sm mt-3">
-                <span class="input-group-text bg-transparent border-0 rounded-0"><i
-                        class="feather-search"></i></span>
-                <input type="text" class="form-control bg-transparent border-0 rounded-0 px-0 shadow-none"
-                    placeholder="Enter Your Location" aria-label="Enter Your Location" >
-            </div>
-        </div>
+
         <!-- Filters -->
+         
         <div class="container">
             <div class="cat-slider">
                 <div class="cat-item px-1 py-3">
                     <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.html">
-                        <img alt="#" src="img/icons/Fries.png" class="img-fluid mb-2">
-                        <p class="m-0 small">Fries</p>
+                        <img alt="#" src="img/homelogo/americanlogo.png" class="img-fluid mb-2">
+                        <p class="m-0 small">Amerikan Mutfağı</p>
                     </a>
                 </div>
                 <div class="cat-item px-1 py-3">
                     <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.html">
-                        <img alt="#" src="img/icons/Pizza.png" class="img-fluid mb-2">
-                        <p class="m-0 small">Pizza</p>
+                        <img alt="#" src="img/homelogo/italyanlogo.png" class="img-fluid mb-2">
+                        <p class="m-0 small">İtalyan Mutfağı</p>
                     </a>
                 </div>
                 <div class="cat-item px-1 py-3">
                     <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.html">
-                        <img alt="#" src="img/icons/Burger.png" class="img-fluid mb-2">
-                        <p class="m-0 small">Burger</p>
+                        <img alt="#" src="img/homelogo/fastfoodlogo.png" class="img-fluid mb-2">
+                        <p class="m-0 small">Fast Food</p>
                     </a>
                 </div>
                 <div class="cat-item px-1 py-3">
                     <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.html">
-                        <img alt="#" src="img/icons/Sandwich.png" class="img-fluid mb-2">
-                        <p class="m-0 small">Sandwich</p>
+                        <img alt="#" src="img/homelogo/uzakdogulogo.png" class="img-fluid mb-2">
+                        <p class="m-0 small">Uzak Doğu</p>
                     </a>
                 </div>
                 <div class="cat-item px-1 py-3">
                     <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.html">
-                        <img alt="#" src="img/icons/Coffee.png" class="img-fluid mb-2">
-                        <p class="m-0 small">Coffee</p>
+                        <img alt="#" src="img/homelogo/tatlılogo.png" class="img-fluid mb-2">
+                        <p class="m-0 small">Tatlı</p>
                     </a>
                 </div>
                 <div class="cat-item px-1 py-3">
                     <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.html">
-                        <img alt="#" src="img/icons/Steak.png" class="img-fluid mb-2">
-                        <p class="m-0 small">Steak</p>
+                        <img alt="#" src="img/homelogo/kokteyllogo.png" class="img-fluid mb-2">
+                        <p class="m-0 small">Kokteyl</p>
                     </a>
                 </div>
                 <div class="cat-item px-1 py-3">
                     <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.html">
-                        <img alt="#" src="img/icons/ColaCan.png" class="img-fluid mb-2">
-                        <p class="m-0 small">ColaCan</p>
+                        <img alt="#" src="img/homelogo/meksikalogo.png" class="img-fluid mb-2">
+                        <p class="m-0 small">Meksika Mutfağı</p>
                     </a>
                 </div>
                 <div class="cat-item px-1 py-3">
                     <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.html">
-                        <img alt="#" src="img/icons/Breakfast.png" class="img-fluid mb-2">
-                        <p class="m-0 small">Breakfast</p>
+                        <img alt="#" src="img/homelogo/sokaklezzetleri.png" class="img-fluid mb-2">
+                        <p class="m-0 small">Sokak Lezzetleri</p>
                     </a>
                 </div>
                 <div class="cat-item px-1 py-3">
                     <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.html">
-                        <img alt="#" src="img/icons/Salad.png" class="img-fluid mb-2">
-                        <p class="m-0 small">Salad</p>
+                        <img alt="#" src="img/homelogo/romanticdinnerlogo.png" class="img-fluid mb-2">
+                        <p class="m-0 small">Romantik Akşam Yemeği</p>
                     </a>
                 </div>
             </div>
@@ -155,489 +171,140 @@ include 'db/functions.php';
         <div class="container">
 
             <!-- Most popular -->
-            <div class="py-3 title d-flex align-items-center">
+              <!-- Most popular -->
+           <div class="py-3 title d-flex align-items-center">
                 <h5 class="m-0">Most popular</h5>
                 <a class="fw-bold ms-auto" href="most_popular.html">26 places <i class="feather-chevrons-right"></i></a>
             </div>
-            <!-- Most popular -->
-            <div class="most_popular">
-                <div class="row">
-                    <div class="col-md-3 pb-3">
-                        <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                            <div class="list-card-image">
-                                <div class="star position-absolute"><span class="badge text-bg-success"><i
-                                            class="feather-star"></i> 3.1 (300+)</span></div>
-                                <div class="favourite-heart text-danger position-absolute rounded-circle"><a href="#"><i
-                                            class="feather-heart"></i></a></div>
-                                <div class="member-plan position-absolute"><span
-                                        class="badge text-bg-dark">Promoted</span></div>
-                                <a href="restaurant.html">
-                                    <img alt="#" src="img/popular1.png" class="img-fluid item-img w-100">
-                                </a>
-                            </div>
-                            <div class="p-3 position-relative">
-                                <div class="list-card-body">
-                                    <h6 class="mb-1"><a href="restaurant.html" class="text-black">The osahan Restaurant
-                                        </a>
-                                    </h6>
-                                    <p class="text-gray mb-1 small">• North • Hamburgers</p>
-                                    <p class="text-gray mb-1 rating">
-                                    </p>
-                                    <ul class="rating-stars list-unstyled">
-                                        <li>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star"></i>
-                                        </li>
-                                    </ul>
-                                    <p></p>
-                                </div>
-                                <div class="list-card-badge">
-                                    <span class="badge text-bg-danger">OFFER</span> <small>65% OSAHAN50</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 pb-3">
-                        <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                            <div class="list-card-image">
-                                <div class="star position-absolute"><span class="badge text-bg-success"><i
-                                            class="feather-star"></i> 3.1 (300+)</span></div>
-                                <div class="favourite-heart text-danger position-absolute rounded-circle"><a href="#"><i
-                                            class="feather-heart"></i></a></div>
-                                <div class="member-plan position-absolute"><span
-                                        class="badge text-bg-dark">Promoted</span></div>
-                                <a href="restaurant.html">
-                                    <img alt="#" src="img/popular2.png" class="img-fluid item-img w-100">
-                                </a>
-                            </div>
-                            <div class="p-3 position-relative">
-                                <div class="list-card-body">
-                                    <h6 class="mb-1"><a href="restaurant.html" class="text-black">Thai Famous Indian
-                                            Cuisine</a></h6>
-                                    <p class="text-gray mb-1 small">• Indian • Pure veg</p>
-                                    <p class="text-gray mb-1 rating">
-                                    </p>
-                                    <ul class="rating-stars list-unstyled">
-                                        <li>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star"></i>
-                                        </li>
-                                    </ul>
-                                    <p></p>
-                                </div>
-                                <div class="list-card-badge">
-                                    <span class="badge text-bg-success">OFFER</span> <small>65% off</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 pb-3">
-                        <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                            <div class="list-card-image">
-                                <div class="star position-absolute"><span class="badge text-bg-success"><i
-                                            class="feather-star"></i> 3.1 (300+)</span></div>
-                                <div class="favourite-heart text-danger position-absolute rounded-circle"><a href="#"><i
-                                            class="feather-heart"></i></a></div>
-                                <div class="member-plan position-absolute"><span
-                                        class="badge text-bg-dark">Promoted</span></div>
-                                <a href="restaurant.html">
-                                    <img alt="#" src="img/popular3.png" class="img-fluid item-img w-100">
-                                </a>
-                            </div>
-                            <div class="p-3 position-relative">
-                                <div class="list-card-body">
-                                    <h6 class="mb-1"><a href="restaurant.html" class="text-black">The osahan Restaurant
-                                        </a>
-                                    </h6>
-                                    <p class="text-gray mb-1 small">• Hamburgers • Pure veg</p>
-                                    <p class="text-gray mb-1 rating">
-                                    </p>
-                                    <ul class="rating-stars list-unstyled">
-                                        <li>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star"></i>
-                                        </li>
-                                    </ul>
-                                    <p></p>
-                                </div>
-                                <div class="list-card-badge">
-                                    <span class="badge text-bg-danger">OFFER</span> <small>65% OSAHAN50</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 pb-3">
-                        <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                            <div class="list-card-image">
-                                <div class="star position-absolute"><span class="badge text-bg-success"><i
-                                            class="feather-star"></i> 3.1 (300+)</span></div>
-                                <div class="favourite-heart text-danger position-absolute rounded-circle"><a href="#"><i
-                                            class="feather-heart"></i></a></div>
-                                <div class="member-plan position-absolute"><span
-                                        class="badge text-bg-dark">Promoted</span></div>
-                                <a href="restaurant.html">
-                                    <img alt="#" src="img/popular4.png" class="img-fluid item-img w-100">
-                                </a>
-                            </div>
-                            <div class="p-3 position-relative">
-                                <div class="list-card-body">
-                                    <h6 class="mb-1"><a href="restaurant.html" class="text-black">Bite Me Now
-                                            Sandwiches</a></h6>
-                                    <p class="text-gray mb-1 small">American • Pure veg</p>
-                                    <p class="text-gray mb-1 rating">
-                                    </p>
-                                    <ul class="rating-stars list-unstyled">
-                                        <li>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star"></i>
-                                        </li>
-                                    </ul>
-                                    <p></p>
-                                </div>
-                                <div class="list-card-badge">
-                                    <span class="badge text-bg-success">OFFER</span> <small>65% off</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 pb-3">
-                        <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                            <div class="list-card-image">
-                                <div class="star position-absolute"><span class="badge text-bg-success"><i
-                                            class="feather-star"></i> 3.1 (300+)</span></div>
-                                <div class="favourite-heart text-danger position-absolute rounded-circle"><a href="#"><i
-                                            class="feather-heart"></i></a></div>
-                                <div class="member-plan position-absolute"><span
-                                        class="badge text-bg-dark">Promoted</span></div>
-                                <a href="restaurant.html">
-                                    <img alt="#" src="img/popular5.png" class="img-fluid item-img w-100">
-                                </a>
-                            </div>
-                            <div class="p-3 position-relative">
-                                <div class="list-card-body">
-                                    <h6 class="mb-1"><a href="restaurant.html" class="text-black">The osahan Restaurant
-                                        </a>
-                                    </h6>
-                                    <p class="text-gray mb-1 small">• North • Hamburgers</p>
-                                    <p class="text-gray mb-1 rating">
-                                    </p>
-                                    <ul class="rating-stars list-unstyled">
-                                        <li>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star"></i>
-                                        </li>
-                                    </ul>
-                                    <p></p>
-                                </div>
-                                <div class="list-card-badge">
-                                    <span class="badge text-bg-danger">OFFER</span> <small>65% OSAHAN50</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 pb-3">
-                        <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                            <div class="list-card-image">
-                                <div class="star position-absolute"><span class="badge text-bg-success"><i
-                                            class="feather-star"></i> 3.1 (300+)</span></div>
-                                <div class="favourite-heart text-danger position-absolute rounded-circle"><a href="#"><i
-                                            class="feather-heart"></i></a></div>
-                                <div class="member-plan position-absolute"><span
-                                        class="badge text-bg-dark">Promoted</span></div>
-                                <a href="restaurant.html">
-                                    <img alt="#" src="img/popular6.png" class="img-fluid item-img w-100">
-                                </a>
-                            </div>
-                            <div class="p-3 position-relative">
-                                <div class="list-card-body">
-                                    <h6 class="mb-1"><a href="restaurant.html" class="text-black">Thai Famous Indian
-                                            Cuisine</a></h6>
-                                    <p class="text-gray mb-1 small">• Indian • Pure veg</p>
-                                    <p class="text-gray mb-1 rating">
-                                    </p>
-                                    <ul class="rating-stars list-unstyled">
-                                        <li>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star"></i>
-                                        </li>
-                                    </ul>
-                                    <p></p>
-                                </div>
-                                <div class="list-card-badge">
-                                    <span class="badge text-bg-success">OFFER</span> <small>65% off</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 pb-3">
-                        <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                            <div class="list-card-image">
-                                <div class="star position-absolute"><span class="badge text-bg-success"><i
-                                            class="feather-star"></i> 3.1 (300+)</span></div>
-                                <div class="favourite-heart text-danger position-absolute rounded-circle"><a href="#"><i
-                                            class="feather-heart"></i></a></div>
-                                <div class="member-plan position-absolute"><span
-                                        class="badge text-bg-dark">Promoted</span></div>
-                                <a href="restaurant.html">
-                                    <img alt="#" src="img/popular7.png" class="img-fluid item-img w-100">
-                                </a>
-                            </div>
-                            <div class="p-3 position-relative">
-                                <div class="list-card-body">
-                                    <h6 class="mb-1"><a href="restaurant.html" class="text-black">The osahan Restaurant
-                                        </a>
-                                    </h6>
-                                    <p class="text-gray mb-1 small">• Hamburgers • Pure veg</p>
-                                    <p class="text-gray mb-1 rating">
-                                    </p>
-                                    <ul class="rating-stars list-unstyled">
-                                        <li>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star"></i>
-                                        </li>
-                                    </ul>
-                                    <p></p>
-                                </div>
-                                <div class="list-card-badge">
-                                    <span class="badge text-bg-danger">OFFER</span> <small>65% OSAHAN50</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 pb-3">
-                        <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                            <div class="list-card-image">
-                                <div class="star position-absolute"><span class="badge text-bg-success"><i
-                                            class="feather-star"></i> 3.1 (300+)</span></div>
-                                <div class="favourite-heart text-danger position-absolute rounded-circle"><a href="#"><i
-                                            class="feather-heart"></i></a></div>
-                                <div class="member-plan position-absolute"><span
-                                        class="badge text-bg-dark">Promoted</span></div>
-                                <a href="restaurant.html">
-                                    <img alt="#" src="img/popular8.png" class="img-fluid item-img w-100">
-                                </a>
-                            </div>
-                            <div class="p-3 position-relative">
-                                <div class="list-card-body">
-                                    <h6 class="mb-1"><a href="restaurant.html" class="text-black">Bite Me Now
-                                            Sandwiches</a></h6>
-                                    <p class="text-gray mb-1 small">American • Pure veg</p>
-                                    <p class="text-gray mb-1 rating">
-                                    </p>
-                                    <ul class="rating-stars list-unstyled">
-                                        <li>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star star_active"></i>
-                                            <i class="feather-star"></i>
-                                        </li>
-                                    </ul>
-                                    <p></p>
-                                </div>
-                                <div class="list-card-badge">
-                                    <span class="badge text-bg-success">OFFER</span> <small>65% off</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
- 
-    <!-- Footer -->
-    <div class="osahan-menu-fotter fixed-bottom bg-white px-3 py-2 text-center d-none">
-        <div class="row">
-            <div class="col selected">
-                <a href="home.html" class="text-danger small fw-bold text-decoration-none">
-                    <p class="h4 m-0"><i class="feather-home text-danger"></i></p>
-                    Home
-                </a>
-            </div>
-            <div class="col">
-                <a href="most_popular.html" class="text-dark small fw-bold text-decoration-none">
-                    <p class="h4 m-0"><i class="feather-map-pin"></i></p>
-                    Trending
-                </a>
-            </div>
-            <div class="col bg-white rounded-circle mt-n4 px-3 py-2">
-                <div class="bg-danger rounded-circle mt-n0 shadow">
-                    <a href="checkout.html" class="text-white small fw-bold text-decoration-none">
-                        <i class="feather-shopping-cart"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="col">
-                <a href="favorites.html" class="text-dark small fw-bold text-decoration-none">
-                    <p class="h4 m-0"><i class="feather-heart"></i></p>
-                    Favorites
-                </a>
-            </div>
-            <div class="col">
-                <a href="profile.html" class="text-dark small fw-bold text-decoration-none">
-                    <p class="h4 m-0"><i class="feather-user"></i></p>
-                    Profile
-                </a>
-            </div>
+   <div class="row g-3">
+  <?php
+  $imageCount = 1;
+  foreach ($popular_restaurants as $restaurant):
+      // Fotoğraf isimleri img/restaurants/1.jpg, 2.jpg, ... şeklinde olacak
+      $imagePath = "img/restaurants/" . $imageCount . ".jpg";
+  ?>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
+        <div class="list-card-image">
+          <div class="star position-absolute">
+            <span class="badge text-bg-success">
+              <i class="feather-star"></i>
+              <?= $restaurant['average_rating'] ?? '0.0' ?>
+              (<?= $restaurant['total_ratings'] ?>)
+            </span>
+          </div>
+          <div class="favourite-heart text-danger position-absolute rounded-circle">
+            <a href="#"><i class="feather-heart"></i></a>
+          </div>
+          <a href="restaurant.php?id=<?= $restaurant['id'] ?>">
+            <img alt="Restaurant Image" src="<?= $imagePath ?>" class="img-fluid item-img w-100" style="height: 200px; object-fit: cover;">
+          </a>
         </div>
+        <div class="p-3 position-relative">
+          <div class="list-card-body">
+            <h6 class="mb-1">
+              <a href="restaurant.php?id=<?= $restaurant['id'] ?>" class="text-black">
+                <?= htmlspecialchars($restaurant['name']) ?>
+              </a>
+            </h6>
+            <p class="text-gray mb-1 small">• <?= $restaurant['category_name'] ?? 'Unknown' ?></p>
+            <ul class="rating-stars list-unstyled">
+              <li>
+                <?php
+                $rating = round($restaurant['average_rating']);
+                for ($i = 1; $i <= 5; $i++) {
+                  echo '<i class="feather-star' . ($i <= $rating ? ' star_active' : '') . '"></i>';
+                }
+                ?>
+              </li>
+            </ul>
+          </div>
+          <div class="list-card-badge">
+            <span class="badge text-bg-danger">POPULAR</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- footer -->
-    <footer class="section-footer border-top bg-dark">
-        <div class="container">
-            <div class="footer-top padding-y py-5">
-                <div class="row">
-                    <aside class="col-md-4 footer-about">
-                        <article class="d-flex pb-3">
-                            <div><img alt="#" src="img/logo_web.png" class="logo-footer me-3"></div>
-                            <div>
-                                <h6 class="title text-white">About Us</h6>
-                                <p class="text-muted">Some short text about company like You might remember the Dell
-                                    computer commercials in which a youth reports.</p>
-                                <div class="d-flex align-items-center">
-                                    <a class="btn btn-icon btn-outline-light me-1 btn-sm" title="Facebook"
-                                        target="_blank" href="#"><i class="feather-facebook"></i></a>
-                                    <a class="btn btn-icon btn-outline-light me-1 btn-sm" title="Instagram"
-                                        target="_blank" href="#"><i class="feather-instagram"></i></a>
-                                    <a class="btn btn-icon btn-outline-light me-1 btn-sm" title="Youtube"
-                                        target="_blank" href="#"><i class="feather-youtube"></i></a>
-                                    <a class="btn btn-icon btn-outline-light me-1 btn-sm" title="Twitter"
-                                        target="_blank" href="#"><i class="feather-twitter"></i></a>
-                                </div>
-                            </div>
-                        </article>
-                    </aside>
-                    <aside class="col-sm-3 col-md-2 text-white">
-                        <h6 class="title">Error Pages</h6>
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="not-found.html" class="text-muted">Not found</a></li>
-                            <li> <a href="maintence.html" class="text-muted">Maintence</a></li>
-                            <li> <a href="coming-soon.html" class="text-muted">Coming Soon</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-3 col-md-2 text-white">
-                        <h6 class="title">Services</h6>
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="faq.html" class="text-muted">Delivery Support</a></li>
-                            <li> <a href="contact-us.html" class="text-muted">Contact Us</a></li>
-                            <li> <a href="terms.html" class="text-muted">Terms of use</a></li>
-                            <li> <a href="privacy.html" class="text-muted">Privacy policy</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-3  col-md-2 text-white">
-                        <h6 class="title">For users</h6>
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="login.html" class="text-muted"> User Login </a></li>
-                            <li> <a href="signup.html" class="text-muted"> User register </a></li>
-                            <li> <a href="forgot_password.html" class="text-muted"> Forgot Password </a></li>
-                            <li> <a href="profile.html" class="text-muted"> Account Setting </a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-3  col-md-2 text-white">
-                        <h6 class="title">More Pages</h6>
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="trending.html" class="text-muted"> Trending </a></li>
-                            <li> <a href="most_popular.html" class="text-muted"> Most popular </a></li>
-                            <li> <a href="restaurant.html" class="text-muted"> Restaurant Details </a></li>
-                            <li> <a href="favorites.html" class="text-muted"> Favorites </a></li>
-                        </ul>
-                    </aside>
-                </div>
-                <!-- row.// -->
+  <?php
+    $imageCount++;
+  endforeach;
+  ?>
+</div>
+
+
+<footer class="section-footer border-top bg-dark text-white">
+  <div class="container py-5">
+    <div class="row gy-4">
+      <!-- About Us -->
+      <div class="col-lg-4 col-md-6">
+        <div class="d-flex">
+          <img src="img/logo.png" alt="Featsy Logo" style="height: 60px;" class="me-3">
+          <div>
+            <h6 class="fw-bold text-white">About Us</h6>
+            <p class="text-muted mb-2 small">Featsy, yerel lezzetleri keşfetmenizi kolaylaştıran modern bir restoran rehberidir. Benzersiz deneyimler için doğru adres.</p>
+            <div class="d-flex gap-2">
+              <a class="btn btn-sm btn-outline-light" href="#"><i class="feather-facebook"></i></a>
+              <a class="btn btn-sm btn-outline-light" href="#"><i class="feather-instagram"></i></a>
+              <a class="btn btn-sm btn-outline-light" href="#"><i class="feather-twitter"></i></a>
             </div>
-            <!-- footer-top.// -->
-            <section class="footer-center border-top padding-y py-5">
-                <h6 class="title text-white">Countries</h6>
-                <div class="row">
-                    <aside class="col-sm-2 col-md-2 text-white">
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="#" class="text-muted">India</a></li>
-                            <li> <a href="#" class="text-muted">Indonesia</a></li>
-                            <li> <a href="#" class="text-muted">Ireland</a></li>
-                            <li> <a href="#" class="text-muted">Italy</a></li>
-                            <li> <a href="#" class="text-muted">Lebanon</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-2 col-md-2 text-white">
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="#" class="text-muted">Malaysia</a></li>
-                            <li> <a href="#" class="text-muted">New Zealand</a></li>
-                            <li> <a href="#" class="text-muted">Philippines</a></li>
-                            <li> <a href="#" class="text-muted">Poland</a></li>
-                            <li> <a href="#" class="text-muted">Portugal</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-2 col-md-2 text-white">
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="#" class="text-muted">Australia</a></li>
-                            <li> <a href="#" class="text-muted">Brasil</a></li>
-                            <li> <a href="#" class="text-muted">Canada</a></li>
-                            <li> <a href="#" class="text-muted">Chile</a></li>
-                            <li> <a href="#" class="text-muted">Czech Republic</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-2 col-md-2 text-white">
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="#" class="text-muted">Turkey</a></li>
-                            <li> <a href="#" class="text-muted">UAE</a></li>
-                            <li> <a href="#" class="text-muted">United Kingdom</a></li>
-                            <li> <a href="#" class="text-muted">United States</a></li>
-                            <li> <a href="#" class="text-muted">Sri Lanka</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-2 col-md-2 text-white">
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="#" class="text-muted">Qatar</a></li>
-                            <li> <a href="#" class="text-muted">Singapore</a></li>
-                            <li> <a href="#" class="text-muted">Slovakia</a></li>
-                            <li> <a href="#" class="text-muted">South Africa</a></li>
-                            <li> <a href="#" class="text-muted">Green Land</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-2 col-md-2 text-white">
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="#" class="text-muted">Pakistan</a></li>
-                            <li> <a href="#" class="text-muted">Bangladesh</a></li>
-                            <li> <a href="#" class="text-muted">Bhutaan</a></li>
-                            <li> <a href="#" class="text-muted">Nepal</a></li>
-                        </ul>
-                    </aside>
-                </div>
-                <!-- row.// -->
-            </section>
+          </div>
         </div>
-        <!-- //container -->
-        <div class="footer-copyright border-top py-3 bg-light">
-            <div class="container d-flex align-items-center">
-                <p class="mb-0"> © 2023 Company All rights reserved </p>
-                <p class="text-muted mb-0 ms-auto d-flex align-items-center">
-                    <a href="#" class="d-block"><img alt="#" src="img/appstore.png" height="40"></a>
-                    <a href="#" class="d-block ms-3"><img alt="#" src="img/playmarket.png" height="40"></a>
-                </p>
-            </div>
-        </div>
-    </footer>
+      </div>
+
+      <!-- Footer Columns -->
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        <h6 class="fw-bold">Error Pages</h6>
+        <ul class="list-unstyled small">
+          <li><a href="not-found.html" class="text-muted">Not found</a></li>
+          <li><a href="maintence.html" class="text-muted">Maintenance</a></li>
+          <li><a href="coming-soon.html" class="text-muted">Coming Soon</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        <h6 class="fw-bold">Services</h6>
+        <ul class="list-unstyled small">
+          <li><a href="faq.html" class="text-muted">Delivery Support</a></li>
+          <li><a href="contact-us.html" class="text-muted">Contact Us</a></li>
+          <li><a href="terms.html" class="text-muted">Terms of use</a></li>
+          <li><a href="privacy.html" class="text-muted">Privacy policy</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        <h6 class="fw-bold">For Users</h6>
+        <ul class="list-unstyled small">
+          <li><a href="login.html" class="text-muted">User Login</a></li>
+          <li><a href="signup.html" class="text-muted">User Register</a></li>
+          <li><a href="forgot_password.html" class="text-muted">Forgot Password</a></li>
+          <li><a href="profile.html" class="text-muted">Account Settings</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        <h6 class="fw-bold">More Pages</h6>
+        <ul class="list-unstyled small">
+          <li><a href="trending.html" class="text-muted">Trending</a></li>
+          <li><a href="most_popular.html" class="text-muted">Most Popular</a></li>
+          <li><a href="restaurant.html" class="text-muted">Restaurant Detail</a></li>
+          <li><a href="favorites.html" class="text-muted">Favorites</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="border-secondary mt-5">
+
+    <div class="d-flex justify-content-between align-items-center flex-column flex-md-row text-muted small">
+      <p class="mb-2 mb-md-0">© 2025 Featsy. All rights reserved.</p>
+      <div>
+        <a href="#"><img src="img/appstore.png" height="40" class="me-2" alt="App Store"></a>
+        <a href="#"><img src="img/playmarket.png" height="40" alt="Google Play"></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+        
     <nav id="main-nav">
         <ul class="second-nav">
             <li><a href="home.html"><i class="feather-home me-2"></i> Homepage</a></li>
