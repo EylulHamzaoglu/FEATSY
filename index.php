@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <div class="d-flex align-items-center justify-content-center vh-100">
             <div class="px-5 col-md-6 ms-auto">
                 <div class="px-5 col-10 mx-auto">
-                    <h2 class="text-dark my-0">Welcome Back</h2>
+                    <h2 class="text-dark my-0">Welcome Back Again</h2>
                     <p class="text-50">Sign in to continue</p>
 
                     <!-- HATA MESAJI -->
