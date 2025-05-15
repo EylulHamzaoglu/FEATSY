@@ -694,3 +694,18 @@ function get_restaurant_comments($restaurant_id) {
     $stmt->execute();
     return $stmt->get_result();
 }
+
+function get_user_profile($user_id) {
+    global $conn;
+    $stmt = $conn->prepare("
+        SELECT u.mail, u.birth_date, ud.name, ud.surname, ud.phone
+        FROM users u
+        LEFT JOIN user_details ud ON u.id = ud.user_id
+        WHERE u.id = ?
+    ");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc();
+}
+

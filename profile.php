@@ -1,5 +1,16 @@
 <?php
-include '../php/functions.php';
+session_start();
+include 'db/functions.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
+
+$_SESSION['user_id'] = $user['id'];
+$profile = get_user_profile($user_id);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +41,7 @@ include '../php/functions.php';
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-1">
-                        <a href="home.html" class="brand-wrap mb-0">
+                        <a href="home.php" class="brand-wrap mb-0">
                             <img alt="#" class="img-fluid" src="img/logo_web.png">
                         </a>
                         <!-- brand-wrap.// -->
@@ -57,7 +68,7 @@ include '../php/functions.php';
                                         </div>
                                     </div>
                                     <div class="p-3 border-bottom">
-                                        <a href="home.html" class="text-decoration-none">
+                                        <a href="home.php" class="text-decoration-none">
                                             <p class="fw-bold text-primary m-0"><i class="feather-navigation"></i> New York, USA</p>
                                         </a>
                                     </div>
@@ -120,19 +131,19 @@ include '../php/functions.php';
                     <div class="col-8">
                         <div class="d-flex align-items-center justify-content-end pe-5">
                             <!-- search -->
-                            <a href="search.html" class="widget-header me-4 text-dark">
+                            <a href="search.php" class="widget-header me-4 text-dark">
                                 <div class="icon d-flex align-items-center">
                                     <i class="feather-search h6 me-2 mb-0"></i> <span>Search</span>
                                 </div>
                             </a>
                             <!-- offers -->
-                            <a href="offers.html" class="widget-header me-4 text-white btn bg-primary m-none">
+                            <a href="offers.php" class="widget-header me-4 text-white btn bg-primary m-none">
                                 <div class="icon d-flex align-items-center">
                                     <i class="feather-disc h6 me-2 mb-0"></i> <span>Offers</span>
                                 </div>
                             </a>
                             <!-- signin -->
-                            <a href="login.html" class="widget-header me-4 text-dark m-none">
+                            <a href="login.php" class="widget-header me-4 text-dark m-none">
                                 <div class="icon d-flex align-items-center">
                                     <i class="feather-user h6 me-2 mb-0"></i> <span>Sign in</span>
                                 </div>
@@ -143,16 +154,16 @@ include '../php/functions.php';
                                     <img alt="#" src="img/user/1.jpg" class="img-fluid rounded-circle header-user me-2 header-user"> Hi Osahan
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="profile.html">My account</a>
-                                    <a class="dropdown-item" href="faq.html">Delivery support</a>
-                                    <a class="dropdown-item" href="contact-us.html">Contant us</a>
-                                    <a class="dropdown-item" href="terms.html">Term of use</a>
-                                    <a class="dropdown-item" href="privacy.html">Privacy policy</a>
-                                    <a class="dropdown-item" href="login.html">Logout</a>
+                                    <a class="dropdown-item" href="profile.css">My account</a>
+                                    <a class="dropdown-item" href="faq.php">Delivery support</a>
+                                    <a class="dropdown-item" href="contact-us.php">Contant us</a>
+                                    <a class="dropdown-item" href="terms.php">Term of use</a>
+                                    <a class="dropdown-item" href="privacy.php">Privacy policy</a>
+                                    <a class="dropdown-item" href="login.php">Logout</a>
                                 </div>
                             </div>
                             <!-- signin -->
-                            <a href="checkout.html" class="widget-header me-4 text-dark">
+                            <a href="checkout.php" class="widget-header me-4 text-dark">
                                 <div class="icon d-flex align-items-center">
                                     <i class="feather-shopping-cart h6 me-2 mb-0"></i> <span>Cart</span>
                                 </div>
@@ -183,7 +194,7 @@ include '../php/functions.php';
             <div class="py-5 osahan-profile row">
                 <div class="col-md-4 mb-3">
                     <div class="bg-white rounded shadow-sm sticky_sidebar overflow-hidden">
-                        <a href="profile.html" class="">
+                        <a href="profile.css" class="">
                             <div class="d-flex align-items-center p-3">
                                 <div class="left me-3">
                                     <img alt="#" src="img/user1.jpg" class="rounded-circle">
@@ -227,7 +238,7 @@ include '../php/functions.php';
                                     <span class="fw-bold m-0"><i class="feather-chevron-right h6 m-0"></i></span>
                                 </div>
                             </a>
-                            <a href="faq.html" class="d-flex w-100 align-items-center border-bottom px-3 py-4">
+                            <a href="faq.php" class="d-flex w-100 align-items-center border-bottom px-3 py-4">
                                 <div class="left me-3">
                                     <h6 class="fw-bold m-0 text-dark"><i class="feather-truck bg-danger text-white p-2 rounded-circle me-2"></i> Delivery Support</h6>
                                 </div>
@@ -235,7 +246,7 @@ include '../php/functions.php';
                                     <span class="fw-bold m-0"><i class="feather-chevron-right h6 m-0"></i></span>
                                 </div>
                             </a>
-                            <a href="contact-us.html" class="d-flex w-100 align-items-center border-bottom px-3 py-4">
+                            <a href="contact-us.php" class="d-flex w-100 align-items-center border-bottom px-3 py-4">
                                 <div class="left me-3">
                                     <h6 class="fw-bold m-0 text-dark"><i class="feather-phone bg-primary text-white p-2 rounded-circle me-2"></i> Contact</h6>
                                 </div>
@@ -243,7 +254,7 @@ include '../php/functions.php';
                                     <span class="fw-bold m-0"><i class="feather-chevron-right h6 m-0"></i></span>
                                 </div>
                             </a>
-                            <a href="terms.html" class="d-flex w-100 align-items-center border-bottom px-3 py-4">
+                            <a href="terms.php" class="d-flex w-100 align-items-center border-bottom px-3 py-4">
                                 <div class="left me-3">
                                     <h6 class="fw-bold m-0 text-dark"><i class="feather-info bg-success text-white p-2 rounded-circle me-2"></i> Term of use</h6>
                                 </div>
@@ -251,7 +262,7 @@ include '../php/functions.php';
                                     <span class="fw-bold m-0"><i class="feather-chevron-right h6 m-0"></i></span>
                                 </div>
                             </a>
-                            <a href="privacy.html" class="d-flex w-100 align-items-center px-3 py-4">
+                            <a href="privacy.php" class="d-flex w-100 align-items-center px-3 py-4">
                                 <div class="left me-3">
                                     <h6 class="fw-bold m-0 text-dark"><i class="feather-lock bg-warning text-white p-2 rounded-circle me-2"></i> Privacy policy</h6>
                                 </div>
@@ -267,35 +278,48 @@ include '../php/functions.php';
                         <h5 class="mb-4">My account</h5>
                         <div id="edit_profile">
                             <div>
-                                <form action="my_account.html">
-                                    <div class="form-group mb-3">
-                                        <label class="pb-1">First Name</label>
-                                        <input type="text" class="form-control" value="Gurdeep">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label class="pb-1">Last Name</label>
-                                        <input type="text" class="form-control" value="Singh">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label class="pb-1">Mobile Number</label>
-                                        <input type="number" class="form-control" value="1234567890">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label class="pb-1">Email</label>
-                                        <input type="email" class="form-control" value="iamosahan@gmail.com">
-                                    </div>
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-primary w-100">Save Changes</button>
-                                    </div>
-                                </form>
+                            <div class="container mt-5">
+    <div class="card shadow-sm p-4">
+        <h4 class="mb-4">My Account</h4>
+        <form method="POST" action="update_profile.php">
+            <div class="mb-3">
+                <label for="first_name" class="form-label">First Name</label>
+                <input type="text" name="first_name" class="form-control" value="<?php echo htmlspecialchars($profile['first_name']); ?>">
+            </div>
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Last Name</label>
+                <input type="text" name="last_name" class="form-control" value="<?php echo htmlspecialchars($profile['last_name']); ?>">
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Mobile Number</label>
+                <input type="text" name="phone" class="form-control" value="<?php echo htmlspecialchars($profile['phone']); ?>">
+            </div>
+            <div class="mb-3">
+                <label for="mail" class="form-label">Email</label>
+                <input type="email" name="mail" class="form-control" value="<?php echo htmlspecialchars($profile['mail']); ?>" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="birth_date" class="form-label">Date of Birth</label>
+                <input type="date" name="birth_date" class="form-control" value="<?php echo htmlspecialchars($profile['birth_date']); ?>">
+            </div>
+            <button type="submit" class="btn btn-danger w-100">Save Changes</button>
+        </form>
+
+        <div class="mt-4">
+            <a href="change_password.php" class="btn btn-outline-secondary w-100 mb-2">Change Password</a>
+            <a href="deactivate_account.php" class="btn btn-outline-danger w-100">Deactivate Account</a>
+        </div>
+    </div>
+</div>
+
                             </div>
                             <div class="additional">
                                 <div class="change_password my-3">
-                                    <a href="forgot_password.html" class="p-3 border rounded bg-white btn d-flex align-items-center">Change Password 
+                                    <a href="forgot_password.php" class="p-3 border rounded bg-white btn d-flex align-items-center">Change Password 
                               <i class="feather-arrow-right ms-auto"></i></a>
                                 </div>
                                 <div class="deactivate_account">
-                                    <a href="forgot_password.html" class="p-3 border rounded bg-white btn d-flex align-items-center">Deactivate Account 
+                                    <a href="forgot_password.php" class="p-3 border rounded bg-white btn d-flex align-items-center">Deactivate Account 
                               <i class="feather-arrow-right ms-auto"></i></a>
                                 </div>
                             </div>
@@ -308,32 +332,32 @@ include '../php/functions.php';
         <div class="osahan-menu-fotter fixed-bottom bg-white px-3 py-2 text-center d-none">
             <div class="row">
                 <div class="col">
-                    <a href="home.html" class="text-dark small fw-bold text-decoration-none">
+                    <a href="home.php" class="text-dark small fw-bold text-decoration-none">
                         <p class="h4 m-0"><i class="feather-home text-dark"></i></p>
                         Home
                     </a>
                 </div>
                 <div class="col">
-                    <a href="most_popular.html" class="text-dark small fw-bold text-decoration-none">
+                    <a href="most_popular.php" class="text-dark small fw-bold text-decoration-none">
                         <p class="h4 m-0"><i class="feather-map-pin"></i></p>
                         Trending
                     </a>
                 </div>
                 <div class="col bg-white rounded-circle mt-n4 px-3 py-2">
                     <div class="bg-danger rounded-circle mt-n0 shadow">
-                        <a href="checkout.html" class="text-white small fw-bold text-decoration-none">
+                        <a href="checkout.php" class="text-white small fw-bold text-decoration-none">
                             <i class="feather-shopping-cart"></i>
                         </a>
                     </div>
                 </div>
                 <div class="col">
-                    <a href="favorites.html" class="text-dark small fw-bold text-decoration-none">
+                    <a href="favorites.php" class="text-dark small fw-bold text-decoration-none">
                         <p class="h4 m-0"><i class="feather-heart"></i></p>
                         Favorites
                     </a>
                 </div>
                 <div class="col selected">
-                    <a href="profile.html" class="text-danger small fw-bold text-decoration-none">
+                    <a href="profile.css" class="text-danger small fw-bold text-decoration-none">
                         <p class="h4 m-0"><i class="feather-user"></i></p>
                         Profile
                     </a>
@@ -364,36 +388,36 @@ include '../php/functions.php';
                     <aside class="col-sm-3 col-md-2 text-white">
                         <h6 class="title">Error Pages</h6>
                         <ul class="list-unstyled hov_footer">
-                            <li> <a href="not-found.html" class="text-muted">Not found</a></li>
-                            <li> <a href="maintence.html" class="text-muted">Maintence</a></li>
-                            <li> <a href="coming-soon.html" class="text-muted">Coming Soon</a></li>
+                            <li> <a href="not-found.php" class="text-muted">Not found</a></li>
+                            <li> <a href="maintence.php" class="text-muted">Maintence</a></li>
+                            <li> <a href="coming-soon.php" class="text-muted">Coming Soon</a></li>
                         </ul>
                     </aside>
                     <aside class="col-sm-3 col-md-2 text-white">
                         <h6 class="title">Services</h6>
                         <ul class="list-unstyled hov_footer">
-                            <li> <a href="faq.html" class="text-muted">Delivery Support</a></li>
-                            <li> <a href="contact-us.html" class="text-muted">Contact Us</a></li>
-                            <li> <a href="terms.html" class="text-muted">Terms of use</a></li>
-                            <li> <a href="privacy.html" class="text-muted">Privacy policy</a></li>
+                            <li> <a href="faq.php" class="text-muted">Delivery Support</a></li>
+                            <li> <a href="contact-us.php" class="text-muted">Contact Us</a></li>
+                            <li> <a href="terms.php" class="text-muted">Terms of use</a></li>
+                            <li> <a href="privacy.php" class="text-muted">Privacy policy</a></li>
                         </ul>
                     </aside>
                     <aside class="col-sm-3  col-md-2 text-white">
                         <h6 class="title">For users</h6>
                         <ul class="list-unstyled hov_footer">
-                            <li> <a href="login.html" class="text-muted"> User Login </a></li>
-                            <li> <a href="signup.html" class="text-muted"> User register </a></li>
-                            <li> <a href="forgot_password.html" class="text-muted"> Forgot Password </a></li>
-                            <li> <a href="profile.html" class="text-muted"> Account Setting </a></li>
+                            <li> <a href="login.php" class="text-muted"> User Login </a></li>
+                            <li> <a href="signup.php" class="text-muted"> User register </a></li>
+                            <li> <a href="forgot_password.php" class="text-muted"> Forgot Password </a></li>
+                            <li> <a href="profile.css" class="text-muted"> Account Setting </a></li>
                         </ul>
                     </aside>
                     <aside class="col-sm-3  col-md-2 text-white">
                         <h6 class="title">More Pages</h6>
                         <ul class="list-unstyled hov_footer">
-                            <li> <a href="trending.html" class="text-muted"> Trending </a></li>
-                            <li> <a href="most_popular.html" class="text-muted"> Most popular </a></li>
-                            <li> <a href="restaurant.html" class="text-muted"> Restaurant Details </a></li>
-                            <li> <a href="favorites.html" class="text-muted"> Favorites </a></li>
+                            <li> <a href="trending.php" class="text-muted"> Trending </a></li>
+                            <li> <a href="most_popular.php" class="text-muted"> Most popular </a></li>
+                            <li> <a href="restaurant.php" class="text-muted"> Restaurant Details </a></li>
+                            <li> <a href="favorites.php" class="text-muted"> Favorites </a></li>
                         </ul>
                     </aside>
                 </div>
@@ -473,41 +497,41 @@ include '../php/functions.php';
     </footer>
     <nav id="main-nav">
         <ul class="second-nav">
-            <li><a href="home.html"><i class="feather-home me-2"></i> Homepage</a></li>
-            <li><a href="my_order.html"><i class="feather-list me-2"></i> My Orders</a></li>
+            <li><a href="home.php"><i class="feather-home me-2"></i> Homepage</a></li>
+            <li><a href="my_order.php"><i class="feather-list me-2"></i> My Orders</a></li>
             <li>
                 <a href="#"><i class="feather-edit-2 me-2"></i> Authentication</a>
                 <ul>
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="signup.html">Register</a></li>
-                    <li><a href="forgot_password.html">Forgot Password</a></li>
-                    <li><a href="verification.html">Verification</a></li>
-                    <li><a href="location.html">Location</a></li>
+                    <li><a href="login.php">Login</a></li>
+                    <li><a href="signup.php">Register</a></li>
+                    <li><a href="forgot_password.php">Forgot Password</a></li>
+                    <li><a href="verification.php">Verification</a></li>
+                    <li><a href="location.php">Location</a></li>
                 </ul>
             </li>
-            <li><a href="favorites.html"><i class="feather-heart me-2"></i> Favorites</a></li>
-            <li><a href="trending.html"><i class="feather-trending-up me-2"></i> Trending</a></li>
-            <li><a href="most_popular.html"><i class="feather-award me-2"></i> Most Popular</a></li>
-            <li><a href="restaurant.html"><i class="feather-paperclip me-2"></i> Restaurant Detail</a></li>
-            <li><a href="checkout.html"><i class="feather-list me-2"></i> Checkout</a></li>
-            <li><a href="successful.html"><i class="feather-check-circle me-2"></i> Successful</a></li>
-            <li><a href="map.html"><i class="feather-map-pin me-2"></i> Live Map</a></li>
+            <li><a href="favorites.php"><i class="feather-heart me-2"></i> Favorites</a></li>
+            <li><a href="trending.php"><i class="feather-trending-up me-2"></i> Trending</a></li>
+            <li><a href="most_popular.php"><i class="feather-award me-2"></i> Most Popular</a></li>
+            <li><a href="restaurant.php"><i class="feather-paperclip me-2"></i> Restaurant Detail</a></li>
+            <li><a href="checkout.php"><i class="feather-list me-2"></i> Checkout</a></li>
+            <li><a href="successful.php"><i class="feather-check-circle me-2"></i> Successful</a></li>
+            <li><a href="map.php"><i class="feather-map-pin me-2"></i> Live Map</a></li>
             <li>
                 <a href="#"><i class="feather-user me-2"></i> Profile</a>
                 <ul>
-                    <li><a href="profile.html">Profile</a></li>
-                    <li><a href="favorites.html">Delivery support</a></li>
-                    <li><a href="contact-us.html">Contact Us</a></li>
-                    <li><a href="terms.html">Terms of use</a></li>
-                    <li><a href="privacy.html">Privacy & Policy</a></li>
+                    <li><a href="profile.css">Profile</a></li>
+                    <li><a href="favorites.php">Delivery support</a></li>
+                    <li><a href="contact-us.php">Contact Us</a></li>
+                    <li><a href="terms.php">Terms of use</a></li>
+                    <li><a href="privacy.php">Privacy & Policy</a></li>
                 </ul>
             </li>
             <li>
                 <a href="#"><i class="feather-alert-triangle me-2"></i> Error</a>
                 <ul>
-                    <li><a href="not-found.html">Not Found</a>
-                        <li><a href="maintence.html"> Maintence</a>
-                            <li><a href="coming-soon.html">Coming Soon</a>
+                    <li><a href="not-found.php">Not Found</a>
+                        <li><a href="maintence.php"> Maintence</a>
+                            <li><a href="coming-soon.php">Coming Soon</a>
                 </ul>
                 </li>
                 <li>
@@ -550,19 +574,19 @@ include '../php/functions.php';
         </ul>
         <ul class="bottom-nav">
             <li class="email">
-                <a class="text-danger" href="home.html">
+                <a class="text-danger" href="home.php">
                     <p class="h5 m-0"><i class="feather-home text-danger"></i></p>
                     Home
                 </a>
             </li>
             <li class="github">
-                <a href="faq.html">
+                <a href="faq.php">
                     <p class="h5 m-0"><i class="feather-message-circle"></i></p>
                     FAQ
                 </a>
             </li>
             <li class="ko-fi">
-                <a href="contact-us.html">
+                <a href="contact-us.php">
                     <p class="h5 m-0"><i class="feather-phone"></i></p>
                     Help
                 </a>
