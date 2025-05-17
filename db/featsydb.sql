@@ -1,27 +1,9 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Anamakine: localhost
--- Üretim Zamanı: 13 May 2025, 23:42:25
--- Sunucu sürümü: 10.4.28-MariaDB
--- PHP Sürümü: 8.2.4
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Veritabanı: `featsydb`
---
-
--- --------------------------------------------------------
 
 --
 -- Tablo için tablo yapısı `actions`
@@ -395,6 +377,20 @@ INSERT INTO `restaurant_features` (`id`, `restaurant_id`, `feature_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tablo için tablo yapısı `restaurant_images`
+--
+
+CREATE TABLE `restaurant_images` (
+  `id` int(11) NOT NULL,
+  `restaurant_id` int(11) NOT NULL,
+  `image_url` varchar(255) NOT NULL,
+  `uploaded_at` datetime DEFAULT current_timestamp(),
+  `is_main` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Tablo için tablo yapısı `restaurant_menus`
 --
 
@@ -590,6 +586,13 @@ ALTER TABLE `restaurant_features`
   ADD KEY `feature_id` (`feature_id`);
 
 --
+-- Tablo için indeksler `restaurant_images`
+--
+ALTER TABLE `restaurant_images`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `restaurant_id` (`restaurant_id`);
+
+--
 -- Tablo için indeksler `restaurant_menus`
 --
 ALTER TABLE `restaurant_menus`
@@ -686,6 +689,12 @@ ALTER TABLE `restaurant_features`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
+-- Tablo için AUTO_INCREMENT değeri `restaurant_images`
+--
+ALTER TABLE `restaurant_images`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Tablo için AUTO_INCREMENT değeri `restaurant_menus`
 --
 ALTER TABLE `restaurant_menus`
@@ -755,6 +764,12 @@ ALTER TABLE `restaurant_features`
   ADD CONSTRAINT `restaurant_features_ibfk_2` FOREIGN KEY (`feature_id`) REFERENCES `features` (`id`) ON DELETE CASCADE;
 
 --
+-- Tablo kısıtlamaları `restaurant_images`
+--
+ALTER TABLE `restaurant_images`
+  ADD CONSTRAINT `restaurant_images_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`) ON DELETE CASCADE;
+
+--
 -- Tablo kısıtlamaları `restaurant_menus`
 --
 ALTER TABLE `restaurant_menus`
@@ -775,6 +790,3 @@ ALTER TABLE `user_details`
   ADD CONSTRAINT `user_details_ibfk_3` FOREIGN KEY (`county_id`) REFERENCES `counties` (`id`) ON DELETE SET NULL;
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

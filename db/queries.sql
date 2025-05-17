@@ -485,3 +485,14 @@ WHERE a.user_id = ? AND a.rating IS NOT NULL
 GROUP BY c.id
 ORDER BY avg_rating DESC;
 
+SELECT image_url FROM restaurant_images
+WHERE restaurant_id = 5
+ORDER BY uploaded_at;
+
+SELECT image_url FROM restaurant_images
+WHERE restaurant_id = 5 AND is_main = 1
+LIMIT 1;
+
+Bonus: restaurants tablosundaki profile_picture kolonu
+Eğer yukarıdaki yapıyı kullanmaya başlarsan, restaurants.profile_picture sütununu ya silebilir ya da restaurant_images içindeki is_main = 1 görselini bu alana da kopyalayabilirsin.
+
