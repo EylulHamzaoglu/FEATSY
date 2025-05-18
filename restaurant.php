@@ -1,21 +1,40 @@
 <?php
+session_start();
 include 'db/functions.php';
 
 if (!isset($_GET['restaurant_id']) || !is_numeric($_GET['restaurant_id'])) {
     header("Location: home.php");
     exit();
 }
+
 $restaurant_id = intval($_GET['restaurant_id']);
 
-$restaurant = get_restaurant_details($restaurant_id);
-if (!$restaurant) {
-    echo "Restoran bulunamadı.";
-    exit();
+// ✳️ FORM GÖNDERİLDİYSE YORUMU İŞLE
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $user_id = $_SESSION['user_id'] ?? null;
+    $rating = $_POST['rating'] ?? null;
+    $comment_text = $_POST['comment_text'] ?? null;
+
+    // Trim ve sayı kontrolü
+    $comment_text = trim($comment_text);
+    $rating = is_numeric($rating) ? intval($rating) : null;
+
+    if ($user_id && $rating >= 1 && $rating <= 5 && !empty($comment_text)) {
+        // Veritabanına kayıt
+        rate_restaurant($user_id, $restaurant_id, $rating);
+        add_comment($user_id, $restaurant_id, $comment_text);
+        header("Location: restaurant.php?restaurant_id=" . $restaurant_id);
+        exit();
+    } else {
+        $error = "Tüm alanlar doldurulmalıdır.";
+    }
 }
 
+$restaurant = get_restaurant_details($restaurant_id);
 $average_rating = get_restaurant_average_rating($restaurant_id);
 $menu_items = get_restaurant_menu($restaurant_id);
 $comments = get_restaurant_comments($restaurant_id);
+$features = get_restaurant_features($restaurant_id);
 ?>
 
 <!DOCTYPE html>
@@ -96,7 +115,14 @@ $comments = get_restaurant_comments($restaurant_id);
                     </ul>
                     <small class="ms-2">(<?php echo $average_rating; ?> / 5)</small>
                 </div>
-
+                <?php if (!empty($features)): ?>
+    <p class="mb-2">
+        <strong>Özellikler:</strong>
+        <?php foreach ($features as $feature): ?>
+            <span class="badge bg-secondary me-1"><?php echo htmlspecialchars($feature['name']); ?></span>
+        <?php endforeach; ?>
+    </p>
+<?php endif; ?>
                 <div class="d-flex mt-2">
                     <div class="me-4">
                         <small class="text-muted d-block">Delivery</small>
@@ -128,6 +154,33 @@ $comments = get_restaurant_comments($restaurant_id);
         </div>
     <?php endwhile; ?>
 
+    <div class="container mt-5">
+    <h5 class="mb-3">Yorum Yap</h5>
+    <?php if (isset($error)): ?>
+        <div class="alert alert-danger"> <?php echo $error; ?> </div>
+    <?php endif; ?>
+    <form method="POST" action="">
+        <div class="mb-3">
+            <label for="rating" class="form-label">Puan</label>
+            <select class="form-select" id="rating" name="rating" required>
+                <option value="">Puan seçin</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="comment_text" class="form-label">Yorumunuz</label>
+            <textarea class="form-control" id="comment_text" name="comment_text" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Yorumu Gönder</button>
+    </form>
+</div>
+
+<!-- ✨ Yorumları Listele -->
+<div class="container my-5">
     <h5 class="mt-5">Yorumlar</h5>
     <?php while ($comment = $comments->fetch_assoc()): ?>
         <div class="border p-3 mb-3 rounded">
@@ -135,7 +188,7 @@ $comments = get_restaurant_comments($restaurant_id);
             <small class="text-muted"> - <?php echo date("d M Y", strtotime($comment['created_at'])); ?></small>
             <div class="mb-2">
                 <?php
-                $rating = intval($comment['rating']);
+                $rating = intval($comment['rating'] ?? 0);
                 for ($i = 0; $i < 5; $i++) {
                     echo $i < $rating ? '<i class="feather-star text-warning"></i>' : '<i class="feather-star"></i>';
                 }
@@ -145,6 +198,7 @@ $comments = get_restaurant_comments($restaurant_id);
         </div>
     <?php endwhile; ?>
 </div>
+
 
 <!-- Footer -->
 <footer class="section-footer border-top bg-dark text-white py-4">
