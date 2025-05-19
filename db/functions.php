@@ -34,17 +34,18 @@ function sign_in($email, $password) {
         return ['success' => false, 'message' => 'Lütfen tüm alanları doldurun.'];
     }
 
-    $stmt = $conn->prepare("SELECT * FROM users WHERE mail = ? AND password = ?");
+    $stmt = $conn->prepare("SELECT id FROM users WHERE mail = ? AND password = ?");
     $stmt->bind_param("ss", $email, $password);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if ($result->num_rows === 1) {
-        return ['success' => true];
+    if ($user = $result->fetch_assoc()) {
+        return ['success' => true, 'user_id' => $user['id']];
     } else {
         return ['success' => false, 'message' => 'Geçersiz email veya şifre.'];
     }
 }
+
 
 // ✅ get_user_by_id($id)
 // Verilen kullanıcı ID’sine göre kullanıcı bilgilerini döner.
@@ -695,17 +696,20 @@ function get_restaurant_comments($restaurant_id) {
     return $stmt->get_result();
 }
 
+
+
 function get_user_profile($user_id) {
     global $conn;
     $stmt = $conn->prepare("
-        SELECT u.mail, u.birth_date, ud.name, ud.surname, ud.phone
+        SELECT 
+            u.mail, u.birth_date,
+            d.name, d.surname, d.phone
         FROM users u
-        LEFT JOIN user_details ud ON u.id = ud.user_id
+        JOIN user_details d ON u.id = d.user_id
         WHERE u.id = ?
     ");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
-    return $result->fetch_assoc();
+    return $result->fetch_assoc(); // associative array döner
 }
-

@@ -3,738 +3,123 @@ session_start();
 include 'db/functions.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: index.php');
+    header('Location: login.php');
     exit;
 }
 
-$_SESSION['user_id'] = $user['id'];
-$profile = get_user_profile($user_id);
-
-
+$user_id = $_SESSION['user_id'];
+$profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıcı bilgilerini çekmeli
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Askbootstrap">
-    <meta name="author" content="Askbootstrap">
-    <link rel="icon" type="image/png" href="img/fav.png">
-    <title>Swiggiweb - Online Food Ordering Website Template</title>
-    <!-- Slick Slider -->
-    <link href="vendor/slick/slick/slick.css" rel="stylesheet" type="text/css">
-    <link href="vendor/slick/slick/slick-theme.css" rel="stylesheet" type="text/css">
-    <!-- Feather Icon-->
-    <link href="vendor/icons/feather.css" rel="stylesheet" type="text/css">
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet">
-    <!-- Sidebar CSS -->
-    <link href="vendor/sidebar/demo.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Edit Profile</title>
+
+  <!-- CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/icons/feather.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+
+  <style>
+    .cat-item a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100px;
+      height: 100%;
+      text-align: center;
+    }
+
+    .cat-item img {
+      height: 40px;
+      width: 40px;
+      object-fit: contain;
+      margin-bottom: 5px;
+    }
+
+    .cat-item p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.2;
+    }
+  </style>
 </head>
 
 <body class="fixed-bottom-bar">
-    <header class="section-header">
-        <section class="header-main shadow-sm bg-white">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-1">
-                        <a href="home.php" class="brand-wrap mb-0">
-                            <img alt="#" class="img-fluid" src="img/logo_web.png">
-                        </a>
-                        <!-- brand-wrap.// -->
-                    </div>
-                    <div class="col-3 d-flex align-items-center m-none">
-                        <div class="dropdown me-3">
-                            <a class="text-dark dropdown-toggle d-flex align-items-center py-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div><i class="feather-map-pin me-2 bg-light rounded-pill p-2 icofont-size"></i></div>
-                                <div>
-                                    <p class="text-muted mb-0 small">Select Location</p>
-                                    Jawaddi Ludhiana...
-                                </div>
-                            </a>
-                            <div class="dropdown-menu p-0 drop-loc">
-                                <div class="osahan-country">
-                                    <div class="search_location bg-primary p-3 text-end">
-                                        <div class="input-group bg-white rounded shadow-sm">
-                                            <span class="input-group-text bg-transparent border-0 rounded-0"
-                                               ><i class="feather-search"></i></span>
-                                            <input type="text"
-                                                class="form-control bg-transparent border-0 rounded-0 px-0 shadow-none"
-                                                placeholder="Enter Your Location" aria-label="Enter Your Location"
-                                                >
-                                        </div>
-                                    </div>
-                                    <div class="p-3 border-bottom">
-                                        <a href="home.php" class="text-decoration-none">
-                                            <p class="fw-bold text-primary m-0"><i class="feather-navigation"></i> New York, USA</p>
-                                        </a>
-                                    </div>
-                                    <div class="filter">
-                                        <h6 class="p-3 bg-light m-0 border-bottom">Choose your country</h6>
-                                        <div class="border-bottom p-3">
-                                            <div class="form-check form-check-reverse m-0">
-                                                <input type="radio" id="customRadio1" name="location"
-                                                    class="form-check-input">
-                                                <label class="form-check-label text-start w-100"
-                                                    for="customRadio1">Afghanistan</label>
-                                            </div>
-                                        </div>
-                                        <div class="border-bottom p-3">
-                                        <div class="form-check form-check-reverse m-0">
-                                            <input type="radio" id="customRadio2" name="location"
-                                                class="form-check-input" checked="">
-                                            <label class="form-check-label text-start w-100"
-                                                for="customRadio2">India</label>
-                                        </div>
-                                    </div>
-                                    <div class="border-bottom p-3">
-                                        <div class="form-check form-check-reverse m-0">
-                                            <input type="radio" id="customRadio3" name="location"
-                                                class="form-check-input">
-                                            <label class="form-check-label text-start w-100"
-                                                for="customRadio3">USA</label>
-                                        </div>
-                                        </div>
-                                        <div class="border-bottom p-3">
-                                        <div class="form-check form-check-reverse m-0">
-                                            <input type="radio" id="customRadio4" name="location"
-                                                class="form-check-input">
-                                            <label class="form-check-label text-start w-100"
-                                                for="customRadio4">Australia</label>
-                                        </div>
-                                        </div>
-                                        <div class="border-bottom p-3">
-                                        <div class="form-check form-check-reverse m-0">
-                                            <input type="radio" id="customRadio5" name="location"
-                                                class="form-check-input">
-                                            <label class="form-check-label text-start w-100"
-                                                for="customRadio5">Japan</label>
-                                        </div>
-                                        </div>
-                                        <div class="p-3">
-                                        <div class="form-check form-check-reverse m-0">
-                                            <input type="radio" id="customRadio6" name="location"
-                                                class="form-check-input">
-                                            <label class="form-check-label text-start w-100"
-                                                for="customRadio6">China</label>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- col.// -->
-                    <div class="col-8">
-                        <div class="d-flex align-items-center justify-content-end pe-5">
-                            <!-- search -->
-                            <a href="search.php" class="widget-header me-4 text-dark">
-                                <div class="icon d-flex align-items-center">
-                                    <i class="feather-search h6 me-2 mb-0"></i> <span>Search</span>
-                                </div>
-                            </a>
-                            <!-- offers -->
-                            <a href="offers.php" class="widget-header me-4 text-white btn bg-primary m-none">
-                                <div class="icon d-flex align-items-center">
-                                    <i class="feather-disc h6 me-2 mb-0"></i> <span>Offers</span>
-                                </div>
-                            </a>
-                            <!-- signin -->
-                            <a href="login.php" class="widget-header me-4 text-dark m-none">
-                                <div class="icon d-flex align-items-center">
-                                    <i class="feather-user h6 me-2 mb-0"></i> <span>Sign in</span>
-                                </div>
-                            </a>
-                            <!-- my account -->
-                            <div class="dropdown me-4 m-none">
-                                <a href="#" class="dropdown-toggle text-dark py-3 d-block" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img alt="#" src="img/user/1.jpg" class="img-fluid rounded-circle header-user me-2 header-user"> Hi Osahan
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="profile.css">My account</a>
-                                    <a class="dropdown-item" href="faq.php">Delivery support</a>
-                                    <a class="dropdown-item" href="contact-us.php">Contant us</a>
-                                    <a class="dropdown-item" href="terms.php">Term of use</a>
-                                    <a class="dropdown-item" href="privacy.php">Privacy policy</a>
-                                    <a class="dropdown-item" href="login.php">Logout</a>
-                                </div>
-                            </div>
-                            <!-- signin -->
-                            <a href="checkout.php" class="widget-header me-4 text-dark">
-                                <div class="icon d-flex align-items-center">
-                                    <i class="feather-shopping-cart h6 me-2 mb-0"></i> <span>Cart</span>
-                                </div>
-                            </a>
-                            <a class="toggle" href="#">
-                                <span></span>
-                            </a>
-                        </div>
-                        <!-- widgets-wrap.// -->
-                    </div>
-                    <!-- col.// -->
-                </div>
-                <!-- row.// -->
-            </div>
-            <!-- container.// -->
-        </section>
-        <!-- header-main .// -->
-    </header>
-    <div class="osahan-profile">
-        <div class="d-none">
-            <div class="bg-primary border-bottom p-3 d-flex align-items-center">
-                <a class="toggle togglew toggle-2" href="#"><span></span></a>
-                <h4 class="fw-bold m-0 text-white">Profile</h4>
-            </div>
-        </div>
-        <!-- profile -->
-        <div class="container position-relative">
-            <div class="py-5 osahan-profile row">
-                <div class="col-md-4 mb-3">
-                    <div class="bg-white rounded shadow-sm sticky_sidebar overflow-hidden">
-                        <a href="profile.css" class="">
-                            <div class="d-flex align-items-center p-3">
-                                <div class="left me-3">
-                                    <img alt="#" src="img/user1.jpg" class="rounded-circle">
-                                </div>
-                                <div class="right">
-                                    <h6 class="mb-1 fw-bold">Gurdeep Singh <i class="feather-check-circle text-success"></i></h6>
-                                    <p class="text-muted m-0 small">iamosahan@gmail.com</p>
-                                </div>
-                            </div>
-                        </a>
-                        <div class="osahan-credits d-flex align-items-center p-3 bg-light">
-                            <p class="m-0">Accounts Credits</p>
-                            <h5 class="m-0 ms-auto text-primary">$52.25</h5>
-                        </div>
-                        <!-- profile-details -->
-                        <div class="bg-white profile-details">
-                            <a data-bs-toggle="modal" data-bs-target="#paycard" class="d-flex w-100 align-items-center border-bottom p-3">
-                                <div class="left me-3">
-                                    <h6 class="fw-bold mb-1 text-dark">Payment Cards</h6>
-                                    <p class="small text-muted m-0">Add a credit or debit card</p>
-                                </div>
-                                <div class="right ms-auto">
-                                    <span class="fw-bold m-0"><i class="feather-chevron-right h6 m-0"></i></span>
-                                </div>
-                            </a>
-                            <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="d-flex w-100 align-items-center border-bottom p-3">
-                                <div class="left me-3">
-                                    <h6 class="fw-bold mb-1 text-dark">Address</h6>
-                                    <p class="small text-muted m-0">Add or remove a delivery address</p>
-                                </div>
-                                <div class="right ms-auto">
-                                    <span class="fw-bold m-0"><i class="feather-chevron-right h6 m-0"></i></span>
-                                </div>
-                            </a>
-                            <a class="d-flex align-items-center border-bottom p-3" data-bs-toggle="modal" data-bs-target="#inviteModal">
-                                <div class="left me-3">
-                                    <h6 class="fw-bold mb-1">Refer Friends</h6>
-                                    <p class="small text-primary m-0">Get $10.00 FREE</p>
-                                </div>
-                                <div class="right ms-auto">
-                                    <span class="fw-bold m-0"><i class="feather-chevron-right h6 m-0"></i></span>
-                                </div>
-                            </a>
-                            <a href="faq.php" class="d-flex w-100 align-items-center border-bottom px-3 py-4">
-                                <div class="left me-3">
-                                    <h6 class="fw-bold m-0 text-dark"><i class="feather-truck bg-danger text-white p-2 rounded-circle me-2"></i> Delivery Support</h6>
-                                </div>
-                                <div class="right ms-auto">
-                                    <span class="fw-bold m-0"><i class="feather-chevron-right h6 m-0"></i></span>
-                                </div>
-                            </a>
-                            <a href="contact-us.php" class="d-flex w-100 align-items-center border-bottom px-3 py-4">
-                                <div class="left me-3">
-                                    <h6 class="fw-bold m-0 text-dark"><i class="feather-phone bg-primary text-white p-2 rounded-circle me-2"></i> Contact</h6>
-                                </div>
-                                <div class="right ms-auto">
-                                    <span class="fw-bold m-0"><i class="feather-chevron-right h6 m-0"></i></span>
-                                </div>
-                            </a>
-                            <a href="terms.php" class="d-flex w-100 align-items-center border-bottom px-3 py-4">
-                                <div class="left me-3">
-                                    <h6 class="fw-bold m-0 text-dark"><i class="feather-info bg-success text-white p-2 rounded-circle me-2"></i> Term of use</h6>
-                                </div>
-                                <div class="right ms-auto">
-                                    <span class="fw-bold m-0"><i class="feather-chevron-right h6 m-0"></i></span>
-                                </div>
-                            </a>
-                            <a href="privacy.php" class="d-flex w-100 align-items-center px-3 py-4">
-                                <div class="left me-3">
-                                    <h6 class="fw-bold m-0 text-dark"><i class="feather-lock bg-warning text-white p-2 rounded-circle me-2"></i> Privacy policy</h6>
-                                </div>
-                                <div class="right ms-auto">
-                                    <span class="fw-bold m-0"><i class="feather-chevron-right h6 m-0"></i></span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-8 mb-3">
-                    <div class="rounded shadow-sm p-4 bg-white">
-                        <h5 class="mb-4">My account</h5>
-                        <div id="edit_profile">
-                            <div>
-                            <div class="container mt-5">
-    <div class="card shadow-sm p-4">
-        <h4 class="mb-4">My Account</h4>
-        <form method="POST" action="update_profile.php">
-            <div class="mb-3">
-                <label for="first_name" class="form-label">First Name</label>
-                <input type="text" name="first_name" class="form-control" value="<?php echo htmlspecialchars($profile['first_name']); ?>">
-            </div>
-            <div class="mb-3">
-                <label for="last_name" class="form-label">Last Name</label>
-                <input type="text" name="last_name" class="form-control" value="<?php echo htmlspecialchars($profile['last_name']); ?>">
-            </div>
-            <div class="mb-3">
-                <label for="phone" class="form-label">Mobile Number</label>
-                <input type="text" name="phone" class="form-control" value="<?php echo htmlspecialchars($profile['phone']); ?>">
-            </div>
-            <div class="mb-3">
-                <label for="mail" class="form-label">Email</label>
-                <input type="email" name="mail" class="form-control" value="<?php echo htmlspecialchars($profile['mail']); ?>" readonly>
-            </div>
-            <div class="mb-3">
-                <label for="birth_date" class="form-label">Date of Birth</label>
-                <input type="date" name="birth_date" class="form-control" value="<?php echo htmlspecialchars($profile['birth_date']); ?>">
-            </div>
-            <button type="submit" class="btn btn-danger w-100">Save Changes</button>
-        </form>
 
-        <div class="mt-4">
-            <a href="change_password.php" class="btn btn-outline-secondary w-100 mb-2">Change Password</a>
-            <a href="deactivate_account.php" class="btn btn-outline-danger w-100">Deactivate Account</a>
-        </div>
-    </div>
-</div>
+  <div class="container pt-3">
+    <p class="alert alert-info mb-3">
+      Hoş geldin, <strong><?php echo $_SESSION['user_email'] ?? 'misafir'; ?></strong>!
+    </p>
+  </div>
 
-                            </div>
-                            <div class="additional">
-                                <div class="change_password my-3">
-                                    <a href="forgot_password.php" class="p-3 border rounded bg-white btn d-flex align-items-center">Change Password 
-                              <i class="feather-arrow-right ms-auto"></i></a>
-                                </div>
-                                <div class="deactivate_account">
-                                    <a href="forgot_password.php" class="p-3 border rounded bg-white btn d-flex align-items-center">Deactivate Account 
-                              <i class="feather-arrow-right ms-auto"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 mb-3">
+        <div class="card shadow-sm p-4">
+          <h4 class="mb-4">My Account</h4>
+
+          <form method="POST" action="update_profile.php">
+  <div class="mb-3">
+    <label for="first_name" class="form-label">First Name</label>
+    <input type="text" name="first_name" id="first_name" class="form-control"
+      value="<?php echo htmlspecialchars($profile['name'] ?? ''); ?>">
+  </div>
+
+  <div class="mb-3">
+    <label for="last_name" class="form-label">Last Name</label>
+    <input type="text" name="last_name" id="last_name" class="form-control"
+      value="<?php echo htmlspecialchars($profile['surname'] ?? ''); ?>">
+  </div>
+
+  <div class="mb-3">
+    <label for="phone" class="form-label">Mobile Number</label>
+    <input type="text" name="phone" id="phone" class="form-control"
+      value="<?php echo htmlspecialchars($profile['phone'] ?? ''); ?>">
+  </div>
+
+  <div class="mb-3">
+    <label for="mail" class="form-label">Email</label>
+    <input type="email" name="mail" id="mail" class="form-control"
+      value="<?php echo htmlspecialchars($profile['mail'] ?? ''); ?>" readonly>
+  </div>
+
+  <div class="mb-3">
+    <label for="birth_date" class="form-label">Date of Birth</label>
+    <input type="date" name="birth_date" id="birth_date" class="form-control"
+      value="<?php echo htmlspecialchars($profile['birth_date'] ?? ''); ?>">
+  </div>
+
+  <button type="submit" class="btn btn-danger w-100">Save Changes</button>
+</form>
+
+
+          <div class="additional mt-4">
+            <div class="change_password my-3">
+              <a href="forgot_password.php"
+                class="p-3 border rounded bg-white btn d-flex align-items-center">Change Password
+                <i class="feather-arrow-right ms-auto"></i></a>
             </div>
-        </div>
-        <!-- Footer -->
-        <div class="osahan-menu-fotter fixed-bottom bg-white px-3 py-2 text-center d-none">
-            <div class="row">
-                <div class="col">
-                    <a href="home.php" class="text-dark small fw-bold text-decoration-none">
-                        <p class="h4 m-0"><i class="feather-home text-dark"></i></p>
-                        Home
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="most_popular.php" class="text-dark small fw-bold text-decoration-none">
-                        <p class="h4 m-0"><i class="feather-map-pin"></i></p>
-                        Trending
-                    </a>
-                </div>
-                <div class="col bg-white rounded-circle mt-n4 px-3 py-2">
-                    <div class="bg-danger rounded-circle mt-n0 shadow">
-                        <a href="checkout.php" class="text-white small fw-bold text-decoration-none">
-                            <i class="feather-shopping-cart"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col">
-                    <a href="favorites.php" class="text-dark small fw-bold text-decoration-none">
-                        <p class="h4 m-0"><i class="feather-heart"></i></p>
-                        Favorites
-                    </a>
-                </div>
-                <div class="col selected">
-                    <a href="profile.css" class="text-danger small fw-bold text-decoration-none">
-                        <p class="h4 m-0"><i class="feather-user"></i></p>
-                        Profile
-                    </a>
-                </div>
+            <div class="deactivate_account">
+              <a href="forgot_password.php"
+                class="p-3 border rounded bg-white btn d-flex align-items-center">Deactivate Account
+                <i class="feather-arrow-right ms-auto"></i></a>
             </div>
+          </div>
+
         </div>
+      </div>
     </div>
-    <!-- footer -->
-    <footer class="section-footer border-top bg-dark">
-        <div class="container">
-            <div class="footer-top padding-y py-5">
-                <div class="row pt-3">
-                    <aside class="col-md-4 footer-about">
-                        <article class="d-flex pb-3">
-                            <div><img alt="#" src="img/logo_web.png" class="logo-footer me-3"></div>
-                            <div>
-                                <h6 class="title text-white">About Us</h6>
-                                <p class="text-muted">Some short text about company like You might remember the Dell computer commercials in which a youth reports.</p>
-                                <div class="d-flex align-items-center">
-                                    <a class="btn btn-icon btn-outline-light me-1 btn-sm" title="Facebook" target="_blank" href="#"><i class="feather-facebook"></i></a>
-                                    <a class="btn btn-icon btn-outline-light me-1 btn-sm" title="Instagram" target="_blank" href="#"><i class="feather-instagram"></i></a>
-                                    <a class="btn btn-icon btn-outline-light me-1 btn-sm" title="Youtube" target="_blank" href="#"><i class="feather-youtube"></i></a>
-                                    <a class="btn btn-icon btn-outline-light me-1 btn-sm" title="Twitter" target="_blank" href="#"><i class="feather-twitter"></i></a>
-                                </div>
-                            </div>
-                        </article>
-                    </aside>
-                    <aside class="col-sm-3 col-md-2 text-white">
-                        <h6 class="title">Error Pages</h6>
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="not-found.php" class="text-muted">Not found</a></li>
-                            <li> <a href="maintence.php" class="text-muted">Maintence</a></li>
-                            <li> <a href="coming-soon.php" class="text-muted">Coming Soon</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-3 col-md-2 text-white">
-                        <h6 class="title">Services</h6>
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="faq.php" class="text-muted">Delivery Support</a></li>
-                            <li> <a href="contact-us.php" class="text-muted">Contact Us</a></li>
-                            <li> <a href="terms.php" class="text-muted">Terms of use</a></li>
-                            <li> <a href="privacy.php" class="text-muted">Privacy policy</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-3  col-md-2 text-white">
-                        <h6 class="title">For users</h6>
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="login.php" class="text-muted"> User Login </a></li>
-                            <li> <a href="signup.php" class="text-muted"> User register </a></li>
-                            <li> <a href="forgot_password.php" class="text-muted"> Forgot Password </a></li>
-                            <li> <a href="profile.css" class="text-muted"> Account Setting </a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-3  col-md-2 text-white">
-                        <h6 class="title">More Pages</h6>
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="trending.php" class="text-muted"> Trending </a></li>
-                            <li> <a href="most_popular.php" class="text-muted"> Most popular </a></li>
-                            <li> <a href="restaurant.php" class="text-muted"> Restaurant Details </a></li>
-                            <li> <a href="favorites.php" class="text-muted"> Favorites </a></li>
-                        </ul>
-                    </aside>
-                </div>
-                <!-- row.// -->
-            </div>
-            <!-- footer-top.// -->
-            <section class="footer-center border-top padding-y py-5">
-                <h6 class="title text-white">Countries</h6>
-                <div class="row">
-                    <aside class="col-sm-2 col-md-2 text-white">
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="#" class="text-muted">India</a></li>
-                            <li> <a href="#" class="text-muted">Indonesia</a></li>
-                            <li> <a href="#" class="text-muted">Ireland</a></li>
-                            <li> <a href="#" class="text-muted">Italy</a></li>
-                            <li> <a href="#" class="text-muted">Lebanon</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-2 col-md-2 text-white">
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="#" class="text-muted">Malaysia</a></li>
-                            <li> <a href="#" class="text-muted">New Zealand</a></li>
-                            <li> <a href="#" class="text-muted">Philippines</a></li>
-                            <li> <a href="#" class="text-muted">Poland</a></li>
-                            <li> <a href="#" class="text-muted">Portugal</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-2 col-md-2 text-white">
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="#" class="text-muted">Australia</a></li>
-                            <li> <a href="#" class="text-muted">Brasil</a></li>
-                            <li> <a href="#" class="text-muted">Canada</a></li>
-                            <li> <a href="#" class="text-muted">Chile</a></li>
-                            <li> <a href="#" class="text-muted">Czech Republic</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-2 col-md-2 text-white">
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="#" class="text-muted">Turkey</a></li>
-                            <li> <a href="#" class="text-muted">UAE</a></li>
-                            <li> <a href="#" class="text-muted">United Kingdom</a></li>
-                            <li> <a href="#" class="text-muted">United States</a></li>
-                            <li> <a href="#" class="text-muted">Sri Lanka</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-2 col-md-2 text-white">
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="#" class="text-muted">Qatar</a></li>
-                            <li> <a href="#" class="text-muted">Singapore</a></li>
-                            <li> <a href="#" class="text-muted">Slovakia</a></li>
-                            <li> <a href="#" class="text-muted">South Africa</a></li>
-                            <li> <a href="#" class="text-muted">Green Land</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-2 col-md-2 text-white">
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="#" class="text-muted">Pakistan</a></li>
-                            <li> <a href="#" class="text-muted">Bangladesh</a></li>
-                            <li> <a href="#" class="text-muted">Bhutaan</a></li>
-                            <li> <a href="#" class="text-muted">Nepal</a></li>
-                        </ul>
-                    </aside>
-                </div>
-                <!-- row.// -->
-            </section>
-        </div>
-        <!-- //container -->
-        <div class="footer-copyright border-top py-3 bg-light">
-            <div class="container d-flex align-items-center">
-                <p class="mb-0"> © 2023 Company All rights reserved </p>
-                <p class="text-muted mb-0 ms-auto d-flex align-items-center">
-                    <a href="#" class="d-block"><img alt="#" src="img/appstore.png" height="40"></a>
-                    <a href="#" class="d-block ms-3"><img alt="#" src="img/playmarket.png" height="40"></a>
-                </p>
-            </div>
-        </div>
-    </footer>
-    <nav id="main-nav">
-        <ul class="second-nav">
-            <li><a href="home.php"><i class="feather-home me-2"></i> Homepage</a></li>
-            <li><a href="my_order.php"><i class="feather-list me-2"></i> My Orders</a></li>
-            <li>
-                <a href="#"><i class="feather-edit-2 me-2"></i> Authentication</a>
-                <ul>
-                    <li><a href="login.php">Login</a></li>
-                    <li><a href="signup.php">Register</a></li>
-                    <li><a href="forgot_password.php">Forgot Password</a></li>
-                    <li><a href="verification.php">Verification</a></li>
-                    <li><a href="location.php">Location</a></li>
-                </ul>
-            </li>
-            <li><a href="favorites.php"><i class="feather-heart me-2"></i> Favorites</a></li>
-            <li><a href="trending.php"><i class="feather-trending-up me-2"></i> Trending</a></li>
-            <li><a href="most_popular.php"><i class="feather-award me-2"></i> Most Popular</a></li>
-            <li><a href="restaurant.php"><i class="feather-paperclip me-2"></i> Restaurant Detail</a></li>
-            <li><a href="checkout.php"><i class="feather-list me-2"></i> Checkout</a></li>
-            <li><a href="successful.php"><i class="feather-check-circle me-2"></i> Successful</a></li>
-            <li><a href="map.php"><i class="feather-map-pin me-2"></i> Live Map</a></li>
-            <li>
-                <a href="#"><i class="feather-user me-2"></i> Profile</a>
-                <ul>
-                    <li><a href="profile.css">Profile</a></li>
-                    <li><a href="favorites.php">Delivery support</a></li>
-                    <li><a href="contact-us.php">Contact Us</a></li>
-                    <li><a href="terms.php">Terms of use</a></li>
-                    <li><a href="privacy.php">Privacy & Policy</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#"><i class="feather-alert-triangle me-2"></i> Error</a>
-                <ul>
-                    <li><a href="not-found.php">Not Found</a>
-                        <li><a href="maintence.php"> Maintence</a>
-                            <li><a href="coming-soon.php">Coming Soon</a>
-                </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="feather-link me-2"></i> Navigation Link Example</a>
-                    <ul>
-                        <li>
-                            <a href="#">Link Example 1</a>
-                            <ul>
-                                <li>
-                                    <a href="#">Link Example 1.1</a>
-                                    <ul>
-                                        <li><a href="#">Link</a></li>
-                                        <li><a href="#">Link</a></li>
-                                        <li><a href="#">Link</a></li>
-                                        <li><a href="#">Link</a></li>
-                                        <li><a href="#">Link</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Link Example 1.2</a>
-                                    <ul>
-                                        <li><a href="#">Link</a></li>
-                                        <li><a href="#">Link</a></li>
-                                        <li><a href="#">Link</a></li>
-                                        <li><a href="#">Link</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Link Example 2</a></li>
-                        <li><a href="#">Link Example 3</a></li>
-                        <li><a href="#">Link Example 4</a></li>
-                        <li data-nav-custom-content>
-                            <div class="custom-message">
-                                You can add any custom content to your navigation items. This text is just an example.
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-        </ul>
-        <ul class="bottom-nav">
-            <li class="email">
-                <a class="text-danger" href="home.php">
-                    <p class="h5 m-0"><i class="feather-home text-danger"></i></p>
-                    Home
-                </a>
-            </li>
-            <li class="github">
-                <a href="faq.php">
-                    <p class="h5 m-0"><i class="feather-message-circle"></i></p>
-                    FAQ
-                </a>
-            </li>
-            <li class="ko-fi">
-                <a href="contact-us.php">
-                    <p class="h5 m-0"><i class="feather-phone"></i></p>
-                    Help
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <!-- payment modal -->
-    <div class="modal fade" id="paycard" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Add Credit/Debit Card</h5>
-                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <h6 class="m-0">Add new card</h6>
-                    <p class="small">WE ACCEPT <span class="osahan-card ms-2 fw-bold">( Master Card / Visa Card / Rupay )</span></p>
-                    <form>
-                        <div class="form-row">
-                            <div class="col-md-12 form-group mb-3">
-                                <label class="form-label fw-bold small">Card number</label>
-                                <div class="input-group">
-                                    <input placeholder="Card number" type="number" class="form-control">
-                                    <button class="btn btn-outline-secondary" type="button"><i class="feather-credit-card"></i></button>
-                                </div>
-                            </div>
-                            <div class="row g-2 mb-3">
-                                <div class="col-md-8 form-group"><label class="form-label fw-bold small">Valid
-                                        through(MM/YY)</label><input placeholder="Enter Valid through(MM/YY)" type="number" class="form-control"></div>
-                                <div class="col-md-4 form-group"><label class="form-label fw-bold small">CVV</label><input placeholder="Enter CVV Number" type="number" class="form-control"></div>
-                            </div>
-                            <div class="col-md-12 form-group mb-3"><label class="form-label fw-bold small">Name on card</label><input placeholder="Enter Card number" type="text" class="form-control"></div>
-                            <div class="col-md-12 form-group mb-0">
-                                <div class="form-check custom-checkbox">
-                                    <input class="form-check-input" type="checkbox" value="" id="custom-Check1">
-                                    <label class="form-check-label small" for="custom-Check1">
-                                        Securely save this card
-                                        for a faster checkout next time.
-                                    </label>
-                                  </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer p-0 border-0">
-                    <div class="col-6 m-0 p-0">
-                        <button type="button" class="btn border-top btn-lg w-100" data-bs-dismiss="modal">Close</button>
-                    </div>
-                    <div class="col-6 m-0 p-0">
-                        <button type="button" class="btn btn-primary btn-lg w-100">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- address modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Add Delivery Address</h5>
-                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="">
-                        <div class="form-row">
-                            <div class="col-md-12 form-group">
-                                <label class="form-label">Delivery Area</label>
-                                <div class="input-group mb-3">
-                                    <input placeholder="Delivery Area" type="text" class="form-control">
-                                    <button class="btn btn-outline-secondary" type="button"><i class="feather-map-pin"></i></button>
-                                  </div>
-                            </div>
-                            <div class="col-md-12 form-group mb-3"><label class="form-label">Complete Address</label><input
-                                    placeholder="Complete Address e.g. house number, street name, landmark" type="text"
-                                    class="form-control"></div>
-                            <div class="col-md-12 form-group mb-3"><label class="form-label">Delivery
-                                    Instructions</label><input
-                                    placeholder="Delivery Instructions e.g. Opposite Gold Souk Mall" type="text"
-                                    class="form-control"></div>
-                            <div class="mb-0 col-md-12 form-group">
-                                <label class="form-label">Nickname</label>
-                                <div class="btn-group w-100" role="group" aria-label="Basic radio toggle button group">
-                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio4" checked>
-                                    <label class="btn btn-outline-secondary" for="btnradio4">Home</label>
-                                  
-                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio5">
-                                    <label class="btn btn-outline-secondary" for="btnradio5">Work</label>
-                                  
-                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio6">
-                                    <label class="btn btn-outline-secondary" for="btnradio6">Other</label>
-                                  </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer p-0 border-0">
-                    <div class="col-6 m-0 p-0">
-                        <button type="button" class="btn border-top btn-lg w-100" data-bs-dismiss="modal">Close</button>
-                    </div>
-                    <div class="col-6 m-0 p-0">
-                        <button type="button" class="btn btn-primary btn-lg w-100">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Invite Modal-->
-    <div class="modal fade" id="inviteModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title fw-bold text-dark">Invite</h5>
-                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body py-0">
-                    <button class="btn btn-light text-primary btn-sm"><i class="feather-plus"></i></button>
-                    <span class="ms-2 smal text-primary">Send an invite to a friend</span>
-                    <p class="mt-3 small">Invited friends (2)</p>
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="me-3"><img alt="#" src="img/user1.jpg" class="img-fluid rounded-circle"></div>
-                        <div>
-                            <p class="small fw-bold text-dark mb-0">Kate Simpson</p>
-                            <P class="mb-0 small">katesimpson@outbook.com</P>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="me-3"><img alt="#" src="img/user2.png" class="img-fluid rounded-circle"></div>
-                        <div>
-                            <p class="small fw-bold text-dark mb-0">Andrew Smith</p>
-                            <P class="mb-0 small">andrewsmith@ui8.com</P>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer border-0">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- slick Slider JS-->
-    <script type="text/javascript" src="vendor/slick/slick/slick.min.js"></script>
-    <!-- Sidebar JS-->
-    <script type="text/javascript" src="vendor/sidebar/hc-offcanvas-nav.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script type="text/javascript" src="js/osahan.js"></script>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

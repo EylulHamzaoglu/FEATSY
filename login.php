@@ -1,6 +1,5 @@
 <?php
 session_start(); 
-
 include 'db/functions.php';
 
 $message = '';
@@ -12,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $result = sign_in($email, $password);
 
     if ($result['success']) {
-        $_SESSION['user_email'] = $email; 
+        $_SESSION['user_id'] = $result['user_id']; // ✔ Session'a user_id kaydı
         header("Location: home.php");
         exit();
     } else {
@@ -20,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
