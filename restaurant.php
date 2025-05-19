@@ -123,16 +123,14 @@ $features = get_restaurant_features($restaurant_id);
         <?php endforeach; ?>
     </p>
 <?php endif; ?>
-                <div class="d-flex mt-2">
-                    <div class="me-4">
-                        <small class="text-muted d-block">Delivery</small>
-                        <span class="fw-bold text-white">Free</span>
-                    </div>
-                    <div>
-                        <small class="text-muted d-block">Open time</small>
-                        <span class="fw-bold text-white">8:00 AM</span>
-                    </div>
-                </div>
+<div class="d-flex mt-2">
+    <div>
+        <small class="text-white d-block fw-semibold">Çalışma Saatleri</small>
+        <span class="fw-bold text-white">
+            <?php echo htmlspecialchars($restaurant['opening_hours'] ?? 'Saat bilgisi yok'); ?>
+        </span>
+    </div>
+</div>
             </div>
             <div class="col-md-4 text-md-end mt-4 mt-md-0">
                 <img src="uploads/<?php echo htmlspecialchars($menu_items->fetch_assoc()['image_url'] ?? 'default.jpg'); ?>" class="img-fluid rounded shadow-sm" style="max-width: 200px; height: auto;">
