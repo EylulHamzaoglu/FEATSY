@@ -116,10 +116,85 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
       </div>
     </div>
   </div>
+  
+                <footer class="section-footer border-top bg-dark text-white">
+  <div class="container py-5">
+    <div class="row gy-4">
+      <!-- About Us -->
+      <div class="col-lg-4 col-md-6">
+        <div class="d-flex">
+          <img src="img/logo.png" alt="Featsy Logo" style="height: 60px;" class="me-3">
+          <div>
+            <h6 class="fw-bold text-white">About Us</h6>
+            <p class="text-muted mb-2 small">Featsy, yerel lezzetleri keşfetmenizi kolaylaştıran modern bir restoran rehberidir. Benzersiz deneyimler için doğru adres.</p>
+            <div class="d-flex gap-2">
+              <a class="btn btn-sm btn-outline-light" href="#"><i class="feather-facebook"></i></a>
+              <a class="btn btn-sm btn-outline-light" href="#"><i class="feather-instagram"></i></a>
+              <a class="btn btn-sm btn-outline-light" href="#"><i class="feather-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <!-- Footer Columns -->
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        <h6 class="fw-bold">Error Pages</h6>
+        <ul class="list-unstyled small">
+          <li><a href="not-found.php" class="text-muted">Not found</a></li>
+          <li><a href="maintence.php" class="text-muted">Maintenance</a></li>
+          <li><a href="coming-soon.php" class="text-muted">Coming Soon</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        <h6 class="fw-bold">Services</h6>
+        <ul class="list-unstyled small">
+          <li><a href="faq.php" class="text-muted">Delivery Support</a></li>
+          <li><a href="contact-us.php" class="text-muted">Contact Us</a></li>
+          <li><a href="terms.php" class="text-muted">Terms of use</a></li>
+          <li><a href="privacy.php" class="text-muted">Privacy policy</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        <h6 class="fw-bold">For Users</h6>
+        <ul class="list-unstyled small">
+          <li><a href="login.php" class="text-muted">User Login</a></li>
+          <li><a href="signup.php" class="text-muted">User Register</a></li>
+          <li><a href="forgot_password.php" class="text-muted">Forgot Password</a></li>
+          <li><a href="profile.php" class="text-muted">Account Settings</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        <h6 class="fw-bold">More Pages</h6>
+        <ul class="list-unstyled small">
+          <li><a href="trending.php" class="text-muted">Trending</a></li>
+          <li><a href="most_popular.php" class="text-muted">Most Popular</a></li>
+          <li><a href="restaurant.php" class="text-muted">Restaurant Detail</a></li>
+          <li><a href="favorites.php" class="text-muted">Favorites</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="border-secondary mt-5">
+
+    <div class="d-flex justify-content-between align-items-center flex-column flex-md-row text-muted small">
+      <p class="mb-2 mb-md-0">© 2025 Featsy. All rights reserved.</p>
+      <div>
+        <a href="#"><img src="img/appstore.png" height="40" class="me-2" alt="App Store"></a>
+        <a href="#"><img src="img/playmarket.png" height="40" alt="Google Play"></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+        
+    
   <!-- Bootstrap JS -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
+
 
 </html>

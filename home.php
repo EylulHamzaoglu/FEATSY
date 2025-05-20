@@ -230,10 +230,8 @@ $popular_restaurants = get_popular_restaurants(8);
   endforeach;
   ?>
 </div>
-
-
-<footer class="section-footer border-top bg-dark text-white">
-  <div class="container py-5">
+<footer class="bg-dark text-white mt-5 w-100">
+  <div class="container-fluid py-5 px-4 px-md-5">
     <div class="row gy-4">
       <!-- About Us -->
       <div class="col-lg-4 col-md-6">
@@ -285,7 +283,7 @@ $popular_restaurants = get_popular_restaurants(8);
         <h6 class="fw-bold">More Pages</h6>
         <ul class="list-unstyled small">
           <li><a href="trending.php" class="text-muted">Trending</a></li>
-          <li><a href="most_popular.php" class="text-muted">Most Popular</a></li>
+          <li><a href="home.php" class="text-muted">Most Popular</a></li>
           <li><a href="restaurant.php" class="text-muted">Restaurant Detail</a></li>
           <li><a href="favorites.php" class="text-muted">Favorites</a></li>
         </ul>
@@ -304,225 +302,8 @@ $popular_restaurants = get_popular_restaurants(8);
   </div>
 </footer>
 
-        
-    <nav id="main-nav">
-        <ul class="second-nav">
-            <li><a href="home.php"><i class="feather-home me-2"></i> Homepage</a></li>
-            <li><a href="my_order.php"><i class="feather-list me-2"></i> My Orders</a></li>
-            <li>
-                <a href="#"><i class="feather-edit-2 me-2"></i> Authentication</a>
-                <ul>
-                    <li><a href="login.php">Login</a></li>
-                    <li><a href="signup.php">Register</a></li>
-                    <li><a href="forgot_password.php">Forgot Password</a></li>
-                    <li><a href="verification.php">Verification</a></li>
-                    <li><a href="location.php">Location</a></li>
-                </ul>
-            </li>
-            <li><a href="favorites.php"><i class="feather-heart me-2"></i> Favorites</a></li>
-            <li><a href="trending.php"><i class="feather-trending-up me-2"></i> Trending</a></li>
-            <li><a href="most_popular.php"><i class="feather-award me-2"></i> Most Popular</a></li>
-            <li><a href="restaurant.php"><i class="feather-paperclip me-2"></i> Restaurant Detail</a></li>
-            <li><a href="checkout.php"><i class="feather-list me-2"></i> Checkout</a></li>
-            <li><a href="successful.php"><i class="feather-check-circle me-2"></i> Successful</a></li>
-            <li><a href="map.php"><i class="feather-map-pin me-2"></i> Live Map</a></li>
-            <li>
-                <a href="#"><i class="feather-user me-2"></i> Profile</a>
-                <ul>
-                    <li><a href="profile.php">Profile</a></li>
-                    <li><a href="favorites.php">Delivery support</a></li>
-                    <li><a href="contact-us.php">Contact Us</a></li>
-                    <li><a href="terms.php">Terms of use</a></li>
-                    <li><a href="privacy.php">Privacy & Policy</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#"><i class="feather-alert-triangle me-2"></i> Error</a>
-                <ul>
-                    <li><a href="not-found.php">Not Found</a>
-                    <li><a href="maintence.php"> Maintence</a>
-                    <li><a href="coming-soon.php">Coming Soon</a>
-                </ul>
-            </li>
-            <li>
-                <a href="#"><i class="feather-link me-2"></i> Navigation Link Example</a>
-                <ul>
-                    <li>
-                        <a href="#">Link Example 1</a>
-                        <ul>
-                            <li>
-                                <a href="#">Link Example 1.1</a>
-                                <ul>
-                                    <li><a href="#">Link</a></li>
-                                    <li><a href="#">Link</a></li>
-                                    <li><a href="#">Link</a></li>
-                                    <li><a href="#">Link</a></li>
-                                    <li><a href="#">Link</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Link Example 1.2</a>
-                                <ul>
-                                    <li><a href="#">Link</a></li>
-                                    <li><a href="#">Link</a></li>
-                                    <li><a href="#">Link</a></li>
-                                    <li><a href="#">Link</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Link Example 2</a></li>
-                    <li><a href="#">Link Example 3</a></li>
-                    <li><a href="#">Link Example 4</a></li>
-                    <li data-nav-custom-content>
-                        <div class="custom-message">
-                            You can add any custom content to your navigation items. This text is just an example.
-                        </div>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <ul class="bottom-nav">
-            <li class="email">
-                <a class="text-danger" href="home.php">
-                    <p class="h5 m-0"><i class="feather-home text-danger"></i></p>
-                    Home
-                </a>
-            </li>
-            <li class="github">
-                <a href="faq.php">
-                    <p class="h5 m-0"><i class="feather-message-circle"></i></p>
-                    FAQ
-                </a>
-            </li>
-            <li class="ko-fi">
-                <a href="contact-us.php">
-                    <p class="h5 m-0"><i class="feather-phone"></i></p>
-                    Help
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Filter</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    </button>
-                </div>
-                <div class="modal-body p-0">
-                    <div class="osahan-filter">
-                        <div class="filter">
-                            <!-- SORT BY -->
-                            <div class="p-3 bg-light border-bottom">
-                                <h6 class="m-0">SORT BY</h6>
-                            </div>
-                            <div class="border-bottom p-3">
-                                <div class="form-check form-check-reverse m-0">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="customRadios1"
-                                        value="option1" checked>
-                                    <label class="form-check-label text-start w-100" for="customRadios1">
-                                        Top Rated
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="border-bottom p-3">
-                                <div class="form-check form-check-reverse m-0">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="customRadios2"
-                                        value="option2">
-                                    <label class="form-check-label text-start w-100" for="customRadios2">
-                                        Nearest Me
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="border-bottom p-3">
-                                <div class="form-check form-check-reverse m-0">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="customRadios3"
-                                        value="option3">
-                                    <label class="form-check-label text-start w-100" for="customRadios3">
-                                        Cost High to Low
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="border-bottom p-3">
-                                <div class="form-check form-check-reverse m-0">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="customRadios4"
-                                        value="option4">
-                                    <label class="form-check-label text-start w-100" for="customRadios4">
-                                        Cost Low to High
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="border-bottom p-3">
-                                <div class="form-check form-check-reverse m-0">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="customRadios5"
-                                        value="option5">
-                                    <label class="form-check-label text-start w-100" for="customRadios5">
-                                        Most Popular
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- Filter -->
-                            <div class="p-3 bg-light border-bottom">
-                                <h6 class="m-0">FILTER</h6>
-                            </div>
-                            <div class="border-bottom p-3">
-                                <div class="form-check form-check-reverse m-0">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                                    <label class="form-check-label text-start w-100" for="defaultCheck1">
-                                        Open Now
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="border-bottom p-3">
-                                <div class="form-check form-check-reverse m-0">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-                                    <label class="form-check-label text-start w-100" for="defaultCheck2">
-                                        Credit Cards
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="border-bottom p-3">
-                                <div class="form-check form-check-reverse m-0">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
-                                    <label class="form-check-label text-start w-100" for="defaultCheck3">
-                                        Alcohol Served
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- Filter -->
-                            <div class="p-3 bg-light border-bottom">
-                                <h6 class="m-0">ADDITIONAL FILTERS</h6>
-                            </div>
-                            <div class="px-3 pt-3">
-                                <input type="range" class="form-range" min="0" max="5" step="0.5">
-                                <div class="row mb-3">
-                                    <div class="col-6">
-                                        <label>Min</label>
-                                        <input class="form-control" placeholder="$0" type="number">
-                                    </div>
-                                    <div class="col-6 text-end">
-                                        <label>Max</label>
-                                        <input class="form-control" placeholder="$1,0000" type="number">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer p-0 border-0">
-                    <div class="col-6 m-0 p-0">
-                        <button type="button" class="btn border-top btn-lg w-100" data-bs-dismiss="modal">Close</button>
-                    </div>
-                    <div class="col-6 m-0 p-0">
-                        <button type="button" class="btn btn-primary btn-lg w-100">Apply</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    
     <!-- Bootstrap core JavaScript -->
     <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
