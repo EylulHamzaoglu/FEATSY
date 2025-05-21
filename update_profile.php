@@ -9,28 +9,24 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Formdan gelen alan isimleri: first_name, last_name
+// Formdan gelen alanlar
 $first_name = $_POST['first_name'] ?? '';
 $last_name = $_POST['last_name'] ?? '';
 $phone = $_POST['phone'] ?? '';
 $birth_date = $_POST['birth_date'] ?? '';
+$username = $_POST['username'] ?? ''; // varsa formdan alınabilir
 
 global $conn;
 
-// Doğum tarihi (users tablosu)
-$stmt1 = $conn->prepare("UPDATE users SET birth_date = ? WHERE id = ?");
-$stmt1->bind_param("si", $birth_date, $user_id);
-if (!$stmt1->execute()) {
-    echo "HATA 1 (users): " . $stmt1->error;
-}
+// users tablosundaki tüm alanları tek seferde güncelle
+$stmt = $conn->prepare("UPDATE users SET username = ?, name = ?, surname = ?, phone = ?, birth_date = ?, updated_at = NOW() WHERE id = ?");
+$stmt->bind_param("sssssi", $username, $first_name, $last_name, $phone, $birth_date, $user_id);
 
-// Ad, Soyad, Telefon (user_details tablosu)
-$stmt2 = $conn->prepare("UPDATE user_details SET name = ?, surname = ?, phone = ? WHERE user_id = ?");
-$stmt2->bind_param("sssi", $first_name, $last_name, $phone, $user_id);
-if (!$stmt2->execute()) {
-    echo "HATA 2 (user_details): " . $stmt2->error;
+if ($stmt->execute()) {
+    header("Location: profile.php?success=1");
+    exit;
+} else {
+    header("Location: profile.php?error=1");
+    exit;
 }
-
-header("Location: profile.php?success=1");
-exit;
 ?>

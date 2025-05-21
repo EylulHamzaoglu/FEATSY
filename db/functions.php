@@ -3,7 +3,6 @@ include 'db/config_db.php';
 
 // ✅ sign_up($username, $password, $email)
 // Kullanıcıyı veritabanına ekler. Şifreyi hash'ler ve varsayılan olarak 'customer' rolüyle kaydeder.
-
 function sign_up($username, $password, $email) {
     global $conn;
 
@@ -11,7 +10,7 @@ function sign_up($username, $password, $email) {
         return ['success' => false, 'message' => 'Tüm alanları doldurmalısınız.'];
     }
 
-    // ✅ Aynı e-posta var mı kontrol et
+    // Aynı e-posta kontrolü
     $check = $conn->prepare("SELECT id FROM users WHERE mail = ?");
     $check->bind_param("s", $email);
     $check->execute();
@@ -21,16 +20,25 @@ function sign_up($username, $password, $email) {
         return ['success' => false, 'message' => 'Bu e-posta adresi zaten kayıtlı.'];
     }
 
-    // ❌ Hashleme yok, şifre düz kaydedilecek
+    // 1. Kullanıcıyı users tablosuna ekle
     $stmt = $conn->prepare("INSERT INTO users (username, password, mail, role, status) VALUES (?, ?, ?, 'customer', 'active')");
     $stmt->bind_param("sss", $username, $password, $email);
 
     if ($stmt->execute()) {
-        return ['success' => true];
+        // 2. Eklenen kullanıcı ID'sini al
+        $user_id = $conn->insert_id;
+
+        // 3. Boş detaylarla user_details tablosuna ekle
+        $stmt2 = $conn->prepare("INSERT INTO user_details (user_id, name, surname, phone) VALUES (?, '', '', '')");
+        $stmt2->bind_param("i", $user_id);
+        $stmt2->execute();
+
+        return ['success' => true, 'user_id' => $user_id];
     } else {
         return ['success' => false, 'message' => 'Kayıt sırasında hata oluştu: ' . $stmt->error];
     }
 }
+
 
 
 
@@ -695,13 +703,14 @@ function get_restaurant_comments($restaurant_id) {
 function get_user_profile($user_id) {
     global $conn;
 
-    $stmt = $conn->prepare("SELECT username AS name, mail, birth_date FROM users WHERE id = ?");
+    $stmt = $conn->prepare("SELECT username, name, surname, phone, mail, birth_date FROM users WHERE id = ?");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
 
     return $result->fetch_assoc();
 }
+
 
 
 
