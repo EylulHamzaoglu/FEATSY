@@ -36,6 +36,7 @@ while ($row = $menu_items->fetch_assoc()) {
 $comments = get_restaurant_comments($restaurant_id);
 $features = get_restaurant_features($restaurant_id);
 $gallery_images = get_restaurant_images($restaurant_id);
+$grouped_menu = get_menu_grouped_by_section($restaurant_id);
 
 ?>
 
@@ -163,14 +164,43 @@ $gallery_images = get_restaurant_images($restaurant_id);
 
 
 <div class="container my-5">
-    <h5 class="mt-4">Menü</h5>
-    <?php foreach ($menu_items_array as $menu): ?>
-    <div class="d-flex gap-3 p-3 border rounded mb-3">
-        <img src="uploads/<?php echo htmlspecialchars($menu['image_url']); ?>" style="width:100px; height:100px; object-fit:cover;" class="img-thumbnail">
-        <div>
-            <p class="mb-1 fw-semibold"><?php echo htmlspecialchars($menu['name']); ?></p>
-            <small class="text-muted"><?php echo htmlspecialchars($menu['created_at']); ?></small>
+  <h5 class="mt-5 mb-4">Menü</h5>
+
+<?php foreach ($grouped_menu as $section => $items): ?>
+    <div class="row m-0">
+        <h6 class="p-3 m-0 bg-light w-100">
+            <?php echo htmlspecialchars($section); ?>
+            <small class="text-black-50"><?php echo count($items); ?> ITEMS</small>
+        </h6>
+        <div class="col-md-12 px-0 border-top">
+            <div class="bg-white">
+                <?php foreach ($items as $item): ?>
+                    <div class="d-flex align-items-center gap-2 p-3 border-bottom gold-members">
+                        <?php if (!empty($item['image_url'])): ?>
+                            <img alt="#" src="img/restaurants/<?php echo htmlspecialchars($item['image_url']); ?>" class="rounded-pill" style="width: 48px; height: 48px; object-fit: cover;">
+                        <?php else: ?>
+                            <div class="fw-bold text-success veg">.</div>
+                        <?php endif; ?>
+
+                        <div>
+                            <h6 class="mb-1">
+                                <?php echo htmlspecialchars($item['name']); ?>
+                                <!-- Buraya örnek etiket koyabilirsin -->
+                                <!-- <span class="badge text-bg-success">BEST SELLER</span> -->
+                            </h6>
+                            <p class="text-muted mb-0"><?php echo number_format($item['price'], 2); ?> ₺</p>
+                        </div>
+
+                        <span class="ms-auto">
+                            <a href="#" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#extras">ADD</a>
+                        </span>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
+    </div>
+<?php endforeach; ?>
+
     </div>
 <?php endforeach; ?>
 

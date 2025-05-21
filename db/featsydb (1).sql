@@ -1,25 +1,9 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Anamakine: 127.0.0.1
--- Üretim Zamanı: 21 May 2025, 23:00:26
--- Sunucu sürümü: 10.4.32-MariaDB
--- PHP Sürümü: 8.0.30
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Veritabanı: `featsydb`
---
 
 -- --------------------------------------------------------
 
@@ -51,7 +35,8 @@ INSERT INTO `actions` (`id`, `user_id`, `restaurant_id`, `rating`, `is_favorited
 (7, 17, 7, 5, 1, '2025-05-13 23:06:59', '2025-05-13 23:06:59'),
 (8, 18, 3, 4, 0, '2025-05-13 23:06:59', '2025-05-13 23:06:59'),
 (9, 19, 1, 3, 1, '2025-05-13 23:06:59', '2025-05-13 23:06:59'),
-(10, 20, 5, 5, 1, '2025-05-13 23:06:59', '2025-05-13 23:06:59');
+(10, 20, 5, 5, 1, '2025-05-13 23:06:59', '2025-05-13 23:06:59'),
+(11, 21, 2, 5, 0, '2025-05-22 00:37:23', '2025-05-22 00:37:33');
 
 -- --------------------------------------------------------
 
@@ -134,7 +119,9 @@ INSERT INTO `comments` (`id`, `user_id`, `restaurant_id`, `description`, `create
 (7, 17, 7, 'Sushi lezzetliydi, personel çok nazikti.', '2025-05-13 23:03:38'),
 (8, 18, 1, 'Ranchero’da ikinci kez yiyorum, yine memnun kaldım.', '2025-05-13 23:03:38'),
 (9, 19, 3, 'Makarna porsiyonları doyurucu ve İtalyan usulüydü.', '2025-05-13 23:03:38'),
-(10, 20, 6, 'Sokak lezzetleri menüsü tam benlikti, tekrar geleceğim.', '2025-05-13 23:03:38');
+(10, 20, 6, 'Sokak lezzetleri menüsü tam benlikti, tekrar geleceğim.', '2025-05-13 23:03:38'),
+(11, 21, 2, 'süperrr', '2025-05-22 00:37:23'),
+(12, 21, 2, 'harika', '2025-05-22 00:37:33');
 
 -- --------------------------------------------------------
 
@@ -256,7 +243,6 @@ INSERT INTO `price_ranges` (`id`, `min_price`, `max_price`, `label`) VALUES
 
 CREATE TABLE `restaurants` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
   `name` varchar(150) NOT NULL,
   `description` text DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
@@ -276,14 +262,14 @@ CREATE TABLE `restaurants` (
 -- Tablo döküm verisi `restaurants`
 --
 
-INSERT INTO `restaurants` (`id`, `user_id`, `name`, `description`, `phone`, `profile_picture`, `website`, `instagram_url`, `is_verified`, `is_active`, `opening_hours`, `created_at`, `updated_at`, `price_range_id`, `county_id`) VALUES
-(1, 1, 'Ranchero Ataşehir Watergarden', 'Renkli dekorasyonu, canlı müzikleri ve özgün tarifleriyle gerçek bir Meksika deneyimi sunan Ranchero, acı severler için eşsiz bir kaçış noktasıdır.', '02163806510', 'ranchero_ataşehir.jpg', 'https://www.ranchero.com.tr', 'https://instagram.com/rancherorestaurant', 1, 1, '11:00-23:00', '2025-05-13 13:49:09', '2025-05-13 23:14:08', 2, 96),
-(2, 2, 'Ppang Moda', 'Minimalist Japon estetiğini yansıtan Ppang Moda, geleneksel tatlılardan modern füzyon lezzetlere uzanan seçkisiyle tatlı tutkunlarının buluşma noktasıdır.', '05310090489', 'ppang_moda.jpg', 'https://www.ppang.com.tr', 'https://www.instagram.com/ppangbakery', 1, 1, '08:00-22:00', '2025-05-13 14:55:35', '2025-05-13 23:12:39', 1, 116),
-(3, 3, 'Brio İstanbul', 'Brio İstanbul, şık iç mekân tasarımı ve özenle hazırlanan İtalyan yemekleriyle romantik akşam yemeklerinin vazgeçilmezi olmaya aday bir fine dining restoranıdır.', '+902122026969', 'brio_istanbul.jpg', 'https://www.brioistanbul.com', 'https://www.instagram.com/brioistanbul', 1, 1, '12:00-22:30', '2025-05-13 14:57:31', '2025-05-13 23:12:39', 3, 104),
-(4, 4, 'Burger ZMASH', 'Zincir mantığından uzak, tamamen el yapımı smash burger konseptiyle fark yaratan Burger ZMASH, burger tutkunlarını müdavime çeviriyor.', '+905442293247', 'burger_zmash.jpg', 'https://burgerzmash.com', 'https://www.instagram.com/zmash', 1, 1, '12:00-22:00', '2025-05-13 14:59:41', '2025-05-13 23:14:18', 2, 104),
-(5, 5, 'Upperdeck American Diner', 'Upperdeck, klasik Amerikan diner ruhunu modern bir çizgide yeniden yorumlarken, sunduğu geniş menüsü ve rahat ambiyansıyla kalabalıklardan kaçmak isteyenler için birebir.', '02122275068', 'upperdeck.jpg', 'https://www.upperdeckistanbul.com', 'https://instagram.com/upperdeckistanbul', 1, 1, '10:00-22:00', '2025-05-13 15:08:41', '2025-05-13 23:12:39', 3, 103),
-(6, 6, 'Çosa Beyoğlu', 'Çoşa Beyoğlu; modern sokak lezzetleri, günlük tatlılar ve özgün içecekleriyle Beyoğlu’nun enerjisini tabaklara taşıyan yaratıcı bir şehir restoranıdır.', '02122222222', 'cosa_beyoglu.jpg', 'https://www.cosa.com.tr', 'https://instagram.com/cosaistanbul', 1, 1, '11:00-22:00', '2025-05-13 15:14:31', '2025-05-13 23:12:39', 2, 106),
-(7, 7, 'Konoha Etiler', 'Konoha Etiler, ramen ve donburi gibi otantik Uzakdoğu tatlarını samimi bir ortamda sunarken, anime atmosferini andıran dekorasyonuyla farklı bir deneyim yaşatıyor.', '02123521313', 'konoha_etiler.jpg', 'https://www.konoha.com.tr', 'https://instagram.com/konohaetiler', 1, 1, '12:00-22:30', '2025-05-13 15:21:18', '2025-05-13 23:12:39', 3, 102);
+INSERT INTO `restaurants` (`id`, `name`, `description`, `phone`, `profile_picture`, `website`, `instagram_url`, `is_verified`, `is_active`, `opening_hours`, `created_at`, `updated_at`, `price_range_id`, `county_id`) VALUES
+(1, 'Ranchero Ataşehir Watergarden', 'Renkli dekorasyonu, canlı müzikleri ve özgün tarifleriyle gerçek bir Meksika deneyimi sunan Ranchero, acı severler için eşsiz bir kaçış noktasıdır.', '02163806510', 'ranchero_ataşehir.jpg', 'https://www.ranchero.com.tr', 'https://instagram.com/rancherorestaurant', 1, 1, '11:00-23:00', '2025-05-13 13:49:09', '2025-05-13 23:14:08', 2, 96),
+(2, 'Ppang Moda', 'Minimalist Japon estetiğini yansıtan Ppang Moda, geleneksel tatlılardan modern füzyon lezzetlere uzanan seçkisiyle tatlı tutkunlarının buluşma noktasıdır.', '05310090489', 'ppang_moda.jpg', 'https://www.ppang.com.tr', 'https://www.instagram.com/ppangbakery', 1, 1, '08:00-22:00', '2025-05-13 14:55:35', '2025-05-13 23:12:39', 1, 116),
+(3, 'Brio İstanbul', 'Brio İstanbul, şık iç mekân tasarımı ve özenle hazırlanan İtalyan yemekleriyle romantik akşam yemeklerinin vazgeçilmezi olmaya aday bir fine dining restoranıdır.', '+902122026969', 'brio_istanbul.jpg', 'https://www.brioistanbul.com', 'https://www.instagram.com/brioistanbul', 1, 1, '12:00-22:30', '2025-05-13 14:57:31', '2025-05-13 23:12:39', 3, 104),
+(4, 'Burger ZMASH', 'Zincir mantığından uzak, tamamen el yapımı smash burger konseptiyle fark yaratan Burger ZMASH, burger tutkunlarını müdavime çeviriyor.', '+905442293247', 'burger_zmash.jpg', 'https://burgerzmash.com', 'https://www.instagram.com/zmash', 1, 1, '12:00-22:00', '2025-05-13 14:59:41', '2025-05-13 23:14:18', 2, 104),
+(5, 'Upperdeck American Diner', 'Upperdeck, klasik Amerikan diner ruhunu modern bir çizgide yeniden yorumlarken, sunduğu geniş menüsü ve rahat ambiyansıyla kalabalıklardan kaçmak isteyenler için birebir.', '02122275068', 'upperdeck.jpg', 'https://www.upperdeckistanbul.com', 'https://instagram.com/upperdeckistanbul', 1, 1, '10:00-22:00', '2025-05-13 15:08:41', '2025-05-13 23:12:39', 3, 103),
+(6, 'Çosa Beyoğlu', 'Çoşa Beyoğlu; modern sokak lezzetleri, günlük tatlılar ve özgün içecekleriyle Beyoğlu’nun enerjisini tabaklara taşıyan yaratıcı bir şehir restoranıdır.', '02122222222', 'cosa_beyoglu.jpg', 'https://www.cosa.com.tr', 'https://instagram.com/cosaistanbul', 1, 1, '11:00-22:00', '2025-05-13 15:14:31', '2025-05-13 23:12:39', 2, 106),
+(7, 'Konoha Etiler', 'Konoha Etiler, ramen ve donburi gibi otantik Uzakdoğu tatlarını samimi bir ortamda sunarken, anime atmosferini andıran dekorasyonuyla farklı bir deneyim yaşatıyor.', '02123521313', 'konoha_etiler.jpg', 'https://www.konoha.com.tr', 'https://instagram.com/konohaetiler', 1, 1, '12:00-22:30', '2025-05-13 15:21:18', '2025-05-13 23:12:39', 3, 102);
 
 -- --------------------------------------------------------
 
@@ -404,6 +390,15 @@ CREATE TABLE `restaurant_images` (
   `is_main` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Tablo döküm verisi `restaurant_images`
+--
+
+INSERT INTO `restaurant_images` (`id`, `restaurant_id`, `image_url`, `uploaded_at`, `is_main`) VALUES
+(1, 7, 'konoha1.jpeg', '2025-05-22 01:14:48', 1),
+(2, 7, 'konoha2.jpeg', '2025-05-22 01:14:48', 0),
+(3, 7, 'konoha3.jpeg', '2025-05-22 01:14:48', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -430,11 +425,11 @@ CREATE TABLE `restaurant_menu_items` (
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(100) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `surname` varchar(100) DEFAULT NULL,
   `mail` varchar(150) NOT NULL,
+  `phone` varchar(20) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
-  `role` enum('customer','restaurant_owner','admin') DEFAULT 'customer',
-  `status` enum('active','suspended','deleted') DEFAULT 'active',
-  `email_verified` tinyint(1) DEFAULT 0,
   `birth_date` date DEFAULT NULL,
   `profile_picture` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp(),
@@ -445,72 +440,29 @@ CREATE TABLE `users` (
 -- Tablo döküm verisi `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `mail`, `password`, `role`, `status`, `email_verified`, `birth_date`, `profile_picture`, `created_at`, `updated_at`) VALUES
-(1, 'mehmet_yilmaz', 'mehmet@example.com', 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', 'restaurant_owner', 'active', 1, NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
-(2, 'ayse_kara', 'ayse@example.com', 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', 'restaurant_owner', 'active', 1, NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
-(3, 'veli_dogan', 'veli@example.com', 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', 'restaurant_owner', 'active', 1, NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
-(4, 'selin_ozdemir', 'selin@example.com', 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', 'restaurant_owner', 'active', 1, NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
-(5, 'cem_aksoy', 'cem@example.com', 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', 'restaurant_owner', 'active', 1, NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
-(6, 'nur_can', 'nur@example.com', 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', 'restaurant_owner', 'active', 1, NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
-(7, 'hasan_kurt', 'hasan@example.com', 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', 'restaurant_owner', 'active', 1, NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
-(8, 'dilan_tas', 'dilan@example.com', 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', 'restaurant_owner', 'active', 1, NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
-(9, 'mustafa_aydin', 'mustafa@example.com', 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', 'restaurant_owner', 'active', 1, NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
-(10, 'seda_karaca', 'seda@example.com', 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', 'restaurant_owner', 'active', 1, NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
-(11, 'emre_kilic', 'emre@example.com', 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', 'customer', 'active', 1, NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
-(12, 'zeynep_arslan', 'zeynep@example.com', 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', 'customer', 'active', 1, NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
-(13, 'fatma_yildiz', 'fatma@example.com', 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', 'customer', 'active', 1, NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
-(14, 'burak_demir', 'burak@example.com', 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', 'customer', 'active', 1, NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
-(15, 'elif_can', 'elif@example.com', 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', 'customer', 'active', 1, NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
-(16, 'omer_yavuz', 'omer@example.com', 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', 'customer', 'active', 1, NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
-(17, 'sevim_ozkan', 'sevim@example.com', 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', 'customer', 'active', 1, NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
-(18, 'deniz_akbas', 'deniz@example.com', 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', 'customer', 'active', 1, NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
-(19, 'furkan_kaya', 'furkan@example.com', 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', 'customer', 'active', 1, NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
-(20, 'asli_ay', 'asli@example.com', 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', 'customer', 'active', 1, NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
-(21, 'Eylül İrem Hamzaoğlu', 'eylulhmz@outlook.com', 'asddsa', 'customer', 'active', 0, '0000-00-00', NULL, '2025-05-21 21:40:31', '2025-05-21 21:41:03');
-
--- --------------------------------------------------------
-
---
--- Tablo için tablo yapısı `user_details`
---
-
-CREATE TABLE `user_details` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `surname` varchar(100) NOT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `county_id` int(11) DEFAULT NULL,
-  `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Tablo döküm verisi `user_details`
---
-
-INSERT INTO `user_details` (`id`, `user_id`, `name`, `surname`, `phone`, `address`, `county_id`, `created_at`, `updated_at`) VALUES
-(21, 1, 'Mehmet', 'Yılmaz', '05551110001', 'Ataköy Mah. No:1 Bakırköy', 100, '2025-05-13 11:59:29', '2025-05-13 11:59:29'),
-(22, 2, 'Ayşe', 'Kara', '05551110002', 'Bahçelievler Cad. No:25', 99, '2025-05-13 11:59:29', '2025-05-13 11:59:29'),
-(23, 3, 'Veli', 'Doğan', '05551110003', 'Cevizlik Mah. No:3', 100, '2025-05-13 11:59:29', '2025-05-13 11:59:29'),
-(24, 4, 'Selin', 'Özdemir', '05551110004', 'Etiler Mah. No:14 Beşiktaş', 103, '2025-05-13 11:59:29', '2025-05-13 11:59:29'),
-(25, 5, 'Cem', 'Aksoy', '05551110005', 'Ortaköy Mah. No:30', 103, '2025-05-13 11:59:29', '2025-05-13 11:59:29'),
-(26, 6, 'Nur', 'Can', '05551110006', 'Bostancı Mah. No:18', 116, '2025-05-13 11:59:29', '2025-05-13 11:59:29'),
-(27, 7, 'Hasan', 'Kurt', '05551110007', 'Kozyatağı Mah. No:7', 116, '2025-05-13 11:59:29', '2025-05-13 11:59:29'),
-(28, 8, 'Dilan', 'Taş', '05551110008', 'Kadıköy Rıhtım Cad. No:5', 116, '2025-05-13 11:59:29', '2025-05-13 11:59:29'),
-(29, 9, 'Mustafa', 'Aydın', '05551110009', 'Bahariye Cad. No:90', 116, '2025-05-13 11:59:29', '2025-05-13 11:59:29'),
-(30, 10, 'Seda', 'Karaca', '05551110010', 'Feneryolu Mah. No:12', 116, '2025-05-13 11:59:29', '2025-05-13 11:59:29'),
-(31, 11, 'Emre', 'Kılıç', '05551110011', 'Kozvatağı Mah. No:55', 116, '2025-05-13 11:59:29', '2025-05-13 11:59:29'),
-(32, 12, 'Zeynep', 'Arslan', '05551110012', 'Tuzla Sahil Yolu No:7', 129, '2025-05-13 11:59:29', '2025-05-13 11:59:29'),
-(33, 13, 'Fatma', 'Yıldız', '05551110013', 'Maltepe Sahil Mah. No:13', 120, '2025-05-13 11:59:29', '2025-05-13 11:59:29'),
-(34, 14, 'Burak', 'Demir', '05551110014', 'Beşyüzevler Mah. No:8', 127, '2025-05-13 11:59:29', '2025-05-13 11:59:29'),
-(35, 15, 'Elif', 'Can', '05551110015', 'Beşiktaş Nispetiye Cad. No:22', 103, '2025-05-13 11:59:29', '2025-05-13 11:59:29'),
-(36, 16, 'Ömer', 'Yavuz', '05551110016', 'Kağıthane Merkez Mah. No:33', 117, '2025-05-13 11:59:29', '2025-05-13 11:59:29'),
-(37, 17, 'Sevim', 'Özkan', '05551110017', 'Zeytinburnu Sümer Mah. No:6', 132, '2025-05-13 11:59:29', '2025-05-13 11:59:29'),
-(38, 18, 'Derya', 'Acar', '05551110018', 'Pendik Yenişehir Mah. No:40', 121, '2025-05-13 11:59:29', '2025-05-13 11:59:29'),
-(39, 19, 'Furkan', 'Kaya', '05551110019', 'Bayrampaşa Yenidoğan Mah. No:15', 102, '2025-05-13 11:59:29', '2025-05-13 11:59:29'),
-(40, 20, 'Aslı', 'Ar', '05551110020', 'Ümraniye Atatürk Mah. No:4', 130, '2025-05-13 11:59:29', '2025-05-13 11:59:29');
+INSERT INTO `users` (`id`, `username`, `name`, `surname`, `mail`, `phone`, `password`, `birth_date`, `profile_picture`, `created_at`, `updated_at`) VALUES
+(1, 'mehmet_yilmaz', NULL, NULL, 'mehmet@example.com', NULL, 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
+(2, 'ayse_kara', NULL, NULL, 'ayse@example.com', NULL, 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
+(3, 'veli_dogan', NULL, NULL, 'veli@example.com', NULL, 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
+(4, 'selin_ozdemir', NULL, NULL, 'selin@example.com', NULL, 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
+(5, 'cem_aksoy', NULL, NULL, 'cem@example.com', NULL, 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
+(6, 'nur_can', NULL, NULL, 'nur@example.com', NULL, 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
+(7, 'hasan_kurt', NULL, NULL, 'hasan@example.com', NULL, 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
+(8, 'dilan_tas', NULL, NULL, 'dilan@example.com', NULL, 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
+(9, 'mustafa_aydin', NULL, NULL, 'mustafa@example.com', NULL, 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
+(10, 'seda_karaca', NULL, NULL, 'seda@example.com', NULL, 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
+(11, 'emre_kilic', NULL, NULL, 'emre@example.com', NULL, 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
+(12, 'zeynep_arslan', NULL, NULL, 'zeynep@example.com', NULL, 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
+(13, 'fatma_yildiz', NULL, NULL, 'fatma@example.com', NULL, 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
+(14, 'burak_demir', NULL, NULL, 'burak@example.com', NULL, 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
+(15, 'elif_can', NULL, NULL, 'elif@example.com', NULL, 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
+(16, 'omer_yavuz', NULL, NULL, 'omer@example.com', NULL, 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
+(17, 'sevim_ozkan', NULL, NULL, 'sevim@example.com', NULL, 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
+(18, 'deniz_akbas', NULL, NULL, 'deniz@example.com', NULL, 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
+(19, 'furkan_kaya', NULL, NULL, 'furkan@example.com', NULL, 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
+(20, 'asli_ay', NULL, NULL, 'asli@example.com', NULL, 'a3a2754f94b4f8c1ca8d29290bc37ba90cedf0e13a9e702a829740835e5ed564', NULL, NULL, '2025-05-13 11:53:57', '2025-05-13 11:53:57'),
+(21, 'eylulrag', 'eylül irem', 'hamzaoğlu', 'eylulhmz@outlook.com', '5324961311', 'asddsa', '2001-07-19', NULL, '2025-05-21 21:40:31', '2025-05-22 00:59:58'),
+(23, 'Ferit Korhan', NULL, NULL, 'feritk@outlook.com', NULL, 'asddsa', NULL, NULL, '2025-05-22 00:45:05', '2025-05-22 00:45:05');
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -572,7 +524,6 @@ ALTER TABLE `price_ranges`
 --
 ALTER TABLE `restaurants`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_restaurants_user_id` (`user_id`),
   ADD KEY `fk_price_range` (`price_range_id`),
   ADD KEY `fk_restaurant_county` (`county_id`);
 
@@ -616,15 +567,6 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `mail` (`mail`);
 
 --
--- Tablo için indeksler `user_details`
---
-ALTER TABLE `user_details`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `user_id` (`user_id`),
-  ADD KEY `county_id` (`county_id`),
-  ADD KEY `idx_user_details_user_id` (`user_id`);
-
---
 -- Dökümü yapılmış tablolar için AUTO_INCREMENT değeri
 --
 
@@ -632,7 +574,7 @@ ALTER TABLE `user_details`
 -- Tablo için AUTO_INCREMENT değeri `actions`
 --
 ALTER TABLE `actions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `categories`
@@ -650,7 +592,7 @@ ALTER TABLE `cities`
 -- Tablo için AUTO_INCREMENT değeri `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `counties`
@@ -692,7 +634,7 @@ ALTER TABLE `restaurant_features`
 -- Tablo için AUTO_INCREMENT değeri `restaurant_images`
 --
 ALTER TABLE `restaurant_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `restaurant_menu_items`
@@ -704,13 +646,7 @@ ALTER TABLE `restaurant_menu_items`
 -- Tablo için AUTO_INCREMENT değeri `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
---
--- Tablo için AUTO_INCREMENT değeri `user_details`
---
-ALTER TABLE `user_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Dökümü yapılmış tablolar için kısıtlamalar
@@ -768,15 +704,5 @@ ALTER TABLE `restaurant_images`
 --
 ALTER TABLE `restaurant_menu_items`
   ADD CONSTRAINT `restaurant_menu_items_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`) ON DELETE CASCADE;
-
---
--- Tablo kısıtlamaları `user_details`
---
-ALTER TABLE `user_details`
-  ADD CONSTRAINT `user_details_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `user_details_ibfk_3` FOREIGN KEY (`county_id`) REFERENCES `counties` (`id`) ON DELETE SET NULL;
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
