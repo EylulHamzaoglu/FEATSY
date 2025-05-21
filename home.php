@@ -3,8 +3,8 @@ session_start();
 include 'db/functions.php';
 $popular_restaurants = get_popular_restaurants(8);
 if (!isset($_SESSION['user_id'])) {
-  // Giriş yapılmamışsa, guest session tanımla (sadece home.php için)
-  $_SESSION['user_email'] = 'Guest';
+    header("Location: index.php"); // ya da login.php
+    exit();
 }
 ?>
 

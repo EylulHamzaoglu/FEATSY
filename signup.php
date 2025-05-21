@@ -89,6 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <?php if (!empty($message)): ?>
                         <div class="alert alert-danger"><?php echo $message; ?></div>
                     <?php endif; ?>
+                    
 
                     <form class="mt-4 mb-4" method="post" action="">
                         <div class="form-group">
