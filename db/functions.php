@@ -18,10 +18,10 @@ function sign_up($username, $password, $email) {
         return ['success' => false, 'message' => 'Bu e-posta adresi zaten kayıtlı.'];
     }
 
-    // Yeni kullanıcı ekle (role kaldırıldı)
+    // Yeni kullanıcı ekle (status kaldırıldı çünkü artık yok)
     $stmt = $conn->prepare("
-        INSERT INTO users (username, password, mail, name, surname, phone, birth_date, status, created_at, updated_at)
-        VALUES (?, ?, ?, '', '', '', NULL, 'active', NOW(), NOW())
+        INSERT INTO users (username, password, mail, name, surname, phone, birth_date, profile_picture)
+        VALUES (?, ?, ?, '', '', '', NULL, NULL)
     ");
     $stmt->bind_param("sss", $username, $password, $email);
 
