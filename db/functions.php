@@ -804,6 +804,12 @@ function get_restaurants_by_category_name($category_name) {
     $stmt->execute();
 
     $result = $stmt->get_result();
+    $restaurants = [];
+    while ($row = $result->fetch_assoc()) {
+        $restaurants[] = $row;
+    }
+
+    return $restaurants;
      }
 
      function get_menu_grouped_by_section($restaurant_id) {
