@@ -206,7 +206,8 @@ if ($selected_category) {
   $imageCount = 1;
   foreach ($popular_restaurants as $restaurant):
       // Fotoğraf isimleri img/restaurants/1.jpg, 2.jpg, ... şeklinde olacak
-      $imagePath = "img/restaurants/" . $imageCount . ".jpg";
+      $imagePath = get_main_image_url($restaurant['id']);
+
   ?>
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">

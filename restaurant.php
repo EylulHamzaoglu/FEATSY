@@ -140,7 +140,8 @@ $grouped_menu = get_menu_grouped_by_section($restaurant_id);
 </div>
             </div>
             <div class="col-md-4 text-md-end mt-4 mt-md-0">
-                <img src="uploads/<?php echo htmlspecialchars($menu_items_array[0]['image_url'] ?? 'default.jpg'); ?>" class="img-fluid rounded shadow-sm" style="max-width: 200px; height: auto;">
+<?php $main_image = get_main_image_url($restaurant_id); ?>
+<img src="<?php echo htmlspecialchars($main_image); ?>" class="img-fluid rounded shadow-sm" style="max-width: 200px; height: auto;">
 
             </div>
         </div>
