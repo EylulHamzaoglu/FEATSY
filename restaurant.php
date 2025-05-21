@@ -1,32 +1,27 @@
+
 <?php
 session_start();
 include 'db/functions.php';
 
-if (!isset($_GET['restaurant_id']) || !is_numeric($_GET['restaurant_id'])) {
+$restaurant_id = $_GET['id'] ?? $_POST['restaurant_id'] ?? null;
+if (!$restaurant_id || !is_numeric($restaurant_id)) {
     header("Location: home.php");
     exit();
 }
 
-$restaurant_id = intval($_GET['restaurant_id']);
-
-// ✳️ FORM GÖNDERİLDİYSE YORUMU İŞLE
+// Yorum gönderme işlemi
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user_id'] ?? null;
-    $rating = $_POST['rating'] ?? null;
-    $comment_text = $_POST['comment_text'] ?? null;
-
-    // Trim ve sayı kontrolü
-    $comment_text = trim($comment_text);
-    $rating = is_numeric($rating) ? intval($rating) : null;
+    $rating = intval($_POST['rating'] ?? 0);
+    $comment_text = trim($_POST['comment_text'] ?? '');
 
     if ($user_id && $rating >= 1 && $rating <= 5 && !empty($comment_text)) {
-        // Veritabanına kayıt
         rate_restaurant($user_id, $restaurant_id, $rating);
         add_comment($user_id, $restaurant_id, $comment_text);
-        header("Location: restaurant.php?restaurant_id=" . $restaurant_id);
-        exit();
+        header("Location: restaurant.php?id=" . $restaurant_id . "&success=1");
+exit();
     } else {
-        $error = "Tüm alanlar doldurulmalıdır.";
+        $error = "Tüm alanları doğru şekilde doldurun.";
     }
 }
 
@@ -35,6 +30,7 @@ $average_rating = get_restaurant_average_rating($restaurant_id);
 $menu_items = get_restaurant_menu($restaurant_id);
 $comments = get_restaurant_comments($restaurant_id);
 $features = get_restaurant_features($restaurant_id);
+$gallery_images = get_restaurant_menu_images($restaurant_id);
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +59,7 @@ $features = get_restaurant_features($restaurant_id);
         <div class="container">
             <div class="row align-items-center justify-content-between py-2">
                 <div class="col-auto">
-                    <a href="home.html" class="brand-wrap mb-0">
+                    <a href="home.php" class="brand-wrap mb-0">
                         <img alt="logo" src="img/logo.png" class="img-fluid" style="height: 60px;">
                     </a>
                 </div>
@@ -80,7 +76,7 @@ $features = get_restaurant_features($restaurant_id);
                             <?php echo $_SESSION['user_email'] ?? 'Guest'; ?>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item" href="profile.html">My account</a>
+                            <a class="dropdown-item" href="profile.php">My account</a>
                             <a class="dropdown-item" href="faq.html">Delivery support</a>
                             <a class="dropdown-item" href="contact-us.html">Contact us</a>
                             <a class="dropdown-item" href="terms.html">Terms of use</a>
@@ -100,7 +96,11 @@ $features = get_restaurant_features($restaurant_id);
         <div class="row align-items-center">
             <div class="col-md-8">
                 <h2 class="fw-bold mb-2"><?php echo htmlspecialchars($restaurant['name']); ?></h2>
-                <p class="mb-1"><?php echo htmlspecialchars($restaurant['county']); ?> - <?php echo htmlspecialchars($restaurant['category']); ?> - <?php echo htmlspecialchars($restaurant['price_range']); ?></p>
+                <p class="mb-1 text-white">
+  <?php echo htmlspecialchars($restaurant['county']); ?> - 
+  <?php echo htmlspecialchars($restaurant['category']); ?> - 
+  <?php echo htmlspecialchars($restaurant['price_range']); ?>
+</p>
 
                 <div class="d-flex align-items-center my-2">
                     <ul class="rating-stars list-unstyled d-flex mb-0">
@@ -117,7 +117,7 @@ $features = get_restaurant_features($restaurant_id);
                 </div>
                 <?php if (!empty($features)): ?>
     <p class="mb-2">
-        <strong>Özellikler:</strong>
+    <strong class="text-white">Özellikler:</strong>
         <?php foreach ($features as $feature): ?>
             <span class="badge bg-secondary me-1"><?php echo htmlspecialchars($feature['name']); ?></span>
         <?php endforeach; ?>
@@ -140,6 +140,9 @@ $features = get_restaurant_features($restaurant_id);
 </section>
 
 <!-- Main Content -->
+
+
+
 <div class="container my-5">
     <h5 class="mt-4">Menü</h5>
     <?php while ($menu = $menu_items->fetch_assoc()): ?>
@@ -155,9 +158,13 @@ $features = get_restaurant_features($restaurant_id);
     <div class="container mt-5">
     <h5 class="mb-3">Yorum Yap</h5>
     <?php if (isset($error)): ?>
-        <div class="alert alert-danger"> <?php echo $error; ?> </div>
+        <div class="alert alert-danger"><?php echo $error; ?></div>
     <?php endif; ?>
+    <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+    <div class="alert alert-success">Yorumunuz başarıyla kaydedildi.</div>
+<?php endif; ?>
     <form method="POST" action="">
+        <input type="hidden" name="restaurant_id" value="<?= $restaurant_id ?>">
         <div class="mb-3">
             <label for="rating" class="form-label">Puan</label>
             <select class="form-select" id="rating" name="rating" required>
@@ -178,31 +185,96 @@ $features = get_restaurant_features($restaurant_id);
 </div>
 
 <!-- ✨ Yorumları Listele -->
-<div class="container my-5">
-    <h5 class="mt-5">Yorumlar</h5>
-    <?php while ($comment = $comments->fetch_assoc()): ?>
-        <div class="border p-3 mb-3 rounded">
-            <strong><?php echo htmlspecialchars($comment['username']); ?></strong>
-            <small class="text-muted"> - <?php echo date("d M Y", strtotime($comment['created_at'])); ?></small>
-            <div class="mb-2">
-                <?php
-                $rating = intval($comment['rating'] ?? 0);
-                for ($i = 0; $i < 5; $i++) {
-                    echo $i < $rating ? '<i class="feather-star text-warning"></i>' : '<i class="feather-star"></i>';
-                }
-                ?>
-            </div>
-            <p class="mb-0"><?php echo htmlspecialchars($comment['comment_text']); ?></p>
+<div class="container mt-5">
+    <h5 class="mb-3">Yorumlar</h5>
+    <?php
+    $comments = get_restaurant_comments($restaurant_id);
+    if ($comments && $comments->num_rows > 0):
+        while ($comment = $comments->fetch_assoc()):
+    ?>
+        <div class="border-bottom pb-3 mb-3">
+            <strong><?php echo htmlspecialchars($comment['username']); ?></strong> -
+            <span class="text-warning"><?php echo str_repeat("★", intval($comment['rating'])); ?></span>
+            <p class="mb-1"><?php echo htmlspecialchars($comment['comment_text']); ?></p>
+            <small class="text-muted"><?php echo date("d.m.Y", strtotime($comment['created_at'])); ?></small>
         </div>
-    <?php endwhile; ?>
+    <?php endwhile; else: ?>
+        <p class="text-muted">Henüz yorum yapılmamış.</p>
+    <?php endif; ?>
 </div>
 
 
 <!-- Footer -->
-<footer class="section-footer border-top bg-dark text-white py-4">
-    <div class="container text-center">
-        <p class="mb-0">&copy; 2023 Featsy. All rights reserved.</p>
+<footer class="section-footer border-top bg-dark text-white">
+  <div class="container py-5">
+    <div class="row gy-4">
+      <!-- About Us -->
+      <div class="col-lg-4 col-md-6">
+        <div class="d-flex">
+          <img src="img/logo.png" alt="Featsy Logo" style="height: 60px;" class="me-3">
+          <div>
+            <h6 class="fw-bold text-white">About Us</h6>
+            <p class="text-muted mb-2 small">Featsy, yerel lezzetleri keşfetmenizi kolaylaştıran modern bir restoran rehberidir. Benzersiz deneyimler için doğru adres.</p>
+            <div class="d-flex gap-2">
+              <a class="btn btn-sm btn-outline-light" href="#"><i class="feather-facebook"></i></a>
+              <a class="btn btn-sm btn-outline-light" href="#"><i class="feather-instagram"></i></a>
+              <a class="btn btn-sm btn-outline-light" href="#"><i class="feather-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Columns -->
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        <h6 class="fw-bold">Error Pages</h6>
+        <ul class="list-unstyled small">
+          <li><a href="not-found.php" class="text-muted">Not found</a></li>
+          <li><a href="maintence.php" class="text-muted">Maintenance</a></li>
+          <li><a href="coming-soon.php" class="text-muted">Coming Soon</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        <h6 class="fw-bold">Services</h6>
+        <ul class="list-unstyled small">
+          <li><a href="faq.php" class="text-muted">Delivery Support</a></li>
+          <li><a href="contact-us.php" class="text-muted">Contact Us</a></li>
+          <li><a href="terms.php" class="text-muted">Terms of use</a></li>
+          <li><a href="privacy.php" class="text-muted">Privacy policy</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        <h6 class="fw-bold">For Users</h6>
+        <ul class="list-unstyled small">
+          <li><a href="login.php" class="text-muted">User Login</a></li>
+          <li><a href="signup.php" class="text-muted">User Register</a></li>
+          <li><a href="forgot_password.php" class="text-muted">Forgot Password</a></li>
+          <li><a href="profile.php" class="text-muted">Account Settings</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        <h6 class="fw-bold">More Pages</h6>
+        <ul class="list-unstyled small">
+          <li><a href="trending.php" class="text-muted">Trending</a></li>
+          <li><a href="home.php" class="text-muted">Most Popular</a></li>
+          <li><a href="restaurant.php" class="text-muted">Restaurant Detail</a></li>
+          <li><a href="favorites.php" class="text-muted">Favorites</a></li>
+        </ul>
+      </div>
     </div>
+
+    <hr class="border-secondary mt-5">
+
+    <div class="d-flex justify-content-between align-items-center flex-column flex-md-row text-muted small">
+      <p class="mb-2 mb-md-0">© 2025 Featsy. All rights reserved.</p>
+      <div>
+        <a href="#"><img src="img/appstore.png" height="40" class="me-2" alt="App Store"></a>
+        <a href="#"><img src="img/playmarket.png" height="40" alt="Google Play"></a>
+      </div>
+    </div>
+  </div>
 </footer>
 
 <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>

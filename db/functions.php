@@ -713,3 +713,40 @@ function get_user_profile($user_id) {
     $result = $stmt->get_result();
     return $result->fetch_assoc(); // associative array döner
 }
+function search_restaurants_by_name($name) {
+    global $conn;
+
+    $name = "%" . $name . "%";
+    $stmt = $conn->prepare("
+        SELECT 
+            r.id,
+            r.name,
+            r.profile_picture,
+            c.name AS category_name,
+            ROUND(AVG(a.rating), 1) AS average_rating,
+            COUNT(a.rating) AS total_ratings
+        FROM restaurants r
+        LEFT JOIN restaurant_categories rc ON r.id = rc.restaurant_id
+        LEFT JOIN categories c ON rc.category_id = c.id
+        LEFT JOIN actions a ON r.id = a.restaurant_id
+        WHERE r.is_active = 1 AND r.name LIKE ?
+        GROUP BY r.id
+        ORDER BY average_rating DESC
+    ");
+
+    if (!$stmt) {
+        error_log("Prepare failed: " . $conn->error); // ← bu önemli
+        return [];
+    }
+
+    $stmt->bind_param("s", $name);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $restaurants = [];
+    while ($row = $result->fetch_assoc()) {
+        $restaurants[] = $row;
+    }
+
+    return $restaurants;
+}

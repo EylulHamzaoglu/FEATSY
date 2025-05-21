@@ -172,3 +172,4 @@
     $('[data-bs-toggle="tooltip"]').tooltip();
 
 })(jQuery); // End of use strict
+

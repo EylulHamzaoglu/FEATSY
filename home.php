@@ -2,6 +2,10 @@
 session_start();
 include 'db/functions.php';
 $popular_restaurants = get_popular_restaurants(8);
+if (!isset($_SESSION['user_id'])) {
+  // Giriş yapılmamışsa, guest session tanımla (sadece home.php için)
+  $_SESSION['user_email'] = 'Guest';
+}
 ?>
 
 <!DOCTYPE html>
@@ -67,9 +71,13 @@ $popular_restaurants = get_popular_restaurants(8);
       <!-- ✅ Sol: Logo -->
       <div class="col-auto">
   <a href="home.php" class="brand-wrap mb-0">
-    <img alt="logo" src="img/logo.png" class="img-fluid" style="height: 80px;">
+    <img alt="logo" src="img/logo.png" style="height: 140px; width: auto;">
   </a>
 </div>
+<!-- ✍️ Yeni Yazı Alanı -->
+<div class="col-md-6 text-center">
+    <p class="mb-0 fw-bold text-dark fs-5">Ne Yiyeceğini Bilmiyorsan Featsy'e Sor!</p>
+  </div>
 
       <!-- ✅ Sağ: Search ve Guest -->
       <div class="col-auto d-flex align-items-center gap-4">

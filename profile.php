@@ -3,8 +3,8 @@ session_start();
 include 'db/functions.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit;
+  header('Location: index.php');  // ✅ Giriş yapılmamışsa ana sayfaya at
+  exit;
 }
 
 $user_id = $_SESSION['user_id'];
@@ -13,6 +13,49 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
 
 <!DOCTYPE html>
 <html lang="en">
+<header class="section-header">
+        <section class="header-main shadow-sm bg-white">
+  <div class="container">
+    <div class="row align-items-center justify-content-between py-2">
+      <!-- ✅ Sol: Logo -->
+      <div class="col-auto">
+  <a href="home.php" class="brand-wrap mb-0">
+    <img alt="logo" src="img/logo.png" style="height: 140px; width: auto;">
+  </a>
+</div>
+
+      <!-- ✅ Sağ: Search ve Guest -->
+      <div class="col-auto d-flex align-items-center gap-4">
+
+        <!-- Search -->
+        <a href="search.php" class="d-flex align-items-center text-dark text-decoration-none">
+          <i class="feather-search h5 mb-0 me-1"></i>
+          <span class="fw-semibold">Search</span>
+        </a>
+
+        <!-- Guest dropdown -->
+        <div class="dropdown">
+          <a href="#" class="dropdown-toggle d-flex align-items-center text-dark text-decoration-none"
+             id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="img/homelogo/guestlogo.png" alt="User" class="rounded-circle me-2"
+                 style="width: 32px; height: 32px;">
+            <span class="fw-semibold"><?php echo $_SESSION['user_email'] ?? 'Guest'; ?></span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end">
+            <a class="dropdown-item" href="profile.php">My account</a>
+            <a class="dropdown-item" href="faq.php">Delivery support</a>
+            <a class="dropdown-item" href="contact-us.php">Contact us</a>
+            <a class="dropdown-item" href="terms.php">Terms of use</a>
+            <a class="dropdown-item" href="privacy.php">Privacy policy</a>
+            <a class="dropdown-item" href="logout.php">Logout</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+    </header>
 
 <head>
   <meta charset="utf-8">
@@ -51,12 +94,6 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
 </head>
 
 <body class="fixed-bottom-bar">
-
-  <div class="container pt-3">
-    <p class="alert alert-info mb-3">
-      Hoş geldin, <strong><?php echo $_SESSION['user_email'] ?? 'misafir'; ?></strong>!
-    </p>
-  </div>
 
   <div class="container mt-5">
     <div class="row justify-content-center">

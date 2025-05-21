@@ -12,13 +12,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $result = sign_in($email, $password);
 
     if ($result['success']) {
-        $_SESSION['user_email'] = $email; 
-        header("Location: home.php");
-        exit();
+      $_SESSION['user_email'] = $email; 
+      $_SESSION['user_id'] = $result['user_id']; // ✅ GEREKEN EKLEME
+      header("Location: home.php");
+      exit();
+  }
     } else {
         $message = $result['message'];
     }
-}
 ?>
 
 <!DOCTYPE html>
