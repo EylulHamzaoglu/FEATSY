@@ -809,7 +809,7 @@ function get_restaurants_by_category_name($category_name) {
     global $conn;
 
     $stmt = $conn->prepare("
-        SELECT section_name, name, price, image_url, sort_order
+        SELECT section_name, name, price, sort_order
         FROM restaurant_menu_items
         WHERE restaurant_id = ?
         ORDER BY section_name ASC, sort_order ASC
