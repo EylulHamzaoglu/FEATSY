@@ -11,6 +11,17 @@ function sign_up($username, $password, $email) {
         return ['success' => false, 'message' => 'Tüm alanları doldurmalısınız.'];
     }
 
+    // ✅ Aynı e-posta var mı kontrol et
+    $check = $conn->prepare("SELECT id FROM users WHERE mail = ?");
+    $check->bind_param("s", $email);
+    $check->execute();
+    $result = $check->get_result();
+
+    if ($result->num_rows > 0) {
+        return ['success' => false, 'message' => 'Bu e-posta adresi zaten kayıtlı.'];
+    }
+
+    // ❌ Hashleme yok, şifre düz kaydedilecek
     $stmt = $conn->prepare("INSERT INTO users (username, password, mail, role, status) VALUES (?, ?, ?, 'customer', 'active')");
     $stmt->bind_param("sss", $username, $password, $email);
 
@@ -20,6 +31,7 @@ function sign_up($username, $password, $email) {
         return ['success' => false, 'message' => 'Kayıt sırasında hata oluştu: ' . $stmt->error];
     }
 }
+
 
 
 
