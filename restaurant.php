@@ -27,10 +27,15 @@ exit();
 
 $restaurant = get_restaurant_details($restaurant_id);
 $average_rating = get_restaurant_average_rating($restaurant_id);
-$menu_items = get_restaurant_menu($restaurant_id);
+$menu_items = get_restaurant_menu_items($restaurant_id);
+$menu_items_array = [];
+while ($row = $menu_items->fetch_assoc()) {
+    $menu_items_array[] = $row;
+}
+
 $comments = get_restaurant_comments($restaurant_id);
 $features = get_restaurant_features($restaurant_id);
-$gallery_images = get_restaurant_menu_images($restaurant_id);
+$gallery_images = get_restaurant_menu_items($restaurant_id);
 ?>
 
 <!DOCTYPE html>
@@ -133,7 +138,8 @@ $gallery_images = get_restaurant_menu_images($restaurant_id);
 </div>
             </div>
             <div class="col-md-4 text-md-end mt-4 mt-md-0">
-                <img src="uploads/<?php echo htmlspecialchars($menu_items->fetch_assoc()['image_url'] ?? 'default.jpg'); ?>" class="img-fluid rounded shadow-sm" style="max-width: 200px; height: auto;">
+                <img src="uploads/<?php echo htmlspecialchars($menu_items_array[0]['image_url'] ?? 'default.jpg'); ?>" class="img-fluid rounded shadow-sm" style="max-width: 200px; height: auto;">
+
             </div>
         </div>
     </div>
@@ -145,15 +151,16 @@ $gallery_images = get_restaurant_menu_images($restaurant_id);
 
 <div class="container my-5">
     <h5 class="mt-4">Menü</h5>
-    <?php while ($menu = $menu_items->fetch_assoc()): ?>
-        <div class="d-flex gap-3 p-3 border rounded mb-3">
-            <img src="uploads/<?php echo htmlspecialchars($menu['image_url']); ?>" style="width:100px; height:100px; object-fit:cover;" class="img-thumbnail">
-            <div>
-                <p class="mb-1 fw-semibold">Menü Fotoğrafı</p>
-                <small class="text-muted"><?php echo htmlspecialchars($menu['created_at']); ?></small>
-            </div>
+    <?php foreach ($menu_items_array as $menu): ?>
+    <div class="d-flex gap-3 p-3 border rounded mb-3">
+        <img src="uploads/<?php echo htmlspecialchars($menu['image_url']); ?>" style="width:100px; height:100px; object-fit:cover;" class="img-thumbnail">
+        <div>
+            <p class="mb-1 fw-semibold"><?php echo htmlspecialchars($menu['name']); ?></p>
+            <small class="text-muted"><?php echo htmlspecialchars($menu['created_at']); ?></small>
         </div>
-    <?php endwhile; ?>
+    </div>
+<?php endforeach; ?>
+
 
     <div class="container mt-5">
     <h5 class="mb-3">Yorum Yap</h5>
