@@ -149,36 +149,6 @@ $grouped_menu = get_menu_grouped_by_section($restaurant_id);
 
 <!-- Main Content -->
 
-<h5 class="mt-5 mb-4">Menü</h5>
-
-<?php foreach ($grouped_menu as $section => $items): ?>
-    <div class="row m-0">
-        <h6 class="p-3 m-0 bg-light w-100">
-            <?php echo htmlspecialchars($section); ?>
-            <small class="text-black-50"><?php echo count($items); ?> ITEMS</small>
-        </h6>
-        <div class="col-md-12 px-0 border-top">
-            <div class="bg-white">
-                <?php foreach ($items as $item): ?>
-                    <div class="d-flex align-items-center gap-2 p-3 border-bottom gold-members">
-                        <?php if (!empty($item['image_url'])): ?>
-                            <img alt="#" src="img/restaurants/<?php echo htmlspecialchars($item['image_url']); ?>" class="rounded-pill" style="width: 48px; height: 48px; object-fit: cover;">
-                        <?php else: ?>
-                            <div class="fw-bold text-success veg">.</div>
-                        <?php endif; ?>
-
-                        <div>
-                            <h6 class="mb-1"><?php echo htmlspecialchars($item['name']); ?></h6>
-                            <p class="text-muted mb-0"><?php echo number_format($item['price'], 2); ?> ₺</p>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-    </div>
-<?php endforeach; ?>
-
-
 <?php if ($gallery_images && $gallery_images->num_rows > 0): ?>
   <div class="mb-4">
     <h5 class="mb-3">Galeri</h5>
