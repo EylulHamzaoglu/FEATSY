@@ -810,4 +810,26 @@ function get_restaurants_by_category_name($category_name) {
     }
 
     return $restaurants;
+     }
+
+     function get_menu_grouped_by_section($restaurant_id) {
+    global $conn;
+
+    $stmt = $conn->prepare("
+        SELECT section_name, name, price, image_url, sort_order
+        FROM restaurant_menu_items
+        WHERE restaurant_id = ?
+        ORDER BY section_name ASC, sort_order ASC
+    ");
+    $stmt->bind_param("i", $restaurant_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $menu = [];
+
+    while ($row = $result->fetch_assoc()) {
+        $menu[$row['section_name']][] = $row;
+    }
+
+    return $menu;
 }
