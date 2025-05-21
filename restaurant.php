@@ -168,17 +168,9 @@ $grouped_menu = get_menu_grouped_by_section($restaurant_id);
                         <?php endif; ?>
 
                         <div>
-                            <h6 class="mb-1">
-                                <?php echo htmlspecialchars($item['name']); ?>
-                                <!-- Buraya örnek etiket koyabilirsin -->
-                                <!-- <span class="badge text-bg-success">BEST SELLER</span> -->
-                            </h6>
+                            <h6 class="mb-1"><?php echo htmlspecialchars($item['name']); ?></h6>
                             <p class="text-muted mb-0"><?php echo number_format($item['price'], 2); ?> ₺</p>
                         </div>
-
-                        <span class="ms-auto">
-                            <a href="#" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#extras">ADD</a>
-                        </span>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -240,7 +232,7 @@ $grouped_menu = get_menu_grouped_by_section($restaurant_id);
 <?php endforeach; ?>
 
     </div>
-<?php endforeach; ?>
+
 
 
     <div class="container mt-5">

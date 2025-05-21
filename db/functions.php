@@ -21,7 +21,7 @@ function sign_up($username, $password, $email) {
     }
 
     // 1. Kullanıcıyı users tablosuna ekle
-    $stmt = $conn->prepare("INSERT INTO users (username, password, mail, role, status) VALUES (?, ?, ?, 'customer', 'active')");
+    $stmt = $conn->prepare("INSERT INTO users (username, password, mail,) VALUES (?, ?, ?, 'customer', 'active')");
     $stmt->bind_param("sss", $username, $password, $email);
 
     if ($stmt->execute()) {
