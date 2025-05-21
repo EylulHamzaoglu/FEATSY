@@ -437,25 +437,7 @@ function get_restaurant_features($restaurant_id) {
 // ✅ get_restaurant_menu_images($restaurant_id)
 // Restoranın menü görsellerini (image_url) getirir.
 
-function get_restaurant_menu_images($restaurant_id) {
-    global $conn;
 
-    $stmt = $conn->prepare("
-        SELECT image_url
-        FROM restaurant_images
-        WHERE restaurant_id = ?
-    ");
-    $stmt->bind_param("i", $restaurant_id);
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-    $images = [];
-    while ($row = $result->fetch_assoc()) {
-        $images[] = $row['image_url'];
-    }
-
-    return $images;
-}
 // ✅ track_restaurant_view($user_id, $restaurant_id)
 // Kullanıcının bir restorana tıkladığını kaydeder (restaurant_views tablosuna kayıt ekler).
 
@@ -759,4 +741,11 @@ function search_restaurants_by_name($name) {
     }
 
     return $restaurants;
+}
+function get_restaurant_menu_items($restaurant_id) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT * FROM restaurant_menu_items WHERE restaurant_id = ?");
+    $stmt->bind_param("i", $restaurant_id);
+    $stmt->execute();
+    return $stmt->get_result();
 }
