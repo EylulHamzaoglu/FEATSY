@@ -1,8 +1,6 @@
 <?php
 include 'db/config_db.php';
 
-// ✅ sign_up($username, $password, $email)
-// Kullanıcıyı veritabanına ekler. Şifreyi hash'ler ve varsayılan olarak 'customer' rolüyle kaydeder.
 function sign_up($username, $password, $email) {
     global $conn;
 
@@ -10,7 +8,7 @@ function sign_up($username, $password, $email) {
         return ['success' => false, 'message' => 'Tüm alanları doldurmalısınız.'];
     }
 
-    // Aynı e-posta kontrolü
+    // E-posta kontrolü
     $check = $conn->prepare("SELECT id FROM users WHERE mail = ?");
     $check->bind_param("s", $email);
     $check->execute();
@@ -20,20 +18,15 @@ function sign_up($username, $password, $email) {
         return ['success' => false, 'message' => 'Bu e-posta adresi zaten kayıtlı.'];
     }
 
-    // 1. Kullanıcıyı users tablosuna ekle
-    $stmt = $conn->prepare("INSERT INTO users (username, password, mail,) VALUES (?, ?, ?, 'customer', 'active')");
+    // Yeni kullanıcı ekle (role kaldırıldı)
+    $stmt = $conn->prepare("
+        INSERT INTO users (username, password, mail, name, surname, phone, birth_date, status, created_at, updated_at)
+        VALUES (?, ?, ?, '', '', '', NULL, 'active', NOW(), NOW())
+    ");
     $stmt->bind_param("sss", $username, $password, $email);
 
     if ($stmt->execute()) {
-        // 2. Eklenen kullanıcı ID'sini al
-        $user_id = $conn->insert_id;
-
-        // 3. Boş detaylarla user_details tablosuna ekle
-        $stmt2 = $conn->prepare("INSERT INTO user_details (user_id, name, surname, phone) VALUES (?, '', '', '')");
-        $stmt2->bind_param("i", $user_id);
-        $stmt2->execute();
-
-        return ['success' => true, 'user_id' => $user_id];
+        return ['success' => true, 'user_id' => $conn->insert_id];
     } else {
         return ['success' => false, 'message' => 'Kayıt sırasında hata oluştu: ' . $stmt->error];
     }
