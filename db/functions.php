@@ -758,3 +758,32 @@ function get_restaurant_menu_items($restaurant_id) {
     $stmt->execute();
     return $stmt->get_result();
 }
+
+function get_restaurant_images($restaurant_id) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT image_url FROM restaurant_images WHERE restaurant_id = ?");
+    $stmt->bind_param("i", $restaurant_id);
+    $stmt->execute();
+    return $stmt->get_result();
+}
+
+function get_grouped_menu_items($restaurant_id) {
+    global $conn;
+    $stmt = $conn->prepare("
+        SELECT section_name, name, price, image_url 
+        FROM restaurant_menu_items 
+        WHERE restaurant_id = ?
+        ORDER BY section_name ASC, sort_order ASC
+    ");
+    $stmt->bind_param("i", $restaurant_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $grouped = [];
+
+    while ($row = $result->fetch_assoc()) {
+        $grouped[$row['section_name']][] = $row;
+    }
+
+    return $grouped;
+}
