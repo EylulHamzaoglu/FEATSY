@@ -749,3 +749,26 @@ function get_restaurant_menu_items($restaurant_id) {
     $stmt->execute();
     return $stmt->get_result();
 }
+function get_restaurants_by_category_name($category_name) {
+    global $conn;
+
+    $stmt = $conn->prepare("
+        SELECT r.*, c.name AS category_name, ROUND(AVG(a.rating), 1) AS average_rating, COUNT(a.rating) AS total_ratings
+        FROM restaurants r
+        JOIN restaurant_categories rc ON r.id = rc.restaurant_id
+        JOIN categories c ON rc.category_id = c.id
+        LEFT JOIN actions a ON a.restaurant_id = r.id
+        WHERE c.name = ?
+        GROUP BY r.id
+    ");
+    $stmt->bind_param("s", $category_name);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    $restaurants = [];
+    while ($row = $result->fetch_assoc()) {
+        $restaurants[] = $row;
+    }
+
+    return $restaurants;
+}

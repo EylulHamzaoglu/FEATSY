@@ -156,7 +156,7 @@ if (!isset($_SESSION['user_id'])) {
 
     <form method="GET" action="search.php" class="d-flex justify-content-center mb-4">
   <div class="input-group search-bar w-50">
-    <input type="text" name="q" class="form-control form-control-lg shadow-sm" placeholder="Search restaurants" required>
+    <input type="text" name="q" class="form-control form-control-lg shadow-sm" placeholder="Restoran Ara" required>
     <button class="btn btn-outline-primary" type="submit">
       <i class="feather-search"></i>
     </button>

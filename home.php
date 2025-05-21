@@ -6,6 +6,14 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: index.php"); // ya da login.php
     exit();
 }
+$selected_category = $_GET['category'] ?? null;
+
+if ($selected_category) {
+    $popular_restaurants = get_restaurants_by_category_name($selected_category);
+} else {
+    $popular_restaurants = get_popular_restaurants(8);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -117,58 +125,67 @@ if (!isset($_SESSION['user_id'])) {
 
         <!-- Filters -->
          
+         
         <div class="container">
             <div class="cat-slider">
                 <div class="cat-item px-1 py-3">
-                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.php">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="home.php?category=Amerikan Mutfağı">
                         <img alt="#" src="img/homelogo/americanlogo.png" class="img-fluid mb-2">
                         <p class="m-0 small">Amerikan Mutfağı</p>
                     </a>
                 </div>
                 <div class="cat-item px-1 py-3">
-                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.php">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="home.php?category=İtalyan Mutfağı">
+
                         <img alt="#" src="img/homelogo/italyanlogo.png" class="img-fluid mb-2">
                         <p class="m-0 small">İtalyan Mutfağı</p>
                     </a>
                 </div>
                 <div class="cat-item px-1 py-3">
-                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.php">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="home.php?category=Fast Food">
+
                         <img alt="#" src="img/homelogo/fastfoodlogo.png" class="img-fluid mb-2">
                         <p class="m-0 small">Fast Food</p>
                     </a>
                 </div>
                 <div class="cat-item px-1 py-3">
-                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.php">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="home.php?category=Uzak Doğu Mutfağı">
+
                         <img alt="#" src="img/homelogo/uzakdogulogo.png" class="img-fluid mb-2">
                         <p class="m-0 small">Uzak Doğu</p>
                     </a>
                 </div>
                 <div class="cat-item px-1 py-3">
-                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.php">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="home.php?category=Tatlıcı">
+
                         <img alt="#" src="img/homelogo/tatlılogo.png" class="img-fluid mb-2">
                         <p class="m-0 small">Tatlı</p>
                     </a>
                 </div>
                 <div class="cat-item px-1 py-3">
-                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.php">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="home.php?category=Kokteyl Mekanı">
+
                         <img alt="#" src="img/homelogo/kokteyllogo.png" class="img-fluid mb-2">
                         <p class="m-0 small">Kokteyl</p>
                     </a>
                 </div>
                 <div class="cat-item px-1 py-3">
-                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.php">
+                   <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="home.php?category=Meksika Mutfağı">
+
                         <img alt="#" src="img/homelogo/meksikalogo.png" class="img-fluid mb-2">
                         <p class="m-0 small">Meksika Mutfağı</p>
                     </a>
                 </div>
                 <div class="cat-item px-1 py-3">
-                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.php">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="home.php?category=Sokak Lezzetleri">
+
                         <img alt="#" src="img/homelogo/sokaklezzetleri.png" class="img-fluid mb-2">
                         <p class="m-0 small">Sokak Lezzetleri</p>
                     </a>
                 </div>
                 <div class="cat-item px-1 py-3">
-                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.php">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="home.php?category=Romantik Akşam Yemeği">
+
                         <img alt="#" src="img/homelogo/romanticdinnerlogo.png" class="img-fluid mb-2">
                         <p class="m-0 small">Romantik Akşam Yemeği</p>
                     </a>
