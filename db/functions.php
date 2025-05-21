@@ -787,6 +787,7 @@ function get_grouped_menu_items($restaurant_id) {
 
     return $grouped;
 }
+
 function get_restaurants_by_category_name($category_name) {
     global $conn;
 
