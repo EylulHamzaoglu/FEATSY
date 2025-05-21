@@ -35,7 +35,8 @@ while ($row = $menu_items->fetch_assoc()) {
 
 $comments = get_restaurant_comments($restaurant_id);
 $features = get_restaurant_features($restaurant_id);
-$gallery_images = get_restaurant_menu_items($restaurant_id);
+$gallery_images = get_restaurant_images($restaurant_id);
+
 ?>
 
 <!DOCTYPE html>
@@ -147,6 +148,18 @@ $gallery_images = get_restaurant_menu_items($restaurant_id);
 
 <!-- Main Content -->
 
+<?php if ($gallery_images && $gallery_images->num_rows > 0): ?>
+  <div class="mb-4">
+    <h5 class="mb-3">Galeri</h5>
+    <div class="slick-slider">
+      <?php while ($img = $gallery_images->fetch_assoc()): ?>
+        <div>
+          <img src="img/restaurants/<?php echo htmlspecialchars($img['image_url']); ?>" class="img-fluid rounded" style="height:300px; width:100%; object-fit:cover;">
+        </div>
+      <?php endwhile; ?>
+    </div>
+  </div>
+<?php endif; ?>
 
 
 <div class="container my-5">
@@ -289,6 +302,21 @@ $gallery_images = get_restaurant_menu_items($restaurant_id);
 <script type="text/javascript" src="vendor/slick/slick/slick.min.js"></script>
 <script type="text/javascript" src="vendor/sidebar/hc-offcanvas-nav.js"></script>
 <script type="text/javascript" src="js/osahan.js"></script>
+
+<script>
+  $(document).ready(function(){
+    $('.slick-slider').slick({
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      adaptiveHeight: true,
+      autoplay: true,
+      autoplaySpeed: 3000
+    });
+  });
+</script>
+
 
 </body>
 </html>
