@@ -3,8 +3,8 @@ session_start();
 include 'db/functions.php';
 
 if (!isset($_SESSION['user_id'])) {
-  header('Location: index.php');  // ✅ Giriş yapılmamışsa ana sayfaya at
-  exit;
+    header("Location: index.php"); // ya da login.php
+    exit();
 }
 
 $user_id = $_SESSION['user_id'];
@@ -103,22 +103,11 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
 
           <form method="POST" action="update_profile.php">
   <div class="mb-3">
-    <label for="first_name" class="form-label">First Name</label>
+    <label for="first_name" class="form-label">Username</label>
     <input type="text" name="first_name" id="first_name" class="form-control"
       value="<?php echo htmlspecialchars($profile['name'] ?? ''); ?>">
   </div>
 
-  <div class="mb-3">
-    <label for="last_name" class="form-label">Last Name</label>
-    <input type="text" name="last_name" id="last_name" class="form-control"
-      value="<?php echo htmlspecialchars($profile['surname'] ?? ''); ?>">
-  </div>
-
-  <div class="mb-3">
-    <label for="phone" class="form-label">Mobile Number</label>
-    <input type="text" name="phone" id="phone" class="form-control"
-      value="<?php echo htmlspecialchars($profile['phone'] ?? ''); ?>">
-  </div>
 
   <div class="mb-3">
     <label for="mail" class="form-label">Email</label>

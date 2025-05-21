@@ -712,19 +712,17 @@ function get_restaurant_comments($restaurant_id) {
 
 function get_user_profile($user_id) {
     global $conn;
-    $stmt = $conn->prepare("
-        SELECT 
-            u.mail, u.birth_date,
-            d.name, d.surname, d.phone
-        FROM users u
-        JOIN user_details d ON u.id = d.user_id
-        WHERE u.id = ?
-    ");
+
+    $stmt = $conn->prepare("SELECT username AS name, mail, birth_date FROM users WHERE id = ?");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
-    return $result->fetch_assoc(); // associative array döner
+
+    return $result->fetch_assoc();
 }
+
+
+
 function search_restaurants_by_name($name) {
     global $conn;
 
