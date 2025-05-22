@@ -67,7 +67,7 @@ $grouped_menu = get_menu_grouped_by_section($restaurant_id);
             <div class="row align-items-center justify-content-between py-2">
                 <div class="col-auto">
                     <a href="home.php" class="brand-wrap mb-0">
-                        <img alt="logo" src="img/logo.png" class="img-fluid" style="height: 60px;">
+                        <img alt="logo" src="img/logo.png" class="img-fluid" style="height: 110px;">
                     </a>
                 </div>
                 <div class="col-auto d-flex align-items-center">
@@ -84,7 +84,6 @@ $grouped_menu = get_menu_grouped_by_section($restaurant_id);
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
                             <a class="dropdown-item" href="profile.php">My account</a>
-                            <a class="dropdown-item" href="faq.html">Delivery support</a>
                             <a class="dropdown-item" href="contact-us.html">Contact us</a>
                             <a class="dropdown-item" href="terms.html">Terms of use</a>
                             <a class="dropdown-item" href="privacy.html">Privacy policy</a>

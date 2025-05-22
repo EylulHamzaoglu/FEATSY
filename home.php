@@ -106,7 +106,7 @@ if ($selected_category) {
           </a>
           <div class="dropdown-menu dropdown-menu-end">
             <a class="dropdown-item" href="profile.php">My account</a>
-            <a class="dropdown-item" href="faq.php">Delivery support</a>
+           
             <a class="dropdown-item" href="contact-us.php">Contact us</a>
             <a class="dropdown-item" href="terms.php">Terms of use</a>
             <a class="dropdown-item" href="privacy.php">Privacy policy</a>
