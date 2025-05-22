@@ -1,6 +1,3 @@
-<?php
-include '../php/functions.php';
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,499 +22,433 @@ include '../php/functions.php';
 </head>
 
 <body class="fixed-bottom-bar">
+    <style>
+.cat-item a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px; /* kutular eşit yükseklikte olsun */
+  height: 100%;
+  text-align: center;
+}
+
+.cat-item img {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+  margin-bottom: 5px;
+}
+
+.cat-item p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.2;
+}
+</style>
+
+    <!-- Hoş geldin mesajı -->
+
+
     <header class="section-header">
         <section class="header-main shadow-sm bg-white">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-1">
-                        <a href="home.php" class="brand-wrap mb-0">
-                            <img alt="#" class="img-fluid" src="img/logo_web.png">
-                        </a>
-                        <!-- brand-wrap.// -->
-                    </div>
-                    <div class="col-3 d-flex align-items-center m-none">
-                        <div class="dropdown me-3">
-                            <a class="text-dark dropdown-toggle d-flex align-items-center py-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div><i class="feather-map-pin me-2 bg-light rounded-pill p-2 icofont-size"></i></div>
-                                <div>
-                                    <p class="text-muted mb-0 small">Select Location</p>
-                                    Jawaddi Ludhiana...
-                                </div>
-                            </a>
-                            <div class="dropdown-menu p-0 drop-loc">
-                                <div class="osahan-country">
-                                    <div class="search_location bg-primary p-3 text-end">
-                                        <div class="input-group bg-white rounded shadow-sm">
-                                            <span class="input-group-text bg-transparent border-0 rounded-0"
-                                               ><i class="feather-search"></i></span>
-                                            <input type="text"
-                                                class="form-control bg-transparent border-0 rounded-0 px-0 shadow-none"
-                                                placeholder="Enter Your Location" aria-label="Enter Your Location"
-                                                >
-                                        </div>
-                                    </div>
-                                    <div class="p-3 border-bottom">
-                                        <a href="home.php" class="text-decoration-none">
-                                            <p class="fw-bold text-primary m-0"><i class="feather-navigation"></i> New York, USA</p>
-                                        </a>
-                                    </div>
-                                    <div class="filter">
-                                        <h6 class="p-3 bg-light m-0 border-bottom">Choose your country</h6>
-                                        <div class="border-bottom p-3">
-                                            <div class="form-check form-check-reverse m-0">
-                                                <input type="radio" id="customRadio1" name="location"
-                                                    class="form-check-input">
-                                                <label class="form-check-label text-start w-100"
-                                                    for="customRadio1">Afghanistan</label>
-                                            </div>
-                                        </div>
-                                        <div class="border-bottom p-3">
-                                        <div class="form-check form-check-reverse m-0">
-                                            <input type="radio" id="customRadio2" name="location"
-                                                class="form-check-input" checked="">
-                                            <label class="form-check-label text-start w-100"
-                                                for="customRadio2">India</label>
-                                        </div>
-                                    </div>
-                                    <div class="border-bottom p-3">
-                                        <div class="form-check form-check-reverse m-0">
-                                            <input type="radio" id="customRadio3" name="location"
-                                                class="form-check-input">
-                                            <label class="form-check-label text-start w-100"
-                                                for="customRadio3">USA</label>
-                                        </div>
-                                        </div>
-                                        <div class="border-bottom p-3">
-                                        <div class="form-check form-check-reverse m-0">
-                                            <input type="radio" id="customRadio4" name="location"
-                                                class="form-check-input">
-                                            <label class="form-check-label text-start w-100"
-                                                for="customRadio4">Australia</label>
-                                        </div>
-                                        </div>
-                                        <div class="border-bottom p-3">
-                                        <div class="form-check form-check-reverse m-0">
-                                            <input type="radio" id="customRadio5" name="location"
-                                                class="form-check-input">
-                                            <label class="form-check-label text-start w-100"
-                                                for="customRadio5">Japan</label>
-                                        </div>
-                                        </div>
-                                        <div class="p-3">
-                                        <div class="form-check form-check-reverse m-0">
-                                            <input type="radio" id="customRadio6" name="location"
-                                                class="form-check-input">
-                                            <label class="form-check-label text-start w-100"
-                                                for="customRadio6">China</label>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- col.// -->
-                    <div class="col-8">
-                        <div class="d-flex align-items-center justify-content-end pe-5">
-                            <!-- search -->
-                            <a href="search.php" class="widget-header me-4 text-dark">
-                                <div class="icon d-flex align-items-center">
-                                    <i class="feather-search h6 me-2 mb-0"></i> <span>Search</span>
-                                </div>
-                            </a>
-                            <!-- offers -->
-                            <a href="offers.php" class="widget-header me-4 text-white btn bg-primary m-none">
-                                <div class="icon d-flex align-items-center">
-                                    <i class="feather-disc h6 me-2 mb-0"></i> <span>Offers</span>
-                                </div>
-                            </a>
-                            <!-- signin -->
-                            <a href="login.php" class="widget-header me-4 text-dark m-none">
-                                <div class="icon d-flex align-items-center">
-                                    <i class="feather-user h6 me-2 mb-0"></i> <span>Sign in</span>
-                                </div>
-                            </a>
-                            <!-- my account -->
-                            <div class="dropdown me-4 m-none">
-                                <a href="#" class="dropdown-toggle text-dark py-3 d-block" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img alt="#" src="img/user/1.jpg" class="img-fluid rounded-circle header-user me-2 header-user"> Hi Osahan
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="profile.php">My account</a>
-                                    <a class="dropdown-item" href="faq.php">Delivery support</a>
-                                    <a class="dropdown-item" href="contact-us.php">Contant us</a>
-                                    <a class="dropdown-item" href="terms.php">Term of use</a>
-                                    <a class="dropdown-item" href="privacy.php">Privacy policy</a>
-                                    <a class="dropdown-item" href="login.php">Logout</a>
-                                </div>
-                            </div>
-                            <!-- signin -->
-                            <a href="checkout.php" class="widget-header me-4 text-dark">
-                                <div class="icon d-flex align-items-center">
-                                    <i class="feather-shopping-cart h6 me-2 mb-0"></i> <span>Cart</span>
-                                </div>
-                            </a>
-                            <a class="toggle" href="#">
-                                <span></span>
-                            </a>
-                        </div>
-                        <!-- widgets-wrap.// -->
-                    </div>
-                    <!-- col.// -->
-                </div>
-                <!-- row.// -->
-            </div>
-            <!-- container.// -->
-        </section>
-        <!-- header-main .// -->
-    </header>
-    <div class="d-none">
-        <div class="bg-primary border-bottom p-3 d-flex align-items-center">
-            <a class="toggle togglew toggle-2" href="#"><span></span></a>
-            <h4 class="fw-bold m-0 text-white">Track</h4>
+  <div class="container">
+    <div class="row align-items-center justify-content-between py-2">
+      <!-- ✅ Sol: Logo -->
+      <div class="col-auto">
+  <a href="home.php" class="brand-wrap mb-0">
+    <img alt="logo" src="img/logo.png" class="img-fluid" style="height: 80px;">
+  </a>
+</div>
+
+      <!-- ✅ Sağ: Search ve Guest -->
+      <div class="col-auto d-flex align-items-center gap-4">
+
+        <!-- Search -->
+        <a href="search.php" class="d-flex align-items-center text-dark text-decoration-none">
+          <i class="feather-search h5 mb-0 me-1"></i>
+          <span class="fw-semibold">Search</span>
+        </a>
+
+        <!-- Guest dropdown -->
+        <div class="dropdown">
+          <a href="#" class="dropdown-toggle d-flex align-items-center text-dark text-decoration-none"
+             id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="img/homelogo/guestlogo.png" alt="User" class="rounded-circle me-2"
+                 style="width: 32px; height: 32px;">
+            <span class="fw-semibold"><?php echo $_SESSION['user_email'] ?? 'Guest'; ?></span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end">
+            <a class="dropdown-item" href="profile.php">My account</a>
+            <a class="dropdown-item" href="faq.php">Delivery support</a>
+            <a class="dropdown-item" href="contact-us.php">Contact us</a>
+            <a class="dropdown-item" href="terms.php">Terms of use</a>
+            <a class="dropdown-item" href="privacy.php">Privacy policy</a>
+            <a class="dropdown-item" href="logout.php">Logout</a>
+          </div>
         </div>
+
+      </div>
     </div>
-    <div class="osahan-map">
-        <div class="bg-primary">
-            <div class="container">
-                <div class="osahan-slider-map py-2">
-                    <div class="osahan-slider-item">
-                        <div class="text-white">
-                            <div class="member-plan">Fast Food</div>
-                        </div>
-                    </div>
-                    <div class="osahan-slider-item">
-                        <div class="text-white">
-                            <div class="member-plan">Desserts</div>
-                        </div>
-                    </div>
-                    <div class="osahan-slider-item">
-                        <div class="text-white">
-                            <div class="member-plan">Dim Sum</div>
-                        </div>
-                    </div>
-                    <div class="osahan-slider-item">
-                        <div class="text-white">
-                            <div class="member-plan">Breakfast</div>
-                        </div>
-                    </div>
-                    <div class="osahan-slider-item">
-                        <div class="text-white">
-                            <div class="member-plan">Breakfast</div>
-                        </div>
-                    </div>
-                    <div class="osahan-slider-item">
-                        <div class="text-white">
-                            <div class="member-plan">Dim Sum</div>
-                        </div>
-                    </div>
-                    <div class="osahan-slider-item">
-                        <div class="text-white">
-                            <div class="member-plan">Breakfast</div>
-                        </div>
-                    </div>
-                    <div class="osahan-slider-item">
-                        <div class="text-white">
-                            <div class="member-plan">Breakfast</div>
-                        </div>
-                    </div>
+  </div>
+</section>
+    </header>
+
+    <!-- Devamında gelen sayfa içeriğini aynen bırakabilirsin -->
+
+
+        <!-- Filters -->
+         
+        <div class="container">
+            <div class="cat-slider">
+                <div class="cat-item px-1 py-3">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.php">
+                        <img alt="#" src="img/homelogo/americanlogo.png" class="img-fluid mb-2">
+                        <p class="m-0 small">Amerikan Mutfağı</p>
+                    </a>
+                </div>
+                <div class="cat-item px-1 py-3">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.php">
+                        <img alt="#" src="img/homelogo/italyanlogo.png" class="img-fluid mb-2">
+                        <p class="m-0 small">İtalyan Mutfağı</p>
+                    </a>
+                </div>
+                <div class="cat-item px-1 py-3">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.php">
+                        <img alt="#" src="img/homelogo/fastfoodlogo.png" class="img-fluid mb-2">
+                        <p class="m-0 small">Fast Food</p>
+                    </a>
+                </div>
+                <div class="cat-item px-1 py-3">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.php">
+                        <img alt="#" src="img/homelogo/uzakdogulogo.png" class="img-fluid mb-2">
+                        <p class="m-0 small">Uzak Doğu</p>
+                    </a>
+                </div>
+                <div class="cat-item px-1 py-3">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.php">
+                        <img alt="#" src="img/homelogo/tatlılogo.png" class="img-fluid mb-2">
+                        <p class="m-0 small">Tatlı</p>
+                    </a>
+                </div>
+                <div class="cat-item px-1 py-3">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.php">
+                        <img alt="#" src="img/homelogo/kokteyllogo.png" class="img-fluid mb-2">
+                        <p class="m-0 small">Kokteyl</p>
+                    </a>
+                </div>
+                <div class="cat-item px-1 py-3">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.php">
+                        <img alt="#" src="img/homelogo/meksikalogo.png" class="img-fluid mb-2">
+                        <p class="m-0 small">Meksika Mutfağı</p>
+                    </a>
+                </div>
+                <div class="cat-item px-1 py-3">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.php">
+                        <img alt="#" src="img/homelogo/sokaklezzetleri.png" class="img-fluid mb-2">
+                        <p class="m-0 small">Sokak Lezzetleri</p>
+                    </a>
+                </div>
+                <div class="cat-item px-1 py-3">
+                    <a class="bg-white rounded d-block p-2 text-center shadow-sm" href="trending.php">
+                        <img alt="#" src="img/homelogo/romanticdinnerlogo.png" class="img-fluid mb-2">
+                        <p class="m-0 small">Romantik Akşam Yemeği</p>
+                    </a>
                 </div>
             </div>
         </div>
-        <section class="section bg-white osahan-track-order-page position-relative zn-1">
-            <iframe class="position-absolute w-100 border-0" src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d13696.650704896498!2d75.82434255!3d30.8821099!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1555184720550!5m2!1sen!2sin" height="676" allowfullscreen></iframe>
-            <div class="container py-5 position-absolute z-0 start-0 end-0">
-                <div class="row d-flex align-items-center">
-                    <div class="col-md-6 text-center pb-4">
-                        <div class="osahan-point mx-auto"></div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="bg-white p-4 shadow-lg rounded mb-2">
-                            <div class="mb-2"><small>Order #25102589748<a class="float-end fw-bold" href="#"><i class="feather-help-circle"></i> HELP</a></small></div>
-                            <h6 class="mb-1 mt-1"><a href="restaurant.php" class="text-black">Spice Hut Restaurant
-                           </a>
-                            </h6>
-                            <p class="text-gray mb-0"><i class="feather-clock"></i> 04:19 PM | 8 Items | $314</p>
-                        </div>
-                        <div class="bg-white p-4 shadow-lg rounded">
-                            <div class="osahan-track-order-detail po">
-                                <h5 class="mt-0 mb-3">Order Details</h5>
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <small>FROM</small>
-                                        <h6 class="mb-1 mt-1"><a href="restaurant.php" class="text-black"><i class="feather-shopping-cart"></i> Spice Hut Restaurant
-                                    </a>
-                                        </h6>
-                                        <p class="text-gray mb-5">2036, NEW YORK</p>
-                                        <small>DELIVER TO</small>
-                                        <h6 class="mb-1 mt-1"><span class="text-black"><i class="feather-map-pin"></i> Other
-                                    </span>
-                                        </h6>
-                                        <p class="text-gray mb-0">291, Jawaddi Kalan, Ludhiana, Punjab 141002, India
-                                        </p>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <div class="mb-2"><small><i class="feather-list"></i> 5 ITEMS</small></div>
-                                        <p class="mb-2"><i class="feather-ui-press text-danger food-item">·</i> Chicken Tikka Sub 12" (30 cm) x 1 <span class="float-end text-secondary">$314</span></p>
-                                        <p class="mb-2"><i class="feather-ui-press text-success food-item">·</i> Corn &amp; Peas Salad x 1 <span class="float-end text-secondary">$209</span></p>
-                                        <p class="mb-2"><i class="feather-ui-press text-success food-item">·</i> Veg Seekh Sub 6" (15 cm) x 1 <span class="float-end text-secondary">$133</span></p>
-                                        <p class="mb-2"><i class="feather-ui-press text-danger food-item">·</i> Chicken Tikka Sub 12" (30 cm) x 1 <span class="float-end text-secondary">$314</span></p>
-                                        <hr>
-                                        <p class="mb-0 fw-bold text-black">TOTAL BILL <span class="float-end text-secondary">$209</span></p>
-                                        <p class="mb-0 text-info"><small>Paid via Credit/Debit card
-                                    <span class="float-end text-danger">$620 OFF</span></small>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-white p-4 shadow-lg rounded mt-2">
-                            <div class="row text-center">
-                                <div class="col">
-                                    <i class="feather-list h4 icofont-3x text-info"></i>
-                                    <p class="mt-1 fw-bold text-dark mb-0">Order Received</p>
-                                    <small class="text-info mb-0">NOW</small>
-                                </div>
-                                <div class="col">
-                                    <i class="feather-check-circle h4 icofont-3x text-success"></i>
-                                    <p class="mt-1 fw-bold text-dark mb-0">Order Confirmed</p>
-                                    <small class="text-success mb-0">NEXT</small>
-                                </div>
-                                <div class="col">
-                                    <i class="feather-truck h4 icofont-3x text-primary"></i>
-                                    <p class="mt-1 fw-bold text-dark mb-0">Order Picked Up</p>
-                                    <small class="text-primary mb-0">LATER (ET : 30min)</small>
-                                </div>
-                            </div>
+       
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Featsy">
+  <meta name="author" content="Featsy">
+  <title>Featsy | Restoran Haritası</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    iframe {
+      height: 500px;
+      width: 100%;
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+ <div class="container my-4">
+
+<div class="mb-3">
+<button class="btn btn-outline-primary me-2" onclick="showRestaurant('konoha')">Konoha Etiler</button>
+<button class="btn btn-outline-primary me-2" onclick="showRestaurant('brio')">Brio İstanbul</button>
+<button class="btn btn-outline-primary me-2" onclick="showRestaurant('ranchero')">Ranchero Ataşehir</button>
+<button class="btn btn-outline-primary me-2" onclick="showRestaurant('ppang')">Ppang Moda</button>
+<button class="btn btn-outline-primary me-2" onclick="showRestaurant('cosa')">Çosa Beyoğlu</button>
+<button class="btn btn-outline-primary me-2" onclick="showRestaurant('upperdeck')">Upperdeck</button>
+<button class="btn btn-outline-primary me-2" onclick="showRestaurant('zmash')">Burger ZMASH</button>
+</div>
+<!-- ... üstteki kodlar değişmediği için atlanıyor -->
+
+<div class="position-relative" style="height: 600px;">
+  <iframe allowfullscreen="" class="position-absolute top-0 start-0 w-100 h-100 border-0" id="mapFrame" src=""></iframe>
+  <div class="position-absolute top-0 end-0 m-4" id="infoPanel" style="max-width: 400px; z-index: 1000;">
+    <div class="bg-white p-3 shadow rounded mb-2">
+      <div class="mb-2 d-flex justify-content-between">
+        <span class="fw-bold small text-secondary" id="restaurantCategory"></span>
+        <a class="small text-danger" href="#"><i class="feather-help-circle"></i> HELP</a>
+      </div>
+    </div>
+    <div class="bg-white p-3 shadow rounded mb-2">
+      <div class="mb-2"><small class="text-muted">Restoran</small></div>
+      <h6 class="mb-1 fw-bold text-dark" id="restaurantName"></h6>
+      <p class="text-muted mb-0 small" id="restaurantAddress"></p>
+      <p class="text-muted mb-0 small" id="restaurantHours"></p>
+    </div>
+    <div class="bg-white p-3 shadow rounded">
+      <h6 class="mb-2 fw-bold">Ulaşım Bilgisi</h6>
+      <div id="restaurantTransportInfo" class="mb-2 text-muted small">
+        Konuma göre ulaşım bilgisi girilebilir.
+      </div>
+      <hr/>
+      <small class="text-muted">Google Haritalar üzerinde navigasyonla kolay ulaşım sağlanabilir.</small>
+    </div>
+  </div>
+</div>
+
+
+  <script>
+    
+const restaurants = {
+  konoha: {
+    name: "Konoha Etiler",
+    category: "Uzak Doğu Mutfağı",
+    address: "Nisbetiye, Başa Sk. 4a, 34340 Beşiktaş/İstanbull",
+    hours: "Açılış Saatleri: 11:00 - 23:00",
+    embed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3007.7133087611005!2d29.017168075861985!3d41.07525897134113!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab73ebc0f8d51%3A0x34cc38dd0c5a1eb6!2sKonoha%20Etiler!5e0!3m2!1str!2str!4v1747596213035!5m2!1str!2str",
+    transport: `
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> Etiler Metro İstasyonu'na 350m</p>
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> Akmerkez AVM otobüs durağına 200m</p>
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> Otopark: Akmerkez kapalı otoparkı kullanılabilir</p>
+    `
+  },
+  brio: {
+    name: "Brio İstanbul",
+    category: "İtalyan Mutfağı",
+    address: "Bağdat Cd. No:321, Kadıköy/İstanbul",
+    hours: "Açılış Saatleri: 10:00 - 23:00",
+    embed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000.8852450247364!2d29.033144575869954!3d41.224271171321085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x409fe13b8ec2f9b9%3A0xf9dab05ac78721da!2sBrio%20%C4%B0talian%20Restaurant!5e0!3m2!1str!2str!4v1747596261860!5m2!1str!2str",
+    transport: `
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> Kadıköy Metro İstasyonu’na 600m</p>
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> Minibüs duraklarına 300m</p>
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> Otopark: Restoranın arkasında özel otopark mevcut</p>
+    `
+  },
+  ranchero: {
+    name: "Ranchero Ataşehir Watergarden",
+    category: "Meksika Mutfağı",
+    address: "Barbaros mahallesi. Şebboy sokak. 2D dükkan no 29, 34746 Ataşehir/İstanbul",
+    hours: "Açılış Saatleri: 11:00 - 23:30",
+    embed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3011.2416737293584!2d29.0971767758579!3d40.99808327135198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cac7258ea9b427%3A0xa93772f596bfe106!2sRanchero%20Ata%C5%9Fehir%20Watergarden!5e0!3m2!1str!2str!4v1747596347645!5m2!1str!2str",
+    transport: `
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> Watergarden AVM içindedir</p>
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> Otobüs duraklarına 150m</p>
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> Otopark: AVM kapalı otoparkı kullanılabilir</p>
+    `
+  },
+  ppang: {
+    name: "Ppang Moda",
+    category: "Uzak Doğu Mutfağı",
+    address: "Caferağa, Keresteci Aziz Sk. No:36B, 34710 Kadıköy/İstanbul",
+    hours: "Açılış Saatleri: 09:00 - 22:00",
+    embed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3011.9090338511205!2d29.024949084814473!3d40.98347269749247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab9884e9057d7%3A0xc46eb7130883b96e!2sPpang%20Moda!5e0!3m2!1str!2str!4v1747596416691!5m2!1str!2str",
+    transport: `
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> Moda Tramvay Hattı'na yaklaşık 250m</p>
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> Moda Çay Bahçesi’ne yaklaşık 200m</p>
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> Yakın çevrede halka açık otopark alanları mevcut</p>
+    `
+  },
+  cosa: {
+    name: "Çosa Beyoğlu",
+    category: "Sokak Lezzetleri",
+    address: "Hüseyinağa, Yeşilçam Sk. No:3, 34435 Beyoğlu/İstanbul",
+    hours: "Açılış Saatleri: 12:00 - 23:45",
+    embed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3009.5568381260887!2d28.977140175859923!3d41.03495047134687!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caca4aa1e10001%3A0xf032c91d5874882c!2zw4dvc2E!5e0!3m2!1str!2str!4v1747596640575!5m2!1str!2str",
+    transport: `
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> İstiklal Caddesi’ne 100m</p>
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> Taksim Metro’ya 450m</p>
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> Otopark: Galatasaray Lisesi arkasında açık otopark</p>
+    `
+  },
+  upperdeck: {
+    name: "Upperdeck American Diner",
+    category: "Amerikan Mutfağı",
+    address: "Sinanpaşa, Hasfırın Cd. No:298 kat 2, 34022 Beşiktaş/İstanbul",
+    hours: "Açılış Saatleri: 10:30 - 22:00",
+    embed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3009.1808336800814!2d29.001337484835737!3d41.043174397462444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab7ee7c772355%3A0xedc322e05306e618!2sUpperdeck%20American%20Diner!5e0!3m2!1str!2str!4v1747596817965!5m2!1str!2str",
+    transport: `
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> Beşiktaş İskele’ye 300m</p>
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> Otobüs ve dolmuş duraklarına 200m</p>
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> Çevrede birçok ücretli otopark mevcut</p>
+    `
+  },
+  zmash: {
+    name: "Burger ZMASH",
+    category: "Fast Food",
+    address: "Emirgan, Fırın Sk. No:13/1, 34467 Sarıyer/İstanbul",
+    hours: "Açılış Saatleri: 11:00 - 22:30",
+    embed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3006.554694009285!2d29.049510075863395!3d41.10057527133771!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cacb07b581b4cb%3A0x4d3128cef3c5e171!2sBURGER%20ZMASH%20(Rezervasyonlu)!5e0!3m2!1str!2str!4v1747596871724!5m2!1str!2str",
+    transport: `
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> Emirgan Sahili’ne 100m</p>
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> Emirgan otobüs durağına 200m</p>
+      <p class="mb-2"><i class="feather-navigation text-primary"></i> Sahil boyunca ücretsiz park yerleri</p>
+    `
+  }
+};
+
+   
+    function showRestaurant(key) {
+        const r = restaurants[key];
+        document.getElementById('mapFrame').src = r.embed;
+        document.getElementById('restaurantName').innerText = r.name;
+        document.getElementById('restaurantCategory').innerText = r.category;
+        document.getElementById('restaurantAddress').innerText = r.address;
+        document.getElementById('restaurantHours').innerText = r.hours;
+
+  // Dinamik ulaşım bilgisi yerleştir
+        document.getElementById('restaurantTransportInfo').innerHTML = r.transport || `<p class="mb-1 text-muted small">Konuma göre ulaşım bilgisi girilebilir.</p>`;
+    }
+
+
+    // Varsayılan restoranı yükle
+    window.onload = function () {
+      showRestaurant('ppang');
+    };
+
+    
+
+    
+  </script>
+
+ 
+ 
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         <!-- slider -->
-        <div class="container slider_restaurant py-5 border-top">
-            <div class="trending-slider">
-                <div class="osahan-slider-item px-1">
-                    <div class="list-card bg-white h-100 d-flex align-items-center rounded overflow-hidden position-relative shadow-sm">
-                        <div class="list-card-image">
-                            <a href="restaurant.php">
-                                <img alt="#" src="img/trending1.png" class="img-fluid item-img">
-                            </a>
-                        </div>
-                        <div class="p-3 position-relative">
-                            <div class="list-card-body">
-                                <h6 class="mb-1"><a href="restaurant.php" class="text-black">Dave's Bar-B-Que</a>
-                                </h6>
-                                <p class="text-gray mb-2">963 Madyson Drive Suite 679</p>
-                                <p class="text-warning mb-0"><i class="feather-star"></i><i class="feather-star"></i><i class="feather-star"></i><i class="feather-star"></i><i class="feather-star"></i></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="osahan-slider-item px-1">
-                    <div class="list-card bg-white h-100 d-flex align-items-center rounded overflow-hidden position-relative shadow-sm">
-                        <div class="list-card-image">
-                            <a href="restaurant.php">
-                                <img alt="#" src="img/trending2.png" class="img-fluid item-img">
-                            </a>
-                        </div>
-                        <div class="p-3 position-relative">
-                            <div class="list-card-body">
-                                <h6 class="mb-1"><a href="restaurant.php" class="text-black">Thai Famous Cuisine</a></h6>
-                                <p class="text-gray mb-2">980 Syria Drive Suite 680</p>
-                                <p class="text-warning mb-0"><i class="feather-star"></i><i class="feather-star"></i><i class="feather-star"></i><i class="feather-star"></i><i class="feather-star"></i></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="osahan-slider-item px-1">
-                    <div class="list-card bg-white h-100 d-flex align-items-center rounded overflow-hidden position-relative shadow-sm">
-                        <div class="list-card-image">
-                            <a href="restaurant.php">
-                                <img alt="#" src="img/trending3.png" class="img-fluid item-img">
-                            </a>
-                        </div>
-                        <div class="p-3 position-relative">
-                            <div class="list-card-body">
-                                <h6 class="mb-1"><a href="restaurant.php" class="text-black">The osahan Restaurant
-                              </a>
-                                </h6>
-                                <p class="text-gray mb-2">560 Africa Drive Suite 560</p>
-                                <p class="text-warning mb-0"><i class="feather-star"></i><i class="feather-star"></i><i class="feather-star"></i><i class="feather-star"></i><i class="feather-star"></i></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <!-- footer -->
-    <footer class="section-footer border-top bg-dark">
-        <div class="container">
-            <div class="footer-top padding-y py-5">
-                <div class="row pt-3">
-                    <aside class="col-md-4 footer-about">
-                        <article class="d-flex pb-3">
-                            <div><img alt="#" src="img/logo_web.png" class="logo-footer me-3"></div>
-                            <div>
-                                <h6 class="title text-white">About Us</h6>
-                                <p class="text-muted">Some short text about company like You might remember the Dell computer commercials in which a youth reports.</p>
-                                <div class="d-flex align-items-center">
-                                    <a class="btn btn-icon btn-outline-light me-1 btn-sm" title="Facebook" target="_blank" href="#"><i class="feather-facebook"></i></a>
-                                    <a class="btn btn-icon btn-outline-light me-1 btn-sm" title="Instagram" target="_blank" href="#"><i class="feather-instagram"></i></a>
-                                    <a class="btn btn-icon btn-outline-light me-1 btn-sm" title="Youtube" target="_blank" href="#"><i class="feather-youtube"></i></a>
-                                    <a class="btn btn-icon btn-outline-light me-1 btn-sm" title="Twitter" target="_blank" href="#"><i class="feather-twitter"></i></a>
-                                </div>
-                            </div>
-                        </article>
-                    </aside>
-                    <aside class="col-sm-3 col-md-2 text-white">
-                        <h6 class="title">Error Pages</h6>
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="not-found.php" class="text-muted">Not found</a></li>
-                            <li> <a href="maintence.php" class="text-muted">Maintence</a></li>
-                            <li> <a href="coming-soon.php" class="text-muted">Coming Soon</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-3 col-md-2 text-white">
-                        <h6 class="title">Services</h6>
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="faq.php" class="text-muted">Delivery Support</a></li>
-                            <li> <a href="contact-us.php" class="text-muted">Contact Us</a></li>
-                            <li> <a href="terms.php" class="text-muted">Terms of use</a></li>
-                            <li> <a href="privacy.php" class="text-muted">Privacy policy</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-3  col-md-2 text-white">
-                        <h6 class="title">For users</h6>
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="login.php" class="text-muted"> User Login </a></li>
-                            <li> <a href="signup.php" class="text-muted"> User register </a></li>
-                            <li> <a href="forgot_password.php" class="text-muted"> Forgot Password </a></li>
-                            <li> <a href="profile.php" class="text-muted"> Account Setting </a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-3  col-md-2 text-white">
-                        <h6 class="title">More Pages</h6>
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="trending.php" class="text-muted"> Trending </a></li>
-                            <li> <a href="most_popular.php" class="text-muted"> Most popular </a></li>
-                            <li> <a href="restaurant.php" class="text-muted"> Restaurant Details </a></li>
-                            <li> <a href="favorites.php" class="text-muted"> Favorites </a></li>
-                        </ul>
-                    </aside>
-                </div>
-                <!-- row.// -->
+
+<footer class="section-footer border-top bg-dark text-white">
+  <div class="container py-5">
+    <div class="row gy-4">
+      <!-- About Us -->
+      <div class="col-lg-4 col-md-6">
+        <div class="d-flex">
+          <img src="img/logo.png" alt="Featsy Logo" style="height: 60px;" class="me-3">
+          <div>
+            <h6 class="fw-bold text-white">About Us</h6>
+            <p class="text-muted mb-2 small">Featsy, yerel lezzetleri keşfetmenizi kolaylaştıran modern bir restoran rehberidir. Benzersiz deneyimler için doğru adres.</p>
+            <div class="d-flex gap-2">
+              <a class="btn btn-sm btn-outline-light" href="#"><i class="feather-facebook"></i></a>
+              <a class="btn btn-sm btn-outline-light" href="#"><i class="feather-instagram"></i></a>
+              <a class="btn btn-sm btn-outline-light" href="#"><i class="feather-twitter"></i></a>
             </div>
-            <!-- footer-top.// -->
-            <section class="footer-center border-top padding-y py-5">
-                <h6 class="title text-white">Countries</h6>
-                <div class="row">
-                    <aside class="col-sm-2 col-md-2 text-white">
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="#" class="text-muted">India</a></li>
-                            <li> <a href="#" class="text-muted">Indonesia</a></li>
-                            <li> <a href="#" class="text-muted">Ireland</a></li>
-                            <li> <a href="#" class="text-muted">Italy</a></li>
-                            <li> <a href="#" class="text-muted">Lebanon</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-2 col-md-2 text-white">
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="#" class="text-muted">Malaysia</a></li>
-                            <li> <a href="#" class="text-muted">New Zealand</a></li>
-                            <li> <a href="#" class="text-muted">Philippines</a></li>
-                            <li> <a href="#" class="text-muted">Poland</a></li>
-                            <li> <a href="#" class="text-muted">Portugal</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-2 col-md-2 text-white">
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="#" class="text-muted">Australia</a></li>
-                            <li> <a href="#" class="text-muted">Brasil</a></li>
-                            <li> <a href="#" class="text-muted">Canada</a></li>
-                            <li> <a href="#" class="text-muted">Chile</a></li>
-                            <li> <a href="#" class="text-muted">Czech Republic</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-2 col-md-2 text-white">
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="#" class="text-muted">Turkey</a></li>
-                            <li> <a href="#" class="text-muted">UAE</a></li>
-                            <li> <a href="#" class="text-muted">United Kingdom</a></li>
-                            <li> <a href="#" class="text-muted">United States</a></li>
-                            <li> <a href="#" class="text-muted">Sri Lanka</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-2 col-md-2 text-white">
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="#" class="text-muted">Qatar</a></li>
-                            <li> <a href="#" class="text-muted">Singapore</a></li>
-                            <li> <a href="#" class="text-muted">Slovakia</a></li>
-                            <li> <a href="#" class="text-muted">South Africa</a></li>
-                            <li> <a href="#" class="text-muted">Green Land</a></li>
-                        </ul>
-                    </aside>
-                    <aside class="col-sm-2 col-md-2 text-white">
-                        <ul class="list-unstyled hov_footer">
-                            <li> <a href="#" class="text-muted">Pakistan</a></li>
-                            <li> <a href="#" class="text-muted">Bangladesh</a></li>
-                            <li> <a href="#" class="text-muted">Bhutaan</a></li>
-                            <li> <a href="#" class="text-muted">Nepal</a></li>
-                        </ul>
-                    </aside>
-                </div>
-                <!-- row.// -->
-            </section>
+          </div>
         </div>
-        <!-- //container -->
-        <div class="footer-copyright border-top py-3 bg-light">
-            <div class="container d-flex align-items-center">
-                <p class="mb-0"> © 2023 Company All rights reserved </p>
-                <p class="text-muted mb-0 ms-auto d-flex align-items-center">
-                    <a href="#" class="d-block"><img alt="#" src="img/appstore.png" height="40"></a>
-                    <a href="#" class="d-block ms-3"><img alt="#" src="img/playmarket.png" height="40"></a>
-                </p>
-            </div>
-        </div>
-    </footer>
+      </div>
+
+      <!-- Footer Columns -->
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        <h6 class="fw-bold">Error Pages</h6>
+        <ul class="list-unstyled small">
+          <li><a href="not-found.php" class="text-muted">Not found</a></li>
+          <li><a href="maintence.php" class="text-muted">Maintenance</a></li>
+          <li><a href="coming-soon.php" class="text-muted">Coming Soon</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        <h6 class="fw-bold">Services</h6>
+        <ul class="list-unstyled small">
+          <li><a href="faq.php" class="text-muted">Delivery Support</a></li>
+          <li><a href="contact-us.php" class="text-muted">Contact Us</a></li>
+          <li><a href="terms.php" class="text-muted">Terms of use</a></li>
+          <li><a href="privacy.php" class="text-muted">Privacy policy</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        <h6 class="fw-bold">For Users</h6>
+        <ul class="list-unstyled small">
+          <li><a href="login.php" class="text-muted">User Login</a></li>
+          <li><a href="signup.php" class="text-muted">User Register</a></li>
+          <li><a href="forgot_password.php" class="text-muted">Forgot Password</a></li>
+          <li><a href="profile.php" class="text-muted">Account Settings</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        <h6 class="fw-bold">More Pages</h6>
+        <ul class="list-unstyled small">
+          <li><a href="trending.php" class="text-muted">Trending</a></li>
+          <li><a href="most_popular.php" class="text-muted">Most Popular</a></li>
+          <li><a href="restaurant.php" class="text-muted">Restaurant Detail</a></li>
+          <li><a href="favorites.php" class="text-muted">Favorites</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="border-secondary mt-5">
+
+    <div class="d-flex justify-content-between align-items-center flex-column flex-md-row text-muted small">
+      <p class="mb-2 mb-md-0">© 2025 Featsy. All rights reserved.</p>
+      <div>
+        <a href="#"><img src="img/appstore.png" height="40" class="me-2" alt="App Store"></a>
+        <a href="#"><img src="img/playmarket.png" height="40" alt="Google Play"></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
     <nav id="main-nav">
         <ul class="second-nav">
-            <li><a href="home.php"><i class="feather-home me-2"></i> Homepage</a></li>
-            <li><a href="my_order.php"><i class="feather-list me-2"></i> My Orders</a></li>
+            <li><a href="home.html"><i class="feather-home me-2"></i> Homepage</a></li>
+            <li><a href="my_order.html"><i class="feather-list me-2"></i> My Orders</a></li>
             <li>
                 <a href="#"><i class="feather-edit-2 me-2"></i> Authentication</a>
                 <ul>
-                    <li><a href="login.php">Login</a></li>
-                    <li><a href="signup.php">Register</a></li>
-                    <li><a href="forgot_password.php">Forgot Password</a></li>
-                    <li><a href="verification.php">Verification</a></li>
-                    <li><a href="location.php">Location</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="signup.html">Register</a></li>
+                    <li><a href="forgot_password.html">Forgot Password</a></li>
+                    <li><a href="verification.html">Verification</a></li>
+                    <li><a href="location.html">Location</a></li>
                 </ul>
             </li>
-            <li><a href="favorites.php"><i class="feather-heart me-2"></i> Favorites</a></li>
-            <li><a href="trending.php"><i class="feather-trending-up me-2"></i> Trending</a></li>
-            <li><a href="most_popular.php"><i class="feather-award me-2"></i> Most Popular</a></li>
-            <li><a href="restaurant.php"><i class="feather-paperclip me-2"></i> Restaurant Detail</a></li>
-            <li><a href="checkout.php"><i class="feather-list me-2"></i> Checkout</a></li>
-            <li><a href="successful.php"><i class="feather-check-circle me-2"></i> Successful</a></li>
-            <li><a href="map.php"><i class="feather-map-pin me-2"></i> Live Map</a></li>
+            <li><a href="favorites.html"><i class="feather-heart me-2"></i> Favorites</a></li>
+            <li><a href="trending.html"><i class="feather-trending-up me-2"></i> Trending</a></li>
+            <li><a href="most_popular.html"><i class="feather-award me-2"></i> Most Popular</a></li>
+            <li><a href="restaurant.html"><i class="feather-paperclip me-2"></i> Restaurant Detail</a></li>
+            <li><a href="checkout.html"><i class="feather-list me-2"></i> Checkout</a></li>
+            <li><a href="successful.html"><i class="feather-check-circle me-2"></i> Successful</a></li>
+            <li><a href="map.html"><i class="feather-map-pin me-2"></i> Live Map</a></li>
             <li>
                 <a href="#"><i class="feather-user me-2"></i> Profile</a>
                 <ul>
-                    <li><a href="profile.php">Profile</a></li>
-                    <li><a href="favorites.php">Delivery support</a></li>
-                    <li><a href="contact-us.php">Contact Us</a></li>
-                    <li><a href="terms.php">Terms of use</a></li>
-                    <li><a href="privacy.php">Privacy & Policy</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="favorites.html">Delivery support</a></li>
+                    <li><a href="contact-us.html">Contact Us</a></li>
+                    <li><a href="terms.html">Terms of use</a></li>
+                    <li><a href="privacy.html">Privacy & Policy</a></li>
                 </ul>
             </li>
             <li>
                 <a href="#"><i class="feather-alert-triangle me-2"></i> Error</a>
                 <ul>
-                    <li><a href="not-found.php">Not Found</a>
-                        <li><a href="maintence.php"> Maintence</a>
-                            <li><a href="coming-soon.php">Coming Soon</a>
+                    <li><a href="not-found.html">Not Found</a>
+                        <li><a href="maintence.html"> Maintence</a>
+                            <li><a href="coming-soon.html">Coming Soon</a>
                 </ul>
                 </li>
                 <li>
@@ -560,19 +491,19 @@ include '../php/functions.php';
         </ul>
         <ul class="bottom-nav">
             <li class="email">
-                <a class="text-danger" href="home.php">
+                <a class="text-danger" href="home.html">
                     <p class="h5 m-0"><i class="feather-home text-danger"></i></p>
                     Home
                 </a>
             </li>
             <li class="github">
-                <a href="faq.php">
+                <a href="faq.html">
                     <p class="h5 m-0"><i class="feather-message-circle"></i></p>
                     FAQ
                 </a>
             </li>
             <li class="ko-fi">
-                <a href="contact-us.php">
+                <a href="contact-us.html">
                     <p class="h5 m-0"><i class="feather-phone"></i></p>
                     Help
                 </a>
@@ -582,32 +513,32 @@ include '../php/functions.php';
     <div class="osahan-menu-fotter fixed-bottom bg-white px-3 py-2 text-center d-none">
         <div class="row">
             <div class="col selected">
-                <a href="home.php" class="text-danger small fw-bold text-decoration-none">
+                <a href="home.html" class="text-danger small fw-bold text-decoration-none">
                     <p class="h4 m-0"><i class="feather-home text-danger"></i></p>
                     Home
                 </a>
             </div>
             <div class="col">
-                <a href="most_popular.php" class="text-dark small fw-bold text-decoration-none">
+                <a href="most_popular.html" class="text-dark small fw-bold text-decoration-none">
                     <p class="h4 m-0"><i class="feather-map-pin"></i></p>
                     Trending
                 </a>
             </div>
             <div class="col bg-white rounded-circle mt-n4 px-3 py-2">
                 <div class="bg-danger rounded-circle mt-n0 shadow">
-                    <a href="checkout.php" class="text-white small fw-bold text-decoration-none">
+                    <a href="checkout.html" class="text-white small fw-bold text-decoration-none">
                         <i class="feather-shopping-cart"></i>
                     </a>
                 </div>
             </div>
             <div class="col">
-                <a href="favorites.php" class="text-dark small fw-bold text-decoration-none">
+                <a href="favorites.html" class="text-dark small fw-bold text-decoration-none">
                     <p class="h4 m-0"><i class="feather-heart"></i></p>
                     Favorites
                 </a>
             </div>
             <div class="col">
-                <a href="profile.php" class="text-dark small fw-bold text-decoration-none">
+                <a href="profile.html" class="text-dark small fw-bold text-decoration-none">
                     <p class="h4 m-0"><i class="feather-user"></i></p>
                     Profile
                 </a>
