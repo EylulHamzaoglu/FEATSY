@@ -1,3 +1,26 @@
+
+
+<?php
+session_start();
+include 'db/functions.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: index.php"); // ya da login.php
+    exit();
+}
+$user_id = $_SESSION['user_id'];
+$profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıcı bilgilerini çekmeli
+?>
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,13 +101,13 @@
                  style="width: 32px; height: 32px;">
             <span class="fw-semibold"><?php echo $_SESSION['user_email'] ?? 'Guest'; ?></span>
           </a>
-          <div class="dropdown-menu dropdown-menu-end">
-            <a class="dropdown-item" href="profile.php">My account</a>
-            <a class="dropdown-item" href="faq.php">Delivery support</a>
-            <a class="dropdown-item" href="contact-us.php">Contact us</a>
-            <a class="dropdown-item" href="terms.php">Terms of use</a>
-            <a class="dropdown-item" href="privacy.php">Privacy policy</a>
-            <a class="dropdown-item" href="logout.php">Logout</a>
+        <div class="dropdown-menu dropdown-menu-end">
+         <a class="dropdown-item" href="profile.php">Hesabım</a>
+                                 <a class="dropdown-item" href="faq.php">FAQ</a>
+            <a class="dropdown-item" href="contact-us.php">Bize Ulaşın</a>
+            <a class="dropdown-item" href="terms.php">Kullanım Şartları</a>
+            <a class="dropdown-item" href="privacy.php">Gizlilik Politikası</a>
+            <a class="dropdown-item" href="logout.php">Çıkış</a>
           </div>
         </div>
 
@@ -101,21 +124,26 @@
          
 
         <!-- profile -->
-        <div class="container position-relative">
-            <div class="py-5 osahan-profile row">
-                <div class="col-md-4 mb-3">
-                    <div class="bg-white rounded shadow-sm sticky_sidebar overflow-hidden">
-                        <a href="profile.html" class="">
-                            <div class="d-flex align-items-center p-3">
-                                <div class="left me-3">
-                                    <img alt="#" src="img/user1.jpg" class="rounded-circle">
-                                </div>
-                                <div class="right">
-                                    <h6 class="mb-1 fw-bold">Zeynep Karaca <i class="feather-check-circle text-success"></i></h6>
-                                    <p class="text-muted m-0 small">zeynepkaraca@gmail.com</p>
-                                </div>
-                            </div>
-                        </a>
+              <div class="container position-relative">
+    <div class="py-5 osahan-profile row">
+        <div class="col-md-4 mb-3">
+            <div class="bg-white rounded shadow-sm sticky_sidebar overflow-hidden">
+                <a href="profile.php" class="">
+                    <div class="d-flex align-items-center p-3">
+                        <div class="left me-3">
+                            <img alt="Profil Fotoğrafı" src="<?php echo $profile['profile_picture'] ?? 'img/homelogo/guestlogo.png'; ?>" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
+                        </div>
+                        <div class="right">
+                            <h6 class="mb-1 fw-bold">
+                                <?php echo htmlspecialchars($profile['username'] ?? ''); ?>
+                                <i class="feather-check-circle text-success"></i>
+                            </h6>
+                            <p class="text-muted m-0 small">
+                                <?php echo htmlspecialchars($profile['mail'] ?? ''); ?>
+                            </p>
+                        </div>
+                    </div>
+                </a>
 
                         <!-- profile-details -->
                         <div class="bg-white profile-details">
@@ -125,7 +153,7 @@
                                 </div>
                             </a>
 
-                            <a href="contact-us.html" class="d-flex w-100 align-items-center border-bottom px-3 py-4">
+                            <a href="contact-us.php" class="d-flex w-100 align-items-center border-bottom px-3 py-4">
                                 <div class="left me-3">
                                     <h6 class="fw-bold m-0 text-dark"><i class="feather-phone bg-primary text-white p-2 rounded-circle me-2"></i> İletişim</h6>
                                 </div>
@@ -133,7 +161,7 @@
                                     <span class="fw-bold m-0"><i class="feather-chevron-right h6 m-0"></i></span>
                                 </div>
                             </a>
-                            <a href="terms.html" class="d-flex w-100 align-items-center border-bottom px-3 py-4">
+                            <a href="terms.php" class="d-flex w-100 align-items-center border-bottom px-3 py-4">
                                 <div class="left me-3">
                                     <h6 class="fw-bold m-0 text-dark"><i class="feather-info bg-success text-white p-2 rounded-circle me-2"></i> Kullanım Şartları</h6>
                                 </div>
@@ -141,7 +169,7 @@
                                     <span class="fw-bold m-0"><i class="feather-chevron-right h6 m-0"></i></span>
                                 </div>
                             </a>
-                            <a href="privacy.html" class="d-flex w-100 align-items-center px-3 py-4">
+                            <a href="privacy.php" class="d-flex w-100 align-items-center px-3 py-4">
                                 <div class="left me-3">
                                     <h6 class="fw-bold m-0 text-dark"><i class="feather-lock bg-warning text-white p-2 rounded-circle me-2"></i> Gizlilik Politikası</h6>
                                 </div>

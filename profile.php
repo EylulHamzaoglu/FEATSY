@@ -42,12 +42,12 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
             <span class="fw-semibold"><?php echo $_SESSION['user_email'] ?? 'Guest'; ?></span>
           </a>
           <div class="dropdown-menu dropdown-menu-end">
-            <a class="dropdown-item" href="profile.php">My account</a>
-            <a class="dropdown-item" href="faq.php">Delivery support</a>
-            <a class="dropdown-item" href="contact-us.php">Contact us</a>
-            <a class="dropdown-item" href="terms.php">Terms of use</a>
-            <a class="dropdown-item" href="privacy.php">Privacy policy</a>
-            <a class="dropdown-item" href="logout.php">Logout</a>
+         <a class="dropdown-item" href="profile.php">Hesabım</a>
+                                 <a class="dropdown-item" href="faq.php">FAQ</a>
+            <a class="dropdown-item" href="contact-us.php">Bize Ulaşın</a>
+            <a class="dropdown-item" href="terms.php">Kullanım Şartları</a>
+            <a class="dropdown-item" href="privacy.php">Gizlilik Politikası</a>
+            <a class="dropdown-item" href="logout.php">Çıkış</a>
           </div>
         </div>
 

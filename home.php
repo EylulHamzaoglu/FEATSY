@@ -105,12 +105,12 @@ if ($selected_category) {
             <span class="fw-semibold"><?php echo $_SESSION['user_email'] ?? 'Guest'; ?></span>
           </a>
           <div class="dropdown-menu dropdown-menu-end">
-            <a class="dropdown-item" href="profile.php">My account</a>
-           
-            <a class="dropdown-item" href="contact-us.php">Contact us</a>
-            <a class="dropdown-item" href="terms.php">Terms of use</a>
-            <a class="dropdown-item" href="privacy.php">Privacy policy</a>
-            <a class="dropdown-item" href="logout.php">Logout</a>
+             <a class="dropdown-item" href="profile.php">Hesabım</a>
+                                 <a class="dropdown-item" href="faq.php">FAQ</a>
+            <a class="dropdown-item" href="contact-us.php">Bize Ulaşın</a>
+            <a class="dropdown-item" href="terms.php">Kullanım Şartları</a>
+            <a class="dropdown-item" href="privacy.php">Gizlilik Politikası</a>
+            <a class="dropdown-item" href="logout.php">Çıkış</a>
           </div>
         </div>
 
@@ -264,7 +264,7 @@ if ($selected_category) {
         <div class="d-flex">
           <img src="img/logo.png" alt="Featsy Logo" style="height: 60px;" class="me-3">
           <div>
-            <h6 class="fw-bold text-white">About Us</h6>
+            <h6 class="fw-bold text-white">Hakkımızda</h6>
             <p class="text-muted mb-2 small">Featsy, yerel lezzetleri keşfetmenizi kolaylaştıran modern bir restoran rehberidir. Benzersiz deneyimler için doğru adres.</p>
             <div class="d-flex gap-2">
               <a class="btn btn-sm btn-outline-light" href="#"><i class="feather-facebook"></i></a>
