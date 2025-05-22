@@ -47,6 +47,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 
 <body>
+
+<?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+    <div class="alert alert-success text-center">
+        ✅ Kayıt başarıyla tamamlandı. Giriş yapabilirsiniz.
+    </div>
+<?php endif; ?>
+
 <style>
   html, body {
     margin: 0;

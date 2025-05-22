@@ -10,9 +10,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $result = sign_up($username, $password, $email);
 
-    if ($result['success']) {
-        header("Location: index.php"); // 🔁 index.php'ye yönlendir
-        exit();
+if ($result['success']) {
+    header("Location: index.php?success=1");
+    exit();
+
     } else {
         $message = $result['message']; // ❗ hata varsa mesaj göster
     }
