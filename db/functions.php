@@ -854,3 +854,20 @@ function get_main_image_by_restaurant_id($restaurant_id) {
         return 'img/placeholder.jpg'; // Ana resim yoksa varsayılan göster
     }
 }
+
+function is_restaurant_owner($user_id) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT id FROM restaurant_owners WHERE user_id = ? LIMIT 1");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    return $stmt->get_result()->num_rows > 0;
+}
+
+function get_restaurant_id_by_owner($user_id) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT restaurant_id FROM restaurant_owners WHERE user_id = ? LIMIT 1");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc()['restaurant_id'] ?? null;
+}
