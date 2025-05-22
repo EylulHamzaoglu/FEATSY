@@ -840,3 +840,17 @@ function get_main_image_url($restaurant_id) {
         return "img/restaurants/default.jpg"; // yedek resim
     }
 }
+
+
+function get_main_image_by_restaurant_id($restaurant_id) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT image_url FROM restaurant_images WHERE restaurant_id = ? AND is_main = 1 LIMIT 1");
+    $stmt->bind_param("i", $restaurant_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        return 'img/restaurants/' . $row['image_url'];
+    } else {
+        return 'img/placeholder.jpg'; // Ana resim yoksa varsayılan göster
+    }
+}

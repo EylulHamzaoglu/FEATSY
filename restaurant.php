@@ -151,17 +151,20 @@ $grouped_menu = get_menu_grouped_by_section($restaurant_id);
 <!-- Main Content -->
 
 <?php if ($gallery_images && $gallery_images->num_rows > 0): ?>
-  <div class="mb-4">
+  <div class="container my-5">
     <h5 class="mb-3">Galeri</h5>
-    <div class="slick-slider">
+    <div class="slick-slider rounded overflow-hidden shadow-sm" style="max-width: 100%; border-radius: 16px;">
       <?php while ($img = $gallery_images->fetch_assoc()): ?>
-        <div>
-          <img src="img/restaurants/<?php echo htmlspecialchars($img['image_url']); ?>" class="img-fluid rounded" style="height:300px; width:100%; object-fit:cover;">
+        <div class="p-1">
+          <img src="img/restaurants/<?php echo htmlspecialchars($img['image_url']); ?>" 
+               class="img-fluid w-100 rounded" 
+               style="aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; max-height: 500px;">
         </div>
       <?php endwhile; ?>
     </div>
   </div>
 <?php endif; ?>
+
 
 
 <div class="container my-5">
@@ -192,9 +195,7 @@ $grouped_menu = get_menu_grouped_by_section($restaurant_id);
                             <p class="text-muted mb-0"><?php echo number_format($item['price'], 2); ?> ₺</p>
                         </div>
 
-                        <span class="ms-auto">
-                            <a href="#" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#extras">ADD</a>
-                        </span>
+                        
                     </div>
                 <?php endforeach; ?>
             </div>

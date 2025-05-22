@@ -164,58 +164,52 @@ if (!isset($_SESSION['user_id'])) {
 </form>
     <div class="container my-4">
     <div class="row g-3">
-    <?php
-  $imageCount = 1;
-  foreach ($restaurants as $restaurant):
-      // Fotoğraf isimleri img/restaurants/1.jpg, 2.jpg, ... şeklinde olacak
-      $imagePath = "img/restaurants/" . $imageCount . ".jpg";
-  ?>
+<?php foreach ($restaurants as $restaurant): ?>
+    <?php $imagePath = get_main_image_url($restaurant['id']); ?>
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-        <div class="list-card-image">
-          <div class="star position-absolute">
-            <span class="badge text-bg-success">
-              <i class="feather-star"></i>
-              <?= $restaurant['average_rating'] ?? '0.0' ?>
-              (<?= $restaurant['total_ratings'] ?>)
-            </span>
-          </div>
-          <div class="favourite-heart text-danger position-absolute rounded-circle">
-            <a href="#"><i class="feather-heart"></i></a>
-          </div>
-          <a href="restaurant.php?id=<?= $restaurant['id'] ?>">
-            <img alt="Restaurant Image" src="<?= $imagePath ?>" class="img-fluid item-img w-100" style="height: 200px; object-fit: cover;">
-          </a>
+        <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
+            <div class="list-card-image">
+                <div class="star position-absolute">
+                    <span class="badge text-bg-success">
+                        <i class="feather-star"></i>
+                        <?= $restaurant['average_rating'] ?? '0.0' ?>
+                        (<?= $restaurant['total_ratings'] ?>)
+                    </span>
+                </div>
+                <div class="favourite-heart text-danger position-absolute rounded-circle">
+                    <a href="#"><i class="feather-heart"></i></a>
+                </div>
+                <a href="restaurant.php?id=<?= $restaurant['id'] ?>">
+                    <img alt="Restaurant Image" src="<?= $imagePath ?>" class="img-fluid item-img w-100" style="height: 200px; object-fit: cover;">
+                </a>
+            </div>
+            <div class="p-3 position-relative">
+                <div class="list-card-body">
+                    <h6 class="mb-1">
+                        <a href="restaurant.php?id=<?= $restaurant['id'] ?>" class="text-black">
+                            <?= htmlspecialchars($restaurant['name']) ?>
+                        </a>
+                    </h6>
+                    <p class="text-gray mb-1 small">• <?= $restaurant['category_name'] ?? 'Unknown' ?></p>
+                    <ul class="rating-stars list-unstyled">
+                        <li>
+                            <?php
+                            $rating = round($restaurant['average_rating']);
+                            for ($i = 1; $i <= 5; $i++) {
+                                echo '<i class="feather-star' . ($i <= $rating ? ' star_active' : '') . '"></i>';
+                            }
+                            ?>
+                        </li>
+                    </ul>
+                </div>
+                <div class="list-card-badge">
+                    <span class="badge text-bg-danger">POPULAR</span>
+                </div>
+            </div>
         </div>
-        <div class="p-3 position-relative">
-          <div class="list-card-body">
-            <h6 class="mb-1">
-              <a href="restaurant.php?id=<?= $restaurant['id'] ?>" class="text-black">
-                <?= htmlspecialchars($restaurant['name']) ?>
-              </a>
-            </h6>
-            <p class="text-gray mb-1 small">• <?= $restaurant['category_name'] ?? 'Unknown' ?></p>
-            <ul class="rating-stars list-unstyled">
-              <li>
-                <?php
-                $rating = round($restaurant['average_rating']);
-                for ($i = 1; $i <= 5; $i++) {
-                  echo '<i class="feather-star' . ($i <= $rating ? ' star_active' : '') . '"></i>';
-                }
-                ?>
-              </li>
-            </ul>
-          </div>
-          <div class="list-card-badge">
-            <span class="badge text-bg-danger">POPULAR</span>
-          </div>
-        </div>
-      </div>
     </div>
-  <?php
-    $imageCount++;
-  endforeach;
-  ?>
+<?php endforeach; ?>
+
    </div>
   </div>
 
