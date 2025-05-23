@@ -25,7 +25,7 @@ if ($selected_category) {
     <meta name="description" content="Askbootstrap">
     <meta name="author" content="Askbootstrap">
     <link rel="icon" type="image/png" href="img/fav.png">
-    <title>Swiggiweb - Online Food Ordering Website Template</title>
+    <title>Featsy</title>
     <!-- Slick Slider -->
     <link href="vendor/slick/slick/slick.css" rel="stylesheet" type="text/css">
     <link href="vendor/slick/slick/slick-theme.css" rel="stylesheet" type="text/css">
@@ -101,7 +101,7 @@ if ($selected_category) {
           <!-- 🔍 Search -->
           <a href="search.php" class="d-flex align-items-center text-dark text-decoration-none">
             <i class="feather-search h5 mb-0 me-1"></i>
-            <span class="fw-semibold">Search</span>
+            <span class="fw-semibold">Arama</span>
           </a>
 
           <!-- 👤 Kullanıcı -->
@@ -114,7 +114,7 @@ if ($selected_category) {
             </a>
             <div class="dropdown-menu dropdown-menu-end">
               <a class="dropdown-item" href="profile.php">Hesabım</a>
-              <a class="dropdown-item" href="faq.php">FAQ</a>
+              <a class="dropdown-item" href="faq.php">S.S.S.</a>
               <a class="dropdown-item" href="contact-us.php">Bize Ulaşın</a>
               <a class="dropdown-item" href="terms.php">Kullanım Şartları</a>
               <a class="dropdown-item" href="privacy.php">Gizlilik Politikası</a>
@@ -207,8 +207,8 @@ if ($selected_category) {
             <!-- Most popular -->
               <!-- Most popular -->
            <div class="py-3 title d-flex align-items-center">
-                <h5 class="m-0">Most popular</h5>
-                <a class="fw-bold ms-auto" href="most_popular.php">26 places <i class="feather-chevrons-right"></i></a>
+                <h5 class="m-0">En Popüler</h5>
+                <a class="fw-bold ms-auto" href="search.php"> <i class="feather-chevrons-right"></i></a>
             </div>
    <div class="row g-3">
   <?php
@@ -265,8 +265,14 @@ if ($selected_category) {
   endforeach;
   ?>
 </div>
-<footer class="bg-dark text-white mt-5 w-100">
-  <div class="container-fluid py-5 px-4 px-md-5">
+
+
+
+      <!-- Footer Columns -->
+    
+
+    <footer class="section-footer border-top bg-dark text-white">
+  <div class="container py-5">
     <div class="row gy-4">
       <!-- About Us -->
       <div class="col-lg-4 col-md-6">
@@ -285,42 +291,34 @@ if ($selected_category) {
       </div>
 
       <!-- Footer Columns -->
+    
+
       <div class="col-lg-2 col-md-3 col-sm-6">
-        <h6 class="fw-bold">Error Pages</h6>
+        <h6 class="fw-bold">Servisler</h6>
         <ul class="list-unstyled small">
-          <li><a href="not-found.php" class="text-muted">Not found</a></li>
-          <li><a href="maintence.php" class="text-muted">Maintenance</a></li>
-          <li><a href="coming-soon.php" class="text-muted">Coming Soon</a></li>
+          <li><a href="faq.php" class="text-muted">S.S.S</a></li>
+          <li><a href="contact-us.php" class="text-muted">Bize Ulaşın</a></li>
+          <li><a href="terms.php" class="text-muted">Kullanım Şarltları</a></li>
+          <li><a href="privacy.php" class="text-muted">Gizlilik Politikası</a></li>
         </ul>
       </div>
 
       <div class="col-lg-2 col-md-3 col-sm-6">
-        <h6 class="fw-bold">Services</h6>
+        <h6 class="fw-bold">Kullanıcı İçin</h6>
         <ul class="list-unstyled small">
-          <li><a href="faq.php" class="text-muted">Delivery Support</a></li>
-          <li><a href="contact-us.php" class="text-muted">Contact Us</a></li>
-          <li><a href="terms.php" class="text-muted">Terms of use</a></li>
-          <li><a href="privacy.php" class="text-muted">Privacy policy</a></li>
+          <li><a href="index.php" class="text-muted">Kullanıcı Girişi</a></li>
+          <li><a href="signup.php" class="text-muted">Kayıt Ol</a></li>
+          
+          <li><a href="profile.php" class="text-muted">Hesap Ayarları</a></li>
         </ul>
       </div>
 
       <div class="col-lg-2 col-md-3 col-sm-6">
-        <h6 class="fw-bold">For Users</h6>
+        <h6 class="fw-bold">Daha Fazla</h6>
         <ul class="list-unstyled small">
-          <li><a href="login.php" class="text-muted">User Login</a></li>
-          <li><a href="signup.php" class="text-muted">User Register</a></li>
-          <li><a href="forgot_password.php" class="text-muted">Forgot Password</a></li>
-          <li><a href="profile.php" class="text-muted">Account Settings</a></li>
-        </ul>
-      </div>
-
-      <div class="col-lg-2 col-md-3 col-sm-6">
-        <h6 class="fw-bold">More Pages</h6>
-        <ul class="list-unstyled small">
-          <li><a href="trending.php" class="text-muted">Trending</a></li>
-          <li><a href="home.php" class="text-muted">Most Popular</a></li>
-          <li><a href="restaurant.php" class="text-muted">Restaurant Detail</a></li>
+          <li><a href="search.php" class="text-muted">Arama</a></li>
           <li><a href="favorites.php" class="text-muted">Favorites</a></li>
+          <li><a href="map.php" class="text-muted">Harita</a></li>
         </ul>
       </div>
     </div>
@@ -336,8 +334,6 @@ if ($selected_category) {
     </div>
   </div>
 </footer>
-
-
     
     <!-- Bootstrap core JavaScript -->
     <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>

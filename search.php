@@ -23,7 +23,7 @@ if (!isset($_SESSION['user_id'])) {
     <meta name="description" content="Askbootstrap">
     <meta name="author" content="Askbootstrap">
     <link rel="icon" type="image/png" href="img/fav.png">
-    <title>Swiggiweb - Online Food Ordering Website Template</title>
+    <title>Featsy</title>
     <!-- Slick Slider -->
     <link href="vendor/slick/slick/slick.css" rel="stylesheet" type="text/css">
     <link href="vendor/slick/slick/slick-theme.css" rel="stylesheet" type="text/css">
@@ -110,11 +110,15 @@ if (!isset($_SESSION['user_id'])) {
 
       <!-- ✅ Sağ: Search ve Guest -->
       <div class="col-auto d-flex align-items-center gap-4">
+          <a href="chatbot.php" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="feather-message-circle h5 mb-0 me-1"></i>
+            <span class="fw-semibold">Chatbot</span>
+          </a>
 
         <!-- Search -->
         <a href="search.php" class="d-flex align-items-center text-dark text-decoration-none">
           <i class="feather-search h5 mb-0 me-1"></i>
-          <span class="fw-semibold">Search</span>
+          <span class="fw-semibold">Arama</span>
         </a>
 
         <!-- Guest dropdown -->
@@ -126,12 +130,12 @@ if (!isset($_SESSION['user_id'])) {
             <span class="fw-semibold"><?php echo $_SESSION['user_email'] ?? 'Guest'; ?></span>
           </a>
           <div class="dropdown-menu dropdown-menu-end">
-            <a class="dropdown-item" href="profile.php">My account</a>
-            <a class="dropdown-item" href="faq.php">Delivery support</a>
-            <a class="dropdown-item" href="contact-us.php">Contact us</a>
-            <a class="dropdown-item" href="terms.php">Terms of use</a>
-            <a class="dropdown-item" href="privacy.php">Privacy policy</a>
-            <a class="dropdown-item" href="logout.php">Logout</a>
+               <a class="dropdown-item" href="profile.php">Hesabım</a>
+              <a class="dropdown-item" href="faq.php">S.S.S.</a>
+              <a class="dropdown-item" href="contact-us.php">Bize Ulaşın</a>
+              <a class="dropdown-item" href="terms.php">Kullanım Şartları</a>
+              <a class="dropdown-item" href="privacy.php">Gizlilik Politikası</a>
+              <a class="dropdown-item" href="logout.php">Çıkış</a>
           </div>
         </div>
 
@@ -213,7 +217,7 @@ if (!isset($_SESSION['user_id'])) {
    </div>
   </div>
 
-              <footer class="section-footer border-top bg-dark text-white">
+    <footer class="section-footer border-top bg-dark text-white">
   <div class="container py-5">
     <div class="row gy-4">
       <!-- About Us -->
@@ -221,7 +225,7 @@ if (!isset($_SESSION['user_id'])) {
         <div class="d-flex">
           <img src="img/logo.png" alt="Featsy Logo" style="height: 60px;" class="me-3">
           <div>
-            <h6 class="fw-bold text-white">About Us</h6>
+            <h6 class="fw-bold text-white">Hakkımızda</h6>
             <p class="text-muted mb-2 small">Featsy, yerel lezzetleri keşfetmenizi kolaylaştıran modern bir restoran rehberidir. Benzersiz deneyimler için doğru adres.</p>
             <div class="d-flex gap-2">
               <a class="btn btn-sm btn-outline-light" href="#"><i class="feather-facebook"></i></a>
@@ -233,42 +237,34 @@ if (!isset($_SESSION['user_id'])) {
       </div>
 
       <!-- Footer Columns -->
+    
+
       <div class="col-lg-2 col-md-3 col-sm-6">
-        <h6 class="fw-bold">Error Pages</h6>
+        <h6 class="fw-bold">Servisler</h6>
         <ul class="list-unstyled small">
-          <li><a href="not-found.php" class="text-muted">Not found</a></li>
-          <li><a href="maintence.php" class="text-muted">Maintenance</a></li>
-          <li><a href="coming-soon.php" class="text-muted">Coming Soon</a></li>
+          <li><a href="faq.php" class="text-muted">S.S.S</a></li>
+          <li><a href="contact-us.php" class="text-muted">Bize Ulaşın</a></li>
+          <li><a href="terms.php" class="text-muted">Kullanım Şarltları</a></li>
+          <li><a href="privacy.php" class="text-muted">Gizlilik Politikası</a></li>
         </ul>
       </div>
 
       <div class="col-lg-2 col-md-3 col-sm-6">
-        <h6 class="fw-bold">Services</h6>
+        <h6 class="fw-bold">Kullanıcı İçin</h6>
         <ul class="list-unstyled small">
-          <li><a href="faq.php" class="text-muted">Delivery Support</a></li>
-          <li><a href="contact-us.php" class="text-muted">Contact Us</a></li>
-          <li><a href="terms.php" class="text-muted">Terms of use</a></li>
-          <li><a href="privacy.php" class="text-muted">Privacy policy</a></li>
+          <li><a href="index.php" class="text-muted">Kullanıcı Girişi</a></li>
+          <li><a href="signup.php" class="text-muted">Kayıt Ol</a></li>
+          
+          <li><a href="profile.php" class="text-muted">Hesap Ayarları</a></li>
         </ul>
       </div>
 
       <div class="col-lg-2 col-md-3 col-sm-6">
-        <h6 class="fw-bold">For Users</h6>
+        <h6 class="fw-bold">Daha Fazla</h6>
         <ul class="list-unstyled small">
-          <li><a href="login.php" class="text-muted">User Login</a></li>
-          <li><a href="signup.php" class="text-muted">User Register</a></li>
-          <li><a href="forgot_password.php" class="text-muted">Forgot Password</a></li>
-          <li><a href="profile.php" class="text-muted">Account Settings</a></li>
-        </ul>
-      </div>
-
-      <div class="col-lg-2 col-md-3 col-sm-6">
-        <h6 class="fw-bold">More Pages</h6>
-        <ul class="list-unstyled small">
-          <li><a href="trending.php" class="text-muted">Trending</a></li>
-          <li><a href="home.php" class="text-muted">Most Popular</a></li>
-          <li><a href="restaurant.php" class="text-muted">Restaurant Detail</a></li>
+          <li><a href="search.php" class="text-muted">Arama</a></li>
           <li><a href="favorites.php" class="text-muted">Favorites</a></li>
+          <li><a href="map.php" class="text-muted">Harita</a></li>
         </ul>
       </div>
     </div>

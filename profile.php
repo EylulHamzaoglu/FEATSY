@@ -23,14 +23,22 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
     <img alt="logo" src="img/logo.png" style="height: 140px; width: auto;">
   </a>
 </div>
-
+   <!-- ✍️ Orta: Slogan -->
+        <div class="col-md-6 text-center">
+          <p class="mb-0 fw-bold text-dark fs-5">Ne Yiyeceğini Bilmiyorsan Featsy'e Sor!</p>
+        </div>
       <!-- ✅ Sağ: Search ve Guest -->
       <div class="col-auto d-flex align-items-center gap-4">
+           
+          <a href="chatbot.php" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="feather-message-circle h5 mb-0 me-1"></i>
+            <span class="fw-semibold">Chatbot</span>
+          </a>
 
         <!-- Search -->
         <a href="search.php" class="d-flex align-items-center text-dark text-decoration-none">
           <i class="feather-search h5 mb-0 me-1"></i>
-          <span class="fw-semibold">Search</span>
+          <span class="fw-semibold">Arama</span>
         </a>
 
         <!-- Guest dropdown -->
@@ -60,7 +68,7 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Edit Profile</title>
+  <title>Profili Düzenle</title>
 
   <!-- CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
