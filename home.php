@@ -72,53 +72,62 @@ if ($selected_category) {
         </p>
     </div>
 
-    <header class="section-header">
-        <section class="header-main shadow-sm bg-white">
-  <div class="container">
-    <div class="row align-items-center justify-content-between py-2">
-      <!-- ✅ Sol: Logo -->
-      <div class="col-auto">
-  <a href="home.php" class="brand-wrap mb-0">
-    <img alt="logo" src="img/logo.png" style="height: 140px; width: auto;">
-  </a>
-</div>
-<!-- ✍️ Yeni Yazı Alanı -->
-<div class="col-md-6 text-center">
-    <p class="mb-0 fw-bold text-dark fs-5">Ne Yiyeceğini Bilmiyorsan Featsy'e Sor!</p>
-  </div>
+ <header class="section-header">
+  <section class="header-main shadow-sm bg-white">
+    <div class="container">
+      <div class="row align-items-center justify-content-between py-2">
 
-      <!-- ✅ Sağ: Search ve Guest -->
-      <div class="col-auto d-flex align-items-center gap-4">
-
-        <!-- Search -->
-        <a href="search.php" class="d-flex align-items-center text-dark text-decoration-none">
-          <i class="feather-search h5 mb-0 me-1"></i>
-          <span class="fw-semibold">Search</span>
-        </a>
-
-        <!-- Guest dropdown -->
-        <div class="dropdown">
-          <a href="#" class="dropdown-toggle d-flex align-items-center text-dark text-decoration-none"
-             id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="img/homelogo/guestlogo.png" alt="User" class="rounded-circle me-2"
-                 style="width: 32px; height: 32px;">
-            <span class="fw-semibold"><?php echo $_SESSION['user_email'] ?? 'Guest'; ?></span>
+        <!-- ✅ Sol: Logo -->
+        <div class="col-auto">
+          <a href="home.php" class="brand-wrap mb-0">
+            <img alt="logo" src="img/logo.png" style="height: 140px; width: auto;">
           </a>
-          <div class="dropdown-menu dropdown-menu-end">
-             <a class="dropdown-item" href="profile.php">Hesabım</a>
-                                 <a class="dropdown-item" href="faq.php">FAQ</a>
-            <a class="dropdown-item" href="contact-us.php">Bize Ulaşın</a>
-            <a class="dropdown-item" href="terms.php">Kullanım Şartları</a>
-            <a class="dropdown-item" href="privacy.php">Gizlilik Politikası</a>
-            <a class="dropdown-item" href="logout.php">Çıkış</a>
-          </div>
         </div>
 
+        <!-- ✍️ Orta: Slogan -->
+        <div class="col-md-6 text-center">
+          <p class="mb-0 fw-bold text-dark fs-5">Ne Yiyeceğini Bilmiyorsan Featsy'e Sor!</p>
+        </div>
+
+        <!-- ✅ Sağ: Chatbot, Search, Guest -->
+        <div class="col-auto d-flex align-items-center gap-4">
+
+          <!-- 🤖 Chatbot -->
+          <a href="chatbot.php" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="feather-message-circle h5 mb-0 me-1"></i>
+            <span class="fw-semibold">Chatbot</span>
+          </a>
+
+          <!-- 🔍 Search -->
+          <a href="search.php" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="feather-search h5 mb-0 me-1"></i>
+            <span class="fw-semibold">Search</span>
+          </a>
+
+          <!-- 👤 Kullanıcı -->
+          <div class="dropdown">
+            <a href="#" class="dropdown-toggle d-flex align-items-center text-dark text-decoration-none"
+               id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="img/homelogo/guestlogo.png" alt="User" class="rounded-circle me-2"
+                   style="width: 32px; height: 32px;">
+              <span class="fw-semibold"><?php echo $_SESSION['user_email'] ?? 'Guest'; ?></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end">
+              <a class="dropdown-item" href="profile.php">Hesabım</a>
+              <a class="dropdown-item" href="faq.php">FAQ</a>
+              <a class="dropdown-item" href="contact-us.php">Bize Ulaşın</a>
+              <a class="dropdown-item" href="terms.php">Kullanım Şartları</a>
+              <a class="dropdown-item" href="privacy.php">Gizlilik Politikası</a>
+              <a class="dropdown-item" href="logout.php">Çıkış</a>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
-  </div>
-</section>
-    </header>
+  </section>
+</header>
+
 
     <!-- Devamında gelen sayfa içeriğini aynen bırakabilirsin -->
 
