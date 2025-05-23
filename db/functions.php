@@ -1,6 +1,5 @@
 <?php
 include 'db/config_db.php';
-
 function sign_up($username, $password, $email) {
     global $conn;
 
@@ -8,7 +7,7 @@ function sign_up($username, $password, $email) {
         return ['success' => false, 'message' => 'Tüm alanları doldurmalısınız.'];
     }
 
-    // E-posta kontrolü
+    // Aynı mail var mı?
     $check = $conn->prepare("SELECT id FROM users WHERE mail = ?");
     $check->bind_param("s", $email);
     $check->execute();
@@ -18,11 +17,8 @@ function sign_up($username, $password, $email) {
         return ['success' => false, 'message' => 'Bu e-posta adresi zaten kayıtlı.'];
     }
 
-    // Yeni kullanıcı ekle (status kaldırıldı çünkü artık yok)
-    $stmt = $conn->prepare("
-        INSERT INTO users (username, password, mail, name, surname, phone, birth_date, profile_picture)
-        VALUES (?, ?, ?, '', '', '', NULL, NULL)
-    ");
+    // Veri ekle
+    $stmt = $conn->prepare("INSERT INTO users (username, password, mail) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $username, $password, $email);
 
     if ($stmt->execute()) {
@@ -31,6 +27,7 @@ function sign_up($username, $password, $email) {
         return ['success' => false, 'message' => 'Kayıt sırasında hata oluştu: ' . $stmt->error];
     }
 }
+
 
 
 
