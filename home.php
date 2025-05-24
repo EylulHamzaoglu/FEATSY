@@ -63,6 +63,18 @@ if ($selected_category) {
   font-size: 14px;
   line-height: 1.2;
 }
+
+.favorite-icon i {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    padding: 4px;
+    transition: color 0.3s ease;
+}
+
+.favorite-icon i.text-danger {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
 </style>
 
     <!-- Hoş geldin mesajı -->
@@ -118,6 +130,7 @@ if ($selected_category) {
               <a class="dropdown-item" href="contact-us.php">Bize Ulaşın</a>
               <a class="dropdown-item" href="terms.php">Kullanım Şartları</a>
               <a class="dropdown-item" href="privacy.php">Gizlilik Politikası</a>
+               <a class="dropdown-item" href="favorites.php">Favoriler</a>
               <a class="dropdown-item" href="logout.php">Çıkış</a>
             </div>
           </div>
@@ -228,9 +241,17 @@ if ($selected_category) {
               (<?= $restaurant['total_ratings'] ?>)
             </span>
           </div>
-          <div class="favourite-heart text-danger position-absolute rounded-circle">
-            <a href="#"><i class="feather-heart"></i></a>
-          </div>
+         <?php
+$isFav = is_favorite($_SESSION['user_id'], $restaurant['id']);
+?>
+<div class="favorite-icon position-absolute top-0 end-0 m-2">
+  <a href="#" class="favorite-btn" data-id="<?= $restaurant['id'] ?>">
+    <i class="feather-heart fs-4 <?= $isFav ? 'text-danger' : '' ?>"></i>
+  </a>
+</div>
+
+
+
           <a href="restaurant.php?id=<?= $restaurant['id'] ?>">
             <img alt="Restaurant Image" src="<?= $imagePath ?>" class="img-fluid item-img w-100" style="height: 200px; object-fit: cover;">
           </a>
@@ -317,7 +338,7 @@ if ($selected_category) {
         <h6 class="fw-bold">Daha Fazla</h6>
         <ul class="list-unstyled small">
           <li><a href="search.php" class="text-muted">Arama</a></li>
-          <li><a href="favorites.php" class="text-muted">Favorites</a></li>
+          <li><a href="favorites.php" class="text-muted">Favoriler</a></li>
           <li><a href="map.php" class="text-muted">Harita</a></li>
         </ul>
       </div>
@@ -334,6 +355,33 @@ if ($selected_category) {
     </div>
   </div>
 </footer>
+<script>
+document.querySelectorAll('.favorite-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const icon = this.querySelector('i');
+        const restaurantId = this.dataset.id;
+
+        fetch('toggle_favorite.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'restaurant_id=' + restaurantId
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                icon.classList.toggle('text-danger', data.is_favorited == 1);
+            } else {
+                alert(data.message || 'İşlem başarısız');
+            }
+        });
+    });
+});
+
+</script>
+
+</script>
+
     
     <!-- Bootstrap core JavaScript -->
     <script type="text/javascript" src="vendor/jquery/jquery.min.js"></script>

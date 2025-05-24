@@ -327,7 +327,7 @@ const restaurants = {
         <h6 class="fw-bold">Daha Fazla</h6>
         <ul class="list-unstyled small">
           <li><a href="search.php" class="text-muted">Arama</a></li>
-          <li><a href="favorites.php" class="text-muted">Favorites</a></li>
+          <li><a href="favorites.php" class="text-muted">Favoriler</a></li>
           <li><a href="map.php" class="text-muted">Harita</a></li>
         </ul>
       </div>

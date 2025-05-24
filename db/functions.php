@@ -868,3 +868,81 @@ function get_restaurant_id_by_owner($user_id) {
     $result = $stmt->get_result();
     return $result->fetch_assoc()['restaurant_id'] ?? null;
 }
+
+
+function toggle_favorite($user_id, $restaurant_id) {
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT is_favorited FROM actions WHERE user_id = ? AND restaurant_id = ?");
+    $stmt->bind_param("ii", $user_id, $restaurant_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($row = $result->fetch_assoc()) {
+        $new_status = $row['is_favorited'] == 1 ? 0 : 1;
+        $update = $conn->prepare("UPDATE actions SET is_favorited = ?, updated_at = NOW() WHERE user_id = ? AND restaurant_id = ?");
+        $update->bind_param("iii", $new_status, $user_id, $restaurant_id);
+        $update->execute();
+        return $new_status;
+    } else {
+        $insert = $conn->prepare("INSERT INTO actions (user_id, restaurant_id, is_favorited) VALUES (?, ?, 1)");
+        $insert->bind_param("ii", $user_id, $restaurant_id);
+        $insert->execute();
+        return 1;
+    }
+}
+
+
+function get_user_favorite_restaurants($user_id) {
+    global $conn;
+
+    $sql = "
+        SELECT r.*, 
+               c.name AS category_name,
+               (SELECT AVG(a.rating) FROM actions a WHERE a.restaurant_id = r.id) AS average_rating,
+               (SELECT COUNT(*) FROM actions a2 WHERE a2.restaurant_id = r.id AND a2.rating IS NOT NULL) AS total_ratings
+        FROM restaurants r
+        INNER JOIN actions act ON act.restaurant_id = r.id
+        LEFT JOIN restaurant_categories rc ON r.id = rc.restaurant_id
+        LEFT JOIN categories c ON rc.category_id = c.id
+        WHERE act.user_id = ? AND act.is_favorited = 1
+        GROUP BY r.id
+    ";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $restaurants = [];
+    while ($row = $result->fetch_assoc()) {
+        $restaurants[] = $row;
+    }
+
+    return $restaurants;
+}
+function is_favorite($user_id, $restaurant_id) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT is_favorited FROM actions WHERE user_id = ? AND restaurant_id = ?");
+    $stmt->bind_param("ii", $user_id, $restaurant_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        return $row['is_favorited'] == 1;
+    }
+    return false;
+}
+function is_restaurant_favorited($user_id, $restaurant_id) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT is_favorited FROM actions WHERE user_id = ? AND restaurant_id = ?");
+    $stmt->bind_param("ii", $user_id, $restaurant_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        return $row['is_favorited'] == 1;
+    }
+    return false;
+}
+
+
+
