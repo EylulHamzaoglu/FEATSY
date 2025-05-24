@@ -11,14 +11,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $result = sign_in($email, $password);
 
-    if ($result['success']) {
-        $_SESSION['user_email'] = $email; 
-        $_SESSION['user_id'] = $result['user_id'];
-        header("Location: home.php");
-        exit();
+if ($result['success']) {
+    $_SESSION['user_email'] = $email;
+    $_SESSION['user_id'] = $result['user_id'];
+
+    // Role göre yönlendirme
+    if ($result['role'] === 'admin') {
+        header("Location: admin_panel.php");
+    } elseif ($result['role'] === 'owner') {
+        header("Location: restaurant_dashboard.php");
     } else {
-        $message = $result['message']; // ✅ Hata buraya taşındı
+        header("Location: home.php");
     }
+
+    exit();
+} else {
+    $message = $result['message'];
+}
+
 }
 
 ?>
