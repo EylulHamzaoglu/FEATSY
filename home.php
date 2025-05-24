@@ -126,11 +126,12 @@ if ($selected_category) {
             </a>
             <div class="dropdown-menu dropdown-menu-end">
               <a class="dropdown-item" href="profile.php">Hesabım</a>
+               <a class="dropdown-item" href="favorites.php">Favoriler</a>
               <a class="dropdown-item" href="faq.php">S.S.S.</a>
               <a class="dropdown-item" href="contact-us.php">Bize Ulaşın</a>
               <a class="dropdown-item" href="terms.php">Kullanım Şartları</a>
               <a class="dropdown-item" href="privacy.php">Gizlilik Politikası</a>
-               <a class="dropdown-item" href="favorites.php">Favoriler</a>
+              
               <a class="dropdown-item" href="logout.php">Çıkış</a>
             </div>
           </div>
