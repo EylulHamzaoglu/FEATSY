@@ -40,21 +40,39 @@ function sign_up($username, $password, $email) {
 function sign_in($email, $password) {
     global $conn;
 
-    if (empty($email) || empty($password)) {
-        return ['success' => false, 'message' => 'Lütfen tüm alanları doldurun.'];
-    }
-
-    $stmt = $conn->prepare("SELECT id FROM users WHERE mail = ? AND password = ?");
+    $stmt = $conn->prepare("SELECT * FROM users WHERE mail = ? AND password = ?");
     $stmt->bind_param("ss", $email, $password);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if ($user = $result->fetch_assoc()) {
-        return ['success' => true, 'user_id' => $user['id']];
-    } else {
-        return ['success' => false, 'message' => 'Geçersiz email veya şifre.'];
+    if ($result && $result->num_rows === 1) {
+        $user = $result->fetch_assoc();
+        $user_id = $user['id'];
+
+        // Admin mi?
+        $admin_check = $conn->prepare("SELECT id FROM admins WHERE user_id = ?");
+        $admin_check->bind_param("i", $user_id);
+        $admin_check->execute();
+        $admin_result = $admin_check->get_result();
+        if ($admin_result && $admin_result->num_rows === 1) {
+            return ['success' => true, 'user_id' => $user_id, 'role' => 'admin'];
+        }
+
+        // Restaurant sahibi mi?
+        $owner_check = $conn->prepare("SELECT id FROM restaurant_owners WHERE user_id = ?");
+        $owner_check->bind_param("i", $user_id);
+        $owner_check->execute();
+        $owner_result = $owner_check->get_result();
+        if ($owner_result && $owner_result->num_rows === 1) {
+            return ['success' => true, 'user_id' => $user_id, 'role' => 'owner'];
+        }
+
+        return ['success' => true, 'user_id' => $user_id, 'role' => 'user'];
     }
+
+    return ['success' => false, 'message' => 'E-posta veya şifre hatalı.'];
 }
+
 
 
 // ✅ get_user_by_id($id)
@@ -946,3 +964,72 @@ function is_restaurant_favorited($user_id, $restaurant_id) {
 
 
 
+function is_admin($user_id) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT id FROM admins WHERE user_id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result && $result->num_rows > 0;
+}
+
+function get_all_users() {
+    global $conn;
+    $result = $conn->query("SELECT * FROM users ORDER BY id DESC");
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function get_all_restaurants_with_owners() {
+    global $conn;
+    $sql = "SELECT r.*, u.mail AS owner_email 
+            FROM restaurants r
+            LEFT JOIN restaurant_owners o ON r.id = o.restaurant_id
+            LEFT JOIN users u ON o.user_id = u.id
+            ORDER BY r.id DESC";
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function get_all_comments_with_user_and_restaurant() {
+    global $conn;
+    $sql = "
+        SELECT 
+            comments.id,
+            comments.description,
+            comments.created_at,
+            users.mail AS user_email,
+            restaurants.name AS restaurant_name,
+            actions.rating
+        FROM comments
+        JOIN users ON comments.user_id = users.id
+        JOIN restaurants ON comments.restaurant_id = restaurants.id
+        LEFT JOIN actions 
+            ON comments.user_id = actions.user_id 
+            AND comments.restaurant_id = actions.restaurant_id
+        ORDER BY comments.created_at DESC
+    ";
+
+    return $conn->query($sql);
+}
+
+
+function get_all_restaurant_images_with_names() {
+    global $conn;
+    $sql = "SELECT i.*, r.name AS restaurant_name
+            FROM restaurant_images i
+            JOIN restaurants r ON i.restaurant_id = r.id
+            ORDER BY i.created_at DESC";
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function get_all_restaurant_owners() {
+    global $conn;
+    $sql = "SELECT ro.id, u.mail AS user_email, r.name AS restaurant_name
+            FROM restaurant_owners ro
+            JOIN users u ON ro.user_id = u.id
+            JOIN restaurants r ON ro.restaurant_id = r.id
+            ORDER BY ro.id DESC";
+    $result = $conn->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
