@@ -27,7 +27,7 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
     <meta name="description" content="Askbootstrap">
     <meta name="author" content="Askbootstrap">
     <link rel="icon" type="image/png" href="img/fav.png">
-    <title>Swiggiweb - Online Food Ordering Website Template</title>
+    <title>Featsy - Kullanım Şartları</title>
     <!-- Slick Slider -->
     <link href="vendor/slick/slick/slick.css" rel="stylesheet" type="text/css">
     <link href="vendor/slick/slick/slick-theme.css" rel="stylesheet" type="text/css">
@@ -80,7 +80,11 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
     <img alt="logo" src="img/logo.png" class="img-fluid" style="height: 80px;">
   </a>
 </div>
-
+ <div class="col-auto d-flex align-items-center gap-4">
+          <a href="chatbot.php" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="feather-message-circle h5 mb-0 me-1"></i>
+            <span class="fw-semibold">Chatbot</span>
+          </a>
       <!-- ✅ Sağ: Search ve Guest -->
       <div class="col-auto d-flex align-items-center gap-4">
 

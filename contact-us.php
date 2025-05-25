@@ -9,6 +9,36 @@ if (!isset($_SESSION['user_id'])) {
 }
 $user_id = $_SESSION['user_id'];
 $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıcı bilgilerini çekmeli
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'] ?? '';
+    $mail = $_POST['mail'] ?? '';
+    $phone = $_POST['phone'] ?? '';
+    $message = $_POST['message'] ?? '';
+
+    if (!empty($message)) {
+        // Veritabanına kaydet
+        $stmt = $conn->prepare("INSERT INTO contact_messages (user_id, username, mail, phone, message) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("issss", $user_id, $username, $mail, $phone, $message);
+
+        if ($stmt->execute()) {
+            $success = true;
+        } else {
+            $error = "Mesaj kaydedilemedi.";
+        }
+    } else {
+        $error = "Mesaj boş olamaz.";
+    }
+}
+
+
+
+
+
+
+
+
+
 ?>
 
 
@@ -24,7 +54,7 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
     <meta name="description" content="Askbootstrap">
     <meta name="author" content="Askbootstrap">
     <link rel="icon" type="image/png" href="img/fav.png">
-    <title>Swiggiweb - Online Food Ordering Website Template</title>
+    <title>Featsy - Bize Ulaşın</title>
     <!-- Slick Slider -->
     <link href="vendor/slick/slick/slick.css" rel="stylesheet" type="text/css">
     <link href="vendor/slick/slick/slick-theme.css" rel="stylesheet" type="text/css">
@@ -77,7 +107,11 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
     <img alt="logo" src="img/logo.png" class="img-fluid" style="height: 110px;">
   </a>
 </div>
-
+ <div class="col-auto d-flex align-items-center gap-4">
+          <a href="chatbot.php" class="d-flex align-items-center text-dark text-decoration-none">
+            <i class="feather-message-circle h5 mb-0 me-1"></i>
+            <span class="fw-semibold">Chatbot</span>
+          </a>
       <!-- ✅ Sağ: Search ve Guest -->
       <div class="col-auto d-flex align-items-center gap-4">
 
@@ -86,6 +120,8 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
           <i class="feather-search h5 mb-0 me-1"></i>
           <span class="fw-semibold">Arama</span>
         </a>
+
+
 
         <!-- Guest dropdown -->
         <div class="dropdown">
@@ -175,13 +211,28 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
                         </div>
                     </div>
                 </div>
+
+
+
+
                 <div class="col-md-8 mb-3">
                     <div class="rounded shadow-sm">
                         <div class="osahan-cart-item-profile bg-white rounded shadow-sm p-4">
                             <div class="flex-column">
                                 <h6 class="fw-bold">Kendinizden bahsedin</h6>
                                 <p class="text-muted">Sorularınız varsa ya da sadece merhaba demek isterseniz, bizimle iletişime geçin.</p>
-                                <form>
+                                
+                                
+                                
+                                               <?php if (!empty($success)): ?>
+    <div class="alert alert-success">Mesajınız başarıyla gönderildi.</div>
+<?php elseif (!empty($error)): ?>
+    <div class="alert alert-danger"><?php echo $error; ?></div>
+<?php endif; ?>
+
+                                
+                                <form method="POST" action="">
+
                               <div class="form-group mb-3">
     <label for="name" class="small fw-bold pb-1">Adınız</label>
     <input type="text" class="form-control" id="username" name="username" placeholder="Adınız Soyadınız"
@@ -201,9 +252,11 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
 </div>
                                     <div class="form-group mb-3">
                                         <label for="exampleFormControlTextarea1" class="small fw-bold pb-1">SİZE NASIL YARDIMCI OLABİLİRİZ?</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Merhaba..." rows="3"></textarea>
+                                       <textarea class="form-control" id="exampleFormControlTextarea1" name="message" placeholder="Merhaba..." rows="3"></textarea>
+
                                     </div>
-                                    <a class="btn btn-primary w-100" href="#">GÖNDER</a>
+                                    <button type="submit" class="btn btn-primary w-100">GÖNDER</button>
+
                                 </form>
                                 <!-- Map -->
                                 <div class="mapouter pt-3">

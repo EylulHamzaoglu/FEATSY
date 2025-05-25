@@ -42,7 +42,7 @@ if ($result['success']) {
     <meta name="description" content="Askbootstrap">
     <meta name="author" content="Askbootstrap">
     <link rel="icon" type="image/png" href="img/fav.png">
-    <title>Swiggiweb - Online Food Ordering Website Template</title>
+    <title>Featsy - Giriş Yap</title>
     <!-- Slick Slider -->
     <link href="vendor/slick/slick/slick.css" rel="stylesheet" type="text/css">
     <link href="vendor/slick/slick/slick-theme.css" rel="stylesheet" type="text/css">
@@ -108,8 +108,8 @@ if ($result['success']) {
     <!-- Sağ: Form -->
     <div class="form-container">
       <div class="form-box">
-        <h2 class="text-dark my-0">Welcome Back</h2>
-        <p class="text-50">Sign in to continue</p>
+        <h2 class="text-dark my-0">Hoşgeldiniz</h2>
+        <p class="text-50">Devam etmek için giriş yap</p>
 
                     <!-- HATA MESAJI -->
                     <?php if (!empty($message)): ?>
@@ -119,20 +119,20 @@ if ($result['success']) {
                     <form class="mt-5 mb-4" method="post" action="">
                         <div class="form-group">
                             <label class="text-dark pb-1">Email</label>
-                            <input type="email" name="email" placeholder="Enter Email" class="form-control py-1" required>
+                            <input type="email" name="email" placeholder="Email Gir" class="form-control py-1" required>
                         </div>
                         <div class="form-group">
-                            <label class="text-dark pb-1">Password</label>
-                            <input type="password" name="password" placeholder="Enter Password" class="form-control py-1" required>
+                            <label class="text-dark pb-1">Şifre</label>
+                            <input type="password" name="password" placeholder="Şifre Gir" class="form-control py-1" required>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-lg w-100 my-3">SIGN IN</button>
+                        <button type="submit" class="btn btn-primary btn-lg w-100 my-3">GİRİŞ YAP</button>
                        
                     <a href="forgot_password.php" class="text-decoration-none">
-                        <p class="text-center">Forgot your password?</p>
+                        <p class="text-center">Şifreni mi unuttun?</p>
                     </a>
                     <div class="d-flex align-items-center justify-content-center">
                         <a href="signup.php">
-                            <p class="text-center m-0">Don't have an account? Sign up</p>
+                            <p class="text-center m-0">Hesabın yok mu? Kayıt ol</p>
                         </a>
                     </div>
                 </div>

@@ -27,7 +27,7 @@ if ($result['success']) {
     <meta name="description" content="Askbootstrap">
     <meta name="author" content="Askbootstrap">
     <link rel="icon" type="image/png" href="img/fav.png">
-    <title>Swiggiweb - Sign Up</title>
+    <title>Featsy - Sign Up</title>
     <!-- Slick Slider -->
     <link href="vendor/slick/slick/slick.css" rel="stylesheet" type="text/css">
     <link href="vendor/slick/slick/slick-theme.css" rel="stylesheet" type="text/css">
@@ -83,8 +83,8 @@ if ($result['success']) {
     </div>
          <div class="form-container align-items-start" style="padding-top: 100px;">
       <div class="form-box">
-        <h2 class="text-dark my-0">Hello There.</h2>
-        <p class="text-muted mb-4">Sign up to continue</p>
+        <h2 class="text-dark my-0">Merhaba.</h2>
+        <p class="text-muted mb-4">Devam etmek için kayıt ol</p>
 
                     <!-- HATA MESAJI -->
                     <?php if (!empty($message)): ?>
@@ -94,25 +94,25 @@ if ($result['success']) {
 
                     <form class="mt-4 mb-4" method="post" action="">
                         <div class="form-group">
-                            <label class="text-dark pb-1">Name</label>
-                            <input type="text" placeholder="Enter Name" class="form-control py-1" name="username" id="username">
+                            <label class="text-dark pb-1">İsim</label>
+                            <input type="text" placeholder="İsim Gir" class="form-control py-1" name="username" id="username">
                         </div>
                         <div class="form-group">
                             <label class="text-dark pb-1">Email</label>
-                            <input type="text" placeholder="Enter Mail" class="form-control py-1" name="email" id="email">
+                            <input type="text" placeholder="Email Gir" class="form-control py-1" name="email" id="email">
                         </div>
                         <div class="form-group">
-                            <label class="text-dark pb-1">Password</label>
-                            <input type="password" placeholder="Enter Password" class="form-control py-1" name="password" id="password">
+                            <label class="text-dark pb-1">Şifre</label>
+                            <input type="password" placeholder="Şifre Gir" class="form-control py-1" name="password" id="password">
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg w-100 my-3">
-                            SIGN UP
+                           KAYIT OL
                         </button>
                     </form>
 
                     <div class="new-acc d-flex align-items-center justify-content-center">
-                        <a href="login.php">
-                            <p class="text-center m-0">Already have an account? Sign in</p>
+                        <a href="index.php">
+                            <p class="text-center m-0">Hesabın var mı? Giriş Yap</p>
                         </a>
                     </div>
                 </div>

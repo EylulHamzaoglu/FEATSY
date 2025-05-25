@@ -13,6 +13,43 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
 
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+  <meta charset="utf-8">
+   <link rel="icon" type="image/png" href="img/fav.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Featsy - Profili Düzenle</title>
+
+  <!-- CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/icons/feather.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+
+  <style>
+    .cat-item a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100px;
+      height: 100%;
+      text-align: center;
+    }
+
+    .cat-item img {
+      height: 40px;
+      width: 40px;
+      object-fit: contain;
+      margin-bottom: 5px;
+    }
+
+    .cat-item p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.2;
+    }
+  </style>
+</head>
+
 <header class="section-header">
         <section class="header-main shadow-sm bg-white">
   <div class="container">
@@ -66,41 +103,7 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
 </section>
     </header>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Profili Düzenle</title>
 
-  <!-- CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="vendor/icons/feather.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
-
-  <style>
-    .cat-item a {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100px;
-      height: 100%;
-      text-align: center;
-    }
-
-    .cat-item img {
-      height: 40px;
-      width: 40px;
-      object-fit: contain;
-      margin-bottom: 5px;
-    }
-
-    .cat-item p {
-      margin: 0;
-      font-size: 14px;
-      line-height: 1.2;
-    }
-  </style>
-</head>
 
 <body class="fixed-bottom-bar">
 
@@ -108,7 +111,7 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
     <div class="row justify-content-center">
       <div class="col-md-8 mb-3">
         <div class="card shadow-sm p-4">
-          <h4 class="mb-4">My Account</h4>
+          <h4 class="mb-4">Hesabım</h4>
 
           <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
     <div class="alert alert-success">✅ Profil başarıyla güncellendi.</div>
@@ -119,28 +122,28 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
   <form method="POST" action="update_profile.php">
   <!-- Username -->
   <div class="mb-3">
-    <label for="username" class="form-label">Username</label>
+    <label for="username" class="form-label">Kullanıcı Adı</label>
     <input type="text" name="username" id="username" class="form-control"
       value="<?php echo htmlspecialchars($profile['username'] ?? ''); ?>" required>
   </div>
 
   <!-- First Name -->
   <div class="mb-3">
-    <label for="first_name" class="form-label">First Name</label>
+    <label for="first_name" class="form-label">İsim</label>
     <input type="text" name="first_name" id="first_name" class="form-control"
       value="<?php echo htmlspecialchars($profile['name'] ?? ''); ?>">
   </div>
 
   <!-- Last Name -->
   <div class="mb-3">
-    <label for="last_name" class="form-label">Last Name</label>
+    <label for="last_name" class="form-label">Soy isim</label>
     <input type="text" name="last_name" id="last_name" class="form-control"
       value="<?php echo htmlspecialchars($profile['surname'] ?? ''); ?>">
   </div>
 
   <!-- Phone -->
   <div class="mb-3">
-    <label for="phone" class="form-label">Mobile Number</label>
+    <label for="phone" class="form-label">Telefın Numarası</label>
     <input type="text" name="phone" id="phone" class="form-control"
       value="<?php echo htmlspecialchars($profile['phone'] ?? ''); ?>">
   </div>
@@ -154,12 +157,12 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
 
   <!-- Birth Date -->
   <div class="mb-3">
-    <label for="birth_date" class="form-label">Date of Birth</label>
+    <label for="birth_date" class="form-label">Doğum Tarihi</label>
     <input type="date" name="birth_date" id="birth_date" class="form-control"
       value="<?php echo htmlspecialchars($profile['birth_date'] ?? ''); ?>">
   </div>
 
-  <button type="submit" class="btn btn-danger w-100">Save Changes</button>
+  <button type="submit" class="btn btn-danger w-100">Değişiklikleri Kaydet</button>
 </form>
 
 
@@ -167,12 +170,12 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
           <div class="additional mt-4">
             <div class="change_password my-3">
               <a href="forgot_password.php"
-                class="p-3 border rounded bg-white btn d-flex align-items-center">Change Password
+                class="p-3 border rounded bg-white btn d-flex align-items-center">Şifreyi Değiştir
                 <i class="feather-arrow-right ms-auto"></i></a>
             </div>
             <div class="deactivate_account">
               <a href="forgot_password.php"
-                class="p-3 border rounded bg-white btn d-flex align-items-center">Deactivate Account
+                class="p-3 border rounded bg-white btn d-flex align-items-center">Hesabı Devre Dışı Bırak
                 <i class="feather-arrow-right ms-auto"></i></a>
             </div>
           </div>
@@ -190,7 +193,7 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
         <div class="d-flex">
           <img src="img/logo.png" alt="Featsy Logo" style="height: 60px;" class="me-3">
           <div>
-            <h6 class="fw-bold text-white">About Us</h6>
+            <h6 class="fw-bold text-white">Hakkımızda</h6>
             <p class="text-muted mb-2 small">Featsy, yerel lezzetleri keşfetmenizi kolaylaştıran modern bir restoran rehberidir. Benzersiz deneyimler için doğru adres.</p>
             <div class="d-flex gap-2">
               <a class="btn btn-sm btn-outline-light" href="#"><i class="feather-facebook"></i></a>
