@@ -167,18 +167,20 @@ $grouped_menu = get_menu_grouped_by_section($restaurant_id);
 <!-- Main Content -->
 
 <?php if ($gallery_images && $gallery_images->num_rows > 0): ?>
-  <div class="container my-5">
-    <h5 class="mb-3">Galeri</h5>
-    <div class="slick-slider rounded overflow-hidden shadow-sm" style="max-width: 100%; border-radius: 16px;">
-      <?php while ($img = $gallery_images->fetch_assoc()): ?>
-        <div class="p-1">
-          <img src="img/restaurants/<?php echo htmlspecialchars($img['image_url']); ?>" 
-               class="img-fluid w-100 rounded" 
-               style="aspect-ratio:  4 / 3; object-fit: cover; border-radius: 12px; max-height: 500px;">
-        </div>
-      <?php endwhile; ?>
-    </div>
+ <div class="container my-5">
+  <h5 class="mb-3">Galeri</h5>
+  <div class="slick-slider rounded overflow-hidden shadow-sm" style="max-width: 100%;">
+    <?php while ($img = $gallery_images->fetch_assoc()): ?>
+      <div class="p-1 text-center">
+        <img src="img/restaurants/<?php echo htmlspecialchars($img['image_url']); ?>" 
+             class="img-fluid rounded"
+             style="width: 100%; height: 350px; object-fit: contain; border-radius: 12px;">
+      </div>
+    <?php endwhile; ?>
   </div>
+</div>
+
+
 <?php endif; ?>
 
 
@@ -345,17 +347,16 @@ $grouped_menu = get_menu_grouped_by_section($restaurant_id);
 <script type="text/javascript" src="js/osahan.js"></script>
 
 <script>
-  $(document).ready(function(){
-    $('.slick-slider').slick({
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      adaptiveHeight: true,
-      autoplay: true,
-      autoplaySpeed: 3000
-    });
-  });
+$('.slick-slider').slick({
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  adaptiveHeight: true,
+  autoplay: true,
+  autoplaySpeed: 3000
+});
+
 </script>
 
 
