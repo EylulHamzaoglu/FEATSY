@@ -91,6 +91,54 @@ if (!isset($_SESSION['user_id']) || !is_admin($_SESSION['user_id'])) {
                     </div>
                 </div>
             </div>
+            <!-- Kategoriler, Özellikler ve Fiyat Aralığı -->
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSettings">
+      🛠️ Kategoriler, Özellikler ve Fiyat Aralıkları
+    </button>
+  </h2>
+  <div id="collapseSettings" class="accordion-collapse collapse">
+    <div class="accordion-body">
+      <ul>
+        <li><a href="admin_manage_categories.php">📂 Kategorileri Yönet</a></li>
+        <li><a href="admin_manage_features.php">🏷️ Özellikleri Yönet</a></li>
+        <li><a href="admin_manage_prices.php">💰 Fiyat Aralıklarını Yönet</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- İletişim Formu Mesajları -->
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContact">
+      📬 İletişim Formu Mesajları
+    </button>
+  </h2>
+  <div id="collapseContact" class="accordion-collapse collapse">
+    <div class="accordion-body">
+      <a href="admin_contact_messages.php">Mesajları Görüntüle</a>
+    </div>
+  </div>
+</div>
+
+<!-- Hareket Onayları -->
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseApprovals">
+      ✅ Restoran & Kullanıcı Onayları
+    </button>
+  </h2>
+  <div id="collapseApprovals" class="accordion-collapse collapse">
+    <div class="accordion-body">
+      <ul>
+        <li><a href="admin_user_approvals.php">👤 Kullanıcı Onayları</a></li>
+        <li><a href="admin_restaurant_approvals.php">🍽️ Restoran Onayları</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
 
         </div>
 
