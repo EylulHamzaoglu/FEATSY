@@ -62,31 +62,48 @@ if (!isset($_SESSION['user_id'])) {
   line-height: 1.2;
 }
 .search-form-custom {
-  margin-top: 40px; /* önceki değeri 20px ise bunu artırdık */
-  margin-bottom: 30px; /* alttan da azıcık nefes aldır */
+  margin-top: 60px;
+  margin-bottom: 40px;
 }
 
 .search-bar {
   border-radius: 50px;
   overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  background: #fff;
+  transition: box-shadow 0.3s ease;
+}
+
+.search-bar:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
 .search-bar input {
   border: none;
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
+  border-radius: 50px 0 0 50px;
+  padding-left: 20px;
+  font-size: 16px;
+  height: 50px;
 }
 
 .search-bar button {
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
-  padding: 0 20px;
+  border: none;
+  background: linear-gradient(to right, #ff5722, #ff9800);
+  color: white;
+  border-radius: 0 50px 50px 0;
+  padding: 0 25px;
+  transition: background 0.3s ease;
+}
+
+.search-bar button:hover {
+  background: linear-gradient(to right, #e64a19, #f57c00);
 }
 
 .search-bar input:focus {
   box-shadow: none;
   outline: none;
 }
+
 
 </style>
 
@@ -159,14 +176,15 @@ if (!isset($_SESSION['user_id'])) {
         </div>
     </div>
 
-    <form method="GET" action="search.php" class="d-flex justify-content-center mb-4">
+   <form method="GET" action="search.php" class="d-flex justify-content-center search-form-custom">
   <div class="input-group search-bar w-50">
-    <input type="text" name="q" class="form-control form-control-lg shadow-sm" placeholder="Restoran Ara" required>
-    <button class="btn btn-outline-primary" type="submit">
+    <input type="text" name="q" class="form-control" placeholder="İstediğiniz Restoranı Aratın" required>
+    <button class="btn" type="submit">
       <i class="feather-search"></i>
     </button>
   </div>
 </form>
+
     <div class="container my-4">
     <div class="row g-3">
 <?php foreach ($restaurants as $restaurant): ?>

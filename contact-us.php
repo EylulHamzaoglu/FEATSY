@@ -11,15 +11,12 @@ $user_id = $_SESSION['user_id'];
 $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıcı bilgilerini çekmeli
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'] ?? '';
-    $mail = $_POST['mail'] ?? '';
-    $phone = $_POST['phone'] ?? '';
     $message = $_POST['message'] ?? '';
 
     if (!empty($message)) {
         // Veritabanına kaydet
-        $stmt = $conn->prepare("INSERT INTO contact_messages (user_id, username, mail, phone, message) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("issss", $user_id, $username, $mail, $phone, $message);
+        $stmt = $conn->prepare("INSERT INTO contact_messages (user_id, message) VALUES (?, ?)");
+        $stmt->bind_param("is", $user_id, $message);
 
         if ($stmt->execute()) {
             $success = true;
@@ -30,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Mesaj boş olamaz.";
     }
 }
+
 
 
 
@@ -134,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <div class="dropdown-menu dropdown-menu-end">
             <a class="dropdown-item" href="profile.php">Hesabım</a>
              <a class="dropdown-item" href="favorites.php">Favoriler</a>
-                                 <a class="dropdown-item" href="faq.php">FAQ</a>
+                                 <a class="dropdown-item" href="faq.php">S.S.S.</a>
             <a class="dropdown-item" href="contact-us.php">Bize Ulaşın</a>
             <a class="dropdown-item" href="terms.php">Kullanım Şartları</a>
             <a class="dropdown-item" href="privacy.php">Gizlilik Politikası</a>
@@ -231,33 +229,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php endif; ?>
 
                                 
-                                <form method="POST" action="">
+                   <form method="POST" action="">
+  <!-- Adınız -->
+  <div class="form-group mb-3">
+    <label for="username" class="form-label">Adınız</label>
+    <input type="text" class="form-control" id="username" name="username" 
+           value="<?php echo htmlspecialchars($profile['username'] ?? ''); ?>" readonly>
+  </div>
 
-                              <div class="form-group mb-3">
-    <label for="name" class="small fw-bold pb-1">Adınız</label>
-    <input type="text" class="form-control" id="username" name="username" placeholder="Adınız Soyadınız"
-        value="<?php echo htmlspecialchars($profile['username'] ?? ''); ?>">
-</div>
+  <!-- Email -->
+  <div class="form-group mb-3">
+    <label for="mail" class="form-label">E-posta</label>
+    <input type="email" class="form-control" id="mail" name="mail" 
+           value="<?php echo htmlspecialchars($profile['mail'] ?? ''); ?>" readonly>
+  </div>
 
-<div class="form-group mb-3">
-    <label for="mail" class="small fw-bold pb-1">E-posta Adresiniz</label>
-    <input type="email" class="form-control" id="mail" name="mail" placeholder="zeynepkaraca@gmail.com"
-        value="<?php echo htmlspecialchars($profile['mail'] ?? ''); ?>" readonly>
-</div>
+  <!-- Telefon -->
+  <div class="form-group mb-3">
+    <label for="phone" class="form-label">Telefon</label>
+    <input type="text" class="form-control" id="phone" name="phone" 
+           value="<?php echo htmlspecialchars($profile['phone'] ?? ''); ?>" readonly>
+  </div>
 
-<div class="form-group mb-3">
-    <label for="phone" class="small fw-bold pb-1">Telefon Numaranız</label>
-    <input type="text" class="form-control" id="phone" name="phone" placeholder="506 899 78 45"
-        value="<?php echo htmlspecialchars($profile['phone'] ?? ''); ?>">
-</div>
-                                    <div class="form-group mb-3">
-                                        <label for="exampleFormControlTextarea1" class="small fw-bold pb-1">SİZE NASIL YARDIMCI OLABİLİRİZ?</label>
-                                       <textarea class="form-control" id="exampleFormControlTextarea1" name="message" placeholder="Merhaba..." rows="3"></textarea>
+  <!-- Mesaj -->
+  <div class="form-group mb-4">
+    <label for="exampleFormControlTextarea1" class="form-label">Mesajınız</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" name="message" placeholder="Merhaba..." rows="3"></textarea>
+  </div>
 
-                                    </div>
-                                    <button type="submit" class="btn btn-primary w-100">GÖNDER</button>
+  <button type="submit" class="btn btn-primary w-100">GÖNDER</button>
+</form>
 
-                                </form>
                                 <!-- Map -->
                                 <div class="mapouter pt-3">
                                     <div class="gmap_canvas"><iframe class="w-100 h-100 border-0" id="gmap_canvas" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12030.68901114405!2d28.97835945!3d41.0082376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab9b8882fd391%3A0x5bb0ed8b36d1f8b6!2sİstanbul!5e0!3m2!1str!2str!4v1715790000000!5m2!1str!2str"></iframe></div>

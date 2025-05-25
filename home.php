@@ -147,7 +147,7 @@ if ($selected_category) {
 
 
         <!-- Filters -->
-         
+         <main>
          
         <div class="container">
             <div class="cat-slider">
@@ -286,8 +286,9 @@ $isFav = is_favorite($_SESSION['user_id'], $restaurant['id']);
     $imageCount++;
   endforeach;
   ?>
-</div>
+</div> <!-- <-- En dış container'ın kapanışı -->
 
+</main>
 
 
       <!-- Footer Columns -->

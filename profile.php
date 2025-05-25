@@ -89,7 +89,7 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
           <div class="dropdown-menu dropdown-menu-end">
          <a class="dropdown-item" href="profile.php">Hesabım</a>
           <a class="dropdown-item" href="favorites.php">Favoriler</a>
-                                 <a class="dropdown-item" href="faq.php">FAQ</a>
+                                 <a class="dropdown-item" href="faq.php">S.S.S.</a>
             <a class="dropdown-item" href="contact-us.php">Bize Ulaşın</a>
             <a class="dropdown-item" href="terms.php">Kullanım Şartları</a>
             <a class="dropdown-item" href="privacy.php">Gizlilik Politikası</a>
