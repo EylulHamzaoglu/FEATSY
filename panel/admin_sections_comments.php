@@ -27,14 +27,14 @@ $comments = $conn->query("
     <tbody>
         <?php while ($c = $comments->fetch_assoc()): ?>
             <tr>
-                <td><?= $c['id'] ?></td>
-                <td><?= htmlspecialchars($c['user_email']) ?></td>
-                <td><?= htmlspecialchars($c['restaurant_name']) ?></td>
-                <td><?= htmlspecialchars($c['comment_text']) ?></td>
-                <td><?= $c['rating'] ?>/5</td>
-                <td><?= date('d.m.Y H:i', strtotime($c['created_at'])) ?></td>
+                <td><?= $c["id"] ?></td>
+                <td><?= htmlspecialchars($c["user_email"]) ?></td>
+                <td><?= htmlspecialchars($c["restaurant_name"]) ?></td>
+                <td><?= htmlspecialchars($c["comment_text"]) ?></td>
+                <td><?= $c["rating"] ?>/5</td>
+                <td><?= date("d.m.Y H:i", strtotime($c["created_at"])) ?></td>
                 <td>
-                    <a href="admin_comment_delete.php?id=<?= $c['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Silinsin mi?')">Sil</a>
+                    <a href="admin_comment_delete.php?id=<?= $c["id"] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Silinsin mi?')">Sil</a>
                 </td>
             </tr>
         <?php endwhile; ?>

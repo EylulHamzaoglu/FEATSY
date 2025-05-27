@@ -31,7 +31,7 @@ if (!isset($_SESSION['user_id']) || !is_admin($_SESSION['user_id'])) {
                 </h2>
                 <div id="collapseUsers" class="accordion-collapse collapse show">
                     <div class="accordion-body">
-                        <?php include 'admin_sectionsusers.php'; ?>
+                        <?php include 'panel/admin_sections_users.php'; ?>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@ if (!isset($_SESSION['user_id']) || !is_admin($_SESSION['user_id'])) {
                 </h2>
                 <div id="collapseRestaurants" class="accordion-collapse collapse">
                     <div class="accordion-body">
-                        <?php include 'admin_sectionsrestaurants.php'; ?>
+                        <?php include 'panel/admin_sections_restaurants.php'; ?>
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@ if (!isset($_SESSION['user_id']) || !is_admin($_SESSION['user_id'])) {
                 </h2>
                 <div id="collapseImages" class="accordion-collapse collapse">
                     <div class="accordion-body">
-                        <?php include 'admin_sectionsimages.php'; ?>
+                        <?php include 'panel/admin_sections_images.php'; ?>
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@ if (!isset($_SESSION['user_id']) || !is_admin($_SESSION['user_id'])) {
                 </h2>
                 <div id="collapseComments" class="accordion-collapse collapse">
                     <div class="accordion-body">
-                        <?php include 'admin_sectionscomments.php'; ?>
+                        <?php include 'panel/admin_sections_comments.php'; ?>
                     </div>
                 </div>
             </div>
