@@ -53,7 +53,7 @@ $comments = get_restaurant_comments($restaurant_id);
 <?php endif; ?>
 
 
-<form method="POST" action="update_restaurant.php" class="mb-4">
+<form method="POST" action="panel/update_restaurant.php" class="mb-4">
   <div class="mb-2">
     <input type="text" name="name" class="form-control" value="<?= htmlspecialchars($restaurant['name']) ?>" placeholder="Restoran adı">
   </div>
@@ -69,7 +69,7 @@ $comments = get_restaurant_comments($restaurant_id);
 
 
 <h2 class="mt-5">Menü Yönetimi</h2>
-<a href="add_menu_item.php" class="btn btn-success mb-3">+ Yeni ürün ekle</a>
+<a href="panel/add_menu_item.php" class="btn btn-success mb-3">+ Yeni ürün ekle</a>
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -86,8 +86,8 @@ $comments = get_restaurant_comments($restaurant_id);
                 <td><?= htmlspecialchars($item['name']) ?></td>
                 <td><?= number_format($item['price'], 2) ?> ₺</td>
                 <td>
-                    <a href="edit_menu_item.php?id=<?= $item['id'] ?>" class="btn btn-sm btn-warning">Düzenle</a>
-                    <a href="delete_menu_item.php?id=<?= $item['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bu ürünü silmek istediğinize emin misiniz?');">Sil</a>
+                    <a href="panel/edit_menu_item.php?id=<?= $item['id'] ?>" class="btn btn-sm btn-warning">Düzenle</a>
+                    <a href="panel/delete_menu_item.php?id=<?= $item['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bu ürünü silmek istediğinize emin misiniz?');">Sil</a>
                 </td>
             </tr>
         <?php endwhile; ?>
@@ -97,7 +97,7 @@ $comments = get_restaurant_comments($restaurant_id);
 
 
 <h2 class="mt-5">Fotoğraf Galerisi</h2>
-<a href="upload_image.php" class="btn btn-info mb-3">+ Fotoğraf Yükle</a>
+<a href="panel/upload_image.php" class="btn btn-info mb-3">+ Fotoğraf Yükle</a>
 <div class="row g-2">
 <?php while ($img = $gallery->fetch_assoc()): ?>
   <div class="col-md-3">
@@ -107,7 +107,7 @@ $comments = get_restaurant_comments($restaurant_id);
         <?php if ($img['is_main']): ?>
           <span class="badge bg-success mb-2">Ana Görsel</span><br>
         <?php endif; ?>
-        <a href="delete_image.php?id=<?= $img['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bu görseli silmek istediğinizden emin misiniz?')">Sil</a>
+        <a href="panel/delete_image.php?id=<?= $img['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bu görseli silmek istediğinizden emin misiniz?')">Sil</a>
       </div>
     </div>
   </div>
