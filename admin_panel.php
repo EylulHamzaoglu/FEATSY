@@ -73,7 +73,7 @@ if (!isset($_SESSION['user_id']) || !is_admin($_SESSION['user_id'])) {
                 </h2>
                 <div id="collapseComments" class="accordion-collapse collapse">
                     <div class="accordion-body">
-                        <?php include 'panel/admin_sections_comments.php'; ?>
+                        <?php include 'admin_sectionscomments.php'; ?>
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@ if (!isset($_SESSION['user_id']) || !is_admin($_SESSION['user_id'])) {
                 </h2>
                 <div id="collapseOwners" class="accordion-collapse collapse">
                     <div class="accordion-body">
-                        <?php include 'admin_sectionsowners.php'; ?>
+                        <?php include 'panel/admin_sections_owners.php'; ?>
                     </div>
                 </div>
             </div>
@@ -101,9 +101,9 @@ if (!isset($_SESSION['user_id']) || !is_admin($_SESSION['user_id'])) {
   <div id="collapseSettings" class="accordion-collapse collapse">
     <div class="accordion-body">
       <ul>
-        <li><a href="admin_manage_categories.php">📂 Kategorileri Yönet</a></li>
-        <li><a href="admin_manage_features.php">🏷️ Özellikleri Yönet</a></li>
-        <li><a href="admin_manage_prices.php">💰 Fiyat Aralıklarını Yönet</a></li>
+        <li><a href="panel/admin_manage_categories.php">📂 Kategorileri Yönet</a></li>
+        <li><a href="panel/admin_manage_features.php">🏷️ Özellikleri Yönet</a></li>
+        <li><a href="panel/admin_manage_prices.php">💰 Fiyat Aralıklarını Yönet</a></li>
       </ul>
     </div>
   </div>
@@ -118,7 +118,7 @@ if (!isset($_SESSION['user_id']) || !is_admin($_SESSION['user_id'])) {
   </h2>
   <div id="collapseContact" class="accordion-collapse collapse">
     <div class="accordion-body">
-      <a href="admin_contact_messages.php">Mesajları Görüntüle</a>
+      <a href="panel/admin_contact_messages.php">Mesajları Görüntüle</a>
     </div>
   </div>
 </div>
@@ -133,8 +133,8 @@ if (!isset($_SESSION['user_id']) || !is_admin($_SESSION['user_id'])) {
   <div id="collapseApprovals" class="accordion-collapse collapse">
     <div class="accordion-body">
       <ul>
-        <li><a href="admin_user_approvals.php">👤 Kullanıcı Onayları</a></li>
-        <li><a href="admin_restaurant_approvals.php">🍽️ Restoran Onayları</a></li>
+        <li><a href="panel/admin_user_approvals.php">👤 Kullanıcı Onayları</a></li>
+        <li><a href="panel/admin_restaurant_approvals.php">🍽️ Restoran Onayları</a></li>
       </ul>
     </div>
   </div>

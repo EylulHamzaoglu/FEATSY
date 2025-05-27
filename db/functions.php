@@ -1,5 +1,6 @@
 <?php
-include 'db/config_db.php';
+include(__DIR__ . "/config_db.php");
+
 function sign_up($username, $password, $email) {
     global $conn;
 

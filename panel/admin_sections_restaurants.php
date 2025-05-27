@@ -28,8 +28,8 @@ $restaurants = get_all_restaurants_with_owners();
                     <?= $rest['is_active'] ? '<span class="badge bg-success">Aktif</span>' : '<span class="badge bg-secondary">Pasif</span>' ?>
                 </td>
                 <td>
-                    <a href="admin_restaurant_edit.php?id=<?= $rest['id'] ?>" class="btn btn-sm btn-primary">Düzenle</a>
-                    <a href="admin_restaurant_delete.php?id=<?= $rest['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bu restoranı silmek istediğine emin misin?')">Sil</a>
+                    <a href="panel/admin_restaurant_edit.php?id=<?= $rest['id'] ?>" class="btn btn-sm btn-primary">Düzenle</a>
+                    <a href="panel/admin_restaurant_delete.php?id=<?= $rest['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bu restoranı silmek istediğine emin misin?')">Sil</a>
                 </td>
             </tr>
         <?php endforeach; ?>
