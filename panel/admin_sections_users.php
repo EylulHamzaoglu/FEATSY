@@ -1,10 +1,6 @@
 <?php
-session_start();
-include '../db/functions.php';
-if (!isset($_SESSION['user_id']) || !is_admin($_SESSION['user_id'])) {
-    header("Location: index.php");
-    exit;
-}
+include_once 'db/functions.php';
+
 $users = get_all_users(); // Fonksiyon zaten functions.php'de tanımlı olmalı
 ?>
 
