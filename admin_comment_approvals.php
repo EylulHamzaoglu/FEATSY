@@ -1,9 +1,9 @@
 <?php
 session_start();
 include 'db/functions.php';
-if ($_SESSION['role'] !== 'admin') {
-    header("Location: ../index.php");
-    exit();
+if (!isset($_SESSION['user_id']) || !is_admin($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit;
 }
 
 if (isset($_GET['approve'])) {
