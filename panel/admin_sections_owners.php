@@ -20,7 +20,7 @@ $owners = get_all_restaurant_owners();
                 <td><?= htmlspecialchars($o['user_email']) ?></td>
                 <td><?= htmlspecialchars($o['restaurant_name']) ?></td>
                 <td>
-                    <a href="admin_owner_delete.php?id=<?= $o['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bu ilişkiyi silmek istediğinize emin misiniz?')">Sil</a>
+                    <a href="panel/admin_owner_delete.php?id=<?= $o['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bu ilişkiyi silmek istediğinize emin misiniz?')">Sil</a>
                 </td>
             </tr>
         <?php endforeach; ?>

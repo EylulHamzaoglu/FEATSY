@@ -28,7 +28,7 @@ $images = get_all_restaurant_images_with_names();
                 </td>
                 <td><?= date('d.m.Y H:i', strtotime($img['created_at'])) ?></td>
                 <td>
-                    <a href="admin_image_delete.php?id=<?= $img['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bu görseli silmek istediğinize emin misiniz?')">Sil</a>
+                    <a href="panel/admin_image_delete.php?id=<?= $img['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bu görseli silmek istediğinize emin misiniz?')">Sil</a>
                 </td>
             </tr>
         <?php endforeach; ?>
