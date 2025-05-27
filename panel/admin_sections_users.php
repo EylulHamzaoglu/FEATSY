@@ -24,8 +24,8 @@ $users = get_all_users(); // Fonksiyon zaten functions.php'de tanımlı olmalı
                 <td><?= htmlspecialchars($user['phone'] ?? '-') ?></td>
                 <td><?= htmlspecialchars($user['birth_date'] ?? '-') ?></td>
                 <td>
-                    <a href="panel/admin_user_edit.php?id=<?= $user['id'] ?>" class="btn btn-sm btn-primary">Düzenle</a>
-                    <a href="panel/admin_user_delete.php?id=<?= $user['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Silmek istediğine emin misin?')">Sil</a>
+                    <a href="admin_user_edit.php?id=<?= $user['id'] ?>" class="btn btn-sm btn-primary">Düzenle</a>
+                    <a href="admin_user_delete.php?id=<?= $user['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Silmek istediğine emin misin?')">Sil</a>
                 </td>
             </tr>
         <?php endforeach; ?>
