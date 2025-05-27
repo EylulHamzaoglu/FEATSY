@@ -282,7 +282,8 @@ const restaurants = {
         <!-- slider -->
 
 
-    <footer class="section-footer border-top bg-dark text-white">
+   <footer class="section-footer border-top text-white" style="background-color: #121212;">
+
   <div class="container py-5">
     <div class="row gy-4">
       <!-- About Us -->

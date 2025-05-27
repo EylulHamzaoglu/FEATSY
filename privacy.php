@@ -44,7 +44,7 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
     <link href="vendor/sidebar/demo.css" rel="stylesheet">
 </head>
 
-<body class="fixed-bottom-bar">
+<body class="d-flex flex-column min-vh-100">
     <style>
 .cat-item a {
   display: flex;
@@ -108,7 +108,7 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
         <div class="dropdown-menu dropdown-menu-end">
          <a class="dropdown-item" href="profile.php">Hesabım</a>
           <a class="dropdown-item" href="favorites.php">Favoriler</a>
-                                 <a class="dropdown-item" href="faq.php">FAQ</a>
+                                 <a class="dropdown-item" href="faq.php">S.S.S.</a>
             <a class="dropdown-item" href="contact-us.php">Bize Ulaşın</a>
             <a class="dropdown-item" href="terms.php">Kullanım Şartları</a>
             <a class="dropdown-item" href="privacy.php">Gizlilik Politikası</a>
@@ -129,6 +129,7 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
          
 
         <!-- profile -->
+         <main>
               <div class="container position-relative">
     <div class="py-5 osahan-profile row">
         <div class="col-md-4 mb-3">
@@ -203,8 +204,10 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
                 </div>
             </div>
         </div>
+</main>
         <!-- Footer -->
-<footer class="section-footer border-top bg-dark text-white">
+  
+    <footer class="section-footer border-top bg-dark text-white mt-auto">
   <div class="container py-5">
     <div class="row gy-4">
       <!-- About Us -->
@@ -212,7 +215,7 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
         <div class="d-flex">
           <img src="img/logo.png" alt="Featsy Logo" style="height: 60px;" class="me-3">
           <div>
-            <h6 class="fw-bold text-white">About Us</h6>
+            <h6 class="fw-bold text-white">Hakkımızda</h6>
             <p class="text-muted mb-2 small">Featsy, yerel lezzetleri keşfetmenizi kolaylaştıran modern bir restoran rehberidir. Benzersiz deneyimler için doğru adres.</p>
             <div class="d-flex gap-2">
               <a class="btn btn-sm btn-outline-light" href="#"><i class="feather-facebook"></i></a>
@@ -223,7 +226,10 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
         </div>
       </div>
 
-       <div class="col-lg-2 col-md-3 col-sm-6">
+      <!-- Footer Columns -->
+    
+
+      <div class="col-lg-2 col-md-3 col-sm-6">
         <h6 class="fw-bold">Servisler</h6>
         <ul class="list-unstyled small">
           <li><a href="faq.php" class="text-muted">S.S.S</a></li>
@@ -252,6 +258,7 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
         </ul>
       </div>
     </div>
+
     <hr class="border-secondary mt-5">
 
     <div class="d-flex justify-content-between align-items-center flex-column flex-md-row text-muted small">
@@ -263,7 +270,6 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
     </div>
   </div>
 </footer>
-
             </div>
         </div>
     </div>

@@ -102,68 +102,79 @@ $favorites = get_user_favorite_restaurants($user_id);
     <link href="vendor/icons/feather.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 </head>
+
 <body>
+  <body class="d-flex flex-column min-vh-100">
 <i class="feather-heart text-danger"></i>
-
-<div class="container pt-4">
+<div class="container pt-4 flex-grow-1">
   <h3 class="mb-4">Favori Restoranlarım</h3>
-  <div class="row g-3">
-    <?php foreach ($favorites as $restaurant): ?>
-      <?php $imagePath = get_main_image_url($restaurant['id']); ?>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-        <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-          <div class="list-card-image">
-            <div class="star position-absolute">
-              <span class="badge text-bg-success">
-                <i class="feather-star"></i>
-                <?= number_format($restaurant['average_rating'], 1) ?>
 
-              </span>
+  <?php if (empty($favorites)): ?>
+    <div class="text-center mt-5">
+      <i class="feather-heart text-muted" style="font-size: 48px;"></i>
+      <h5 class="mt-3 text-muted">Henüz favori restoranınız yok.</h5>
+      <p class="text-muted">Restoranları keşfederek favorilerinize ekleyebilirsiniz.</p>
+      <a href="home.php" class="btn btn-outline-primary">Keşfetmeye Başla</a>
+    </div>
+  <?php else: ?>
+    <div class="row g-3">
+      <?php foreach ($favorites as $restaurant): ?>
+        <?php $imagePath = get_main_image_url($restaurant['id']); ?>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
+            <div class="list-card-image">
+              <div class="star position-absolute">
+                <span class="badge text-bg-success">
+                  <i class="feather-star"></i>
+                  <?= number_format($restaurant['average_rating'], 1) ?>
+                </span>
+              </div>
+              <a href="restaurant.php?id=<?= $restaurant['id'] ?>">
+                <img alt="Restaurant Image" src="<?= $imagePath ?>" class="img-fluid item-img w-100" style="height: 200px; object-fit: cover;">
+              </a>
             </div>
-            <a href="restaurant.php?id=<?= $restaurant['id'] ?>">
-              <img alt="Restaurant Image" src="<?= $imagePath ?>" class="img-fluid item-img w-100" style="height: 200px; object-fit: cover;">
-            </a>
-          </div>
-          <div class="p-3 position-relative">
-            <div class="list-card-body">
-              <h6 class="mb-1">
-                <a href="restaurant.php?id=<?= $restaurant['id'] ?>" class="text-black">
-                  <?= htmlspecialchars($restaurant['name']) ?>
-                </a>
-              </h6>
-              <p class="text-gray mb-1 small"><?= $restaurant['category_name'] ?? 'Kategori Yok' ?></p>
-              <ul class="rating-stars list-unstyled">
-                <li>
-                  <?php
-                  $rating = round($restaurant['average_rating']);
-                  for ($i = 1; $i <= 5; $i++) {
-                    echo '<i class="feather-star' . ($i <= $rating ? ' star_active' : '') . '"></i>';
-                  }
-                  ?>
-                </li>
-              </ul>
-            </div>
-            <div class="list-card-badge">
-              <span class="badge text-bg-danger">FAVORİ</span>
+            <div class="p-3 position-relative">
+              <div class="list-card-body">
+                <h6 class="mb-1">
+                  <a href="restaurant.php?id=<?= $restaurant['id'] ?>" class="text-black">
+                    <?= htmlspecialchars($restaurant['name']) ?>
+                  </a>
+                </h6>
+                <p class="text-gray mb-1 small"><?= $restaurant['category_name'] ?? 'Kategori Yok' ?></p>
+                <ul class="rating-stars list-unstyled">
+                  <li>
+                    <?php
+                    $rating = round($restaurant['average_rating']);
+                    for ($i = 1; $i <= 5; $i++) {
+                      echo '<i class="feather-star' . ($i <= $rating ? ' star_active' : '') . '"></i>';
+                    }
+                    ?>
+                  </li>
+                </ul>
+              </div>
+              <div class="list-card-badge">
+                <span class="badge text-bg-danger">FAVORİ</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    <?php endforeach; ?>
-  </div>
+      <?php endforeach; ?>
+    </div>
+  <?php endif; ?>
 </div>
 
 
 </body>
+                  
 </html>
-
+                 
                         <!-- brand-wrap.// -->
                  
                     <!-- col.// -->
                    
   
    
-    <footer class="section-footer border-top bg-dark text-white">
+    <footer class="section-footer border-top bg-dark text-white mt-auto">
   <div class="container py-5">
     <div class="row gy-4">
       <!-- About Us -->
