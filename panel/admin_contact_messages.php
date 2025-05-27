@@ -12,8 +12,13 @@ if (isset($_GET['delete'])) {
     $conn->query("DELETE FROM contact_messages WHERE id = $id");
 }
 
-// Tüm mesajları çek
-$messages = $conn->query("SELECT * FROM contact_messages ORDER BY created_at DESC");
+$messages = $conn->query("
+    SELECT cm.*, u.username, u.mail, u.phone
+    FROM contact_messages cm
+    JOIN users u ON cm.user_id = u.id
+    ORDER BY cm.created_at DESC
+");
+
 ?>
 
 <!DOCTYPE html>
