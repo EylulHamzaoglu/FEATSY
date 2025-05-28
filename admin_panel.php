@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 include_once 'db/functions.php';
 
@@ -50,6 +51,9 @@ if (!isset($_SESSION['user_id']) || !is_admin($_SESSION['user_id'])) {
                 </div>
             </div>
 
+
+            
+
             <!-- 📸 Görseller -->
             <div class="accordion-item">
                 <h2 class="accordion-header">
@@ -73,7 +77,7 @@ if (!isset($_SESSION['user_id']) || !is_admin($_SESSION['user_id'])) {
                 </h2>
                 <div id="collapseComments" class="accordion-collapse collapse">
                     <div class="accordion-body">
-                        <?php include 'admin_sectionscomments.php'; ?>
+                        <?php include 'admin_sections_comments.php'; ?>
                     </div>
                 </div>
             </div>
@@ -140,12 +144,31 @@ if (!isset($_SESSION['user_id']) || !is_admin($_SESSION['user_id'])) {
   </div>
 </div>
 
-        </div>
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseApproval">
+      💬 Admin Yorum Onayları
+    </button>
+  </h2>
+  <div id="collapseApproval" class="accordion-collapse collapse">
+    <div class="accordion-body">
+      <a href="panel/admin_comment_approvals.php">Yorumları Görüntüle</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
 
         <div class="text-center mt-5">
             <a href="logout.php" class="btn btn-outline-danger">🚪 Çıkış Yap</a>
         </div>
     </div>
+
+
 
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>

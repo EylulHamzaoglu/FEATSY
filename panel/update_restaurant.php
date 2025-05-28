@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db/functions.php';
+include '../db/functions.php';
 
 if (!isset($_SESSION['user_id']) || !is_restaurant_owner($_SESSION['user_id'])) {
     header("Location: index.php");
@@ -18,9 +18,9 @@ if (!empty($name) && !empty($opening_hours)) {
     $stmt = $conn->prepare("UPDATE restaurants SET name = ?, opening_hours = ?, description = ? WHERE id = ?");
     $stmt->bind_param("sssi", $name, $opening_hours, $description, $restaurant_id);
 
-    if ($stmt->execute()) {
-        header("Location: restaurant_panel.php?success=1");
-        exit;
+if ($stmt->execute()) {
+    header("Location: ../restaurant_dashboard.php?success=1");
+    exit;
     } else {
         echo "Hata: " . $stmt->error;
     }

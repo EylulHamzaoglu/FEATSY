@@ -5,6 +5,7 @@ if (!isset($_SESSION['user_id']) || !is_admin($_SESSION['user_id'])) {
     header("Location: index.php");
     exit;
 }
+
 $user_id = intval($_GET['id']);
 $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
 $stmt->bind_param("i", $user_id);
@@ -23,7 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['is_active'])) {
     $update = $conn->prepare("UPDATE users SET is_active = ? WHERE id = ?");
     $update->bind_param("ii", $new_status, $user_id);
     $update->execute();
-    header("Location: admin_panel.php"); // veya users listesine yönlendir
+  header("Location: ../admin_panel.php");
+ // veya users listesine yönlendir
     exit;
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db/functions.php';
+include '../db/functions.php';
 
 if (!isset($_SESSION['user_id']) || !is_restaurant_owner($_SESSION['user_id'])) {
     header("Location: index.php");

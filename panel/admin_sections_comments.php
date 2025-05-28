@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include 'db/functions.php';
 
 $query = "
@@ -44,5 +44,5 @@ $result = $conn->query($query);
                 </tr>
             <?php endwhile; ?>
         </tbody>
-    </table>
+    </table>
 </div>

@@ -212,7 +212,7 @@ include 'db/functions.php';
           </div>
           <div class="card-body p-0">
             <iframe 
-              src="https://featsychat.cereinsight.com"
+              src="https://db.cereinsight.com"
               width="100%" height="600" frameborder="0"
               style="border-radius: 0 0 20px 20px;">
             </iframe>
