@@ -77,7 +77,7 @@ if (!isset($_SESSION['user_id']) || !is_admin($_SESSION['user_id'])) {
                 </h2>
                 <div id="collapseComments" class="accordion-collapse collapse">
                     <div class="accordion-body">
-                        <?php include 'admin_sections_comments.php'; ?>
+                        <?php include 'panel/admin_sections_comments.php'; ?>
                     </div>
                 </div>
             </div>

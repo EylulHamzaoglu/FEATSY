@@ -329,6 +329,21 @@ function unlike_restaurant($user_id, $restaurant_id) {
         return "Hata: " . $stmt->error;
     }
 }
+
+
+function approve_comment($user_id, $comment_id) {
+    global $conn;
+    $stmt = $conn->prepare("UPDATE comments SET is_approved = 1 WHERE id = ?");
+    $stmt->bind_param("i", $comment_id);
+    $stmt->execute();
+
+    if ($stmt->execute()) {
+        return "Yorum onaylandı.";
+    } else {
+        return "Hata: " . $stmt->error;
+    }
+}
+
 // ✅ get_user_comments($user_id)
 // Kullanıcının yaptığı tüm yorumları restoran adıyla birlikte getirir.
 
@@ -339,7 +354,7 @@ function get_user_comments($user_id) {
         SELECT c.id, c.description, c.created_at, r.name AS restaurant_name
         FROM comments c
         JOIN restaurants r ON c.restaurant_id = r.id
-        WHERE c.user_id = ?
+        WHERE c.user_id = ? AND c.is_approved = 1
         ORDER BY c.created_at DESC
     ");
     $stmt->bind_param("i", $user_id);
@@ -697,7 +712,7 @@ function get_restaurant_comments($restaurant_id) {
         FROM comments c
         LEFT JOIN users u ON c.user_id = u.id
         LEFT JOIN actions a ON c.user_id = a.user_id AND c.restaurant_id = a.restaurant_id
-        WHERE c.restaurant_id = ?
+        WHERE c.restaurant_id = ? AND C.is_approved = 1
         ORDER BY c.created_at DESC
     ";
     
@@ -1007,6 +1022,8 @@ function get_all_comments_with_user_and_restaurant() {
         LEFT JOIN actions 
             ON comments.user_id = actions.user_id 
             AND comments.restaurant_id = actions.restaurant_id
+        WHERE
+            comments.is_approved = 0
         ORDER BY comments.created_at DESC
     ";
 
