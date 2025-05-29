@@ -119,7 +119,7 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
     <div class="alert alert-danger">❌ Profil güncellenirken bir hata oluştu.</div>
 <?php endif; ?>
 
-  <form method="POST" action="update_profile.php">
+  <form method="POST" action="panel/update_profile.php">
   <!-- Username -->
   <div class="mb-3">
     <label for="username" class="form-label">Kullanıcı Adı</label>
