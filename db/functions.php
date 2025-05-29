@@ -129,7 +129,7 @@ function get_all_restaurants() {
 // ✅ get_most_popular_restaurants()
 // Tüm restoranları getirir. Varsayılan olarak aktif restoranları döner.
 
-function get_popular_restaurants($limit = 8) {
+function get_popular_restaurants($limit = 20) {
     global $conn;
     $sql = "
         SELECT 
@@ -997,10 +997,11 @@ function get_all_users() {
 
 function get_all_restaurants_with_owners() {
     global $conn;
-    $sql = "SELECT r.*, u.mail AS owner_email 
+    $sql = "SELECT r.*, u.mail AS owner_email , CONCAT(pr.label, '(', pr.min_price, '-', pr.max_price, ')') as price_description
             FROM restaurants r
             LEFT JOIN restaurant_owners o ON r.id = o.restaurant_id
             LEFT JOIN users u ON o.user_id = u.id
+            LEFT JOIN price_ranges pr ON r.price_range_id = pr.id
             ORDER BY r.id DESC";
     $result = $conn->query($sql);
     return $result->fetch_all(MYSQLI_ASSOC);

@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
 
     if ($file['error'] === 0) {
         $filename = uniqid() . "_" . basename($file['name']);
-        $target_dir = "img/restaurants/";
+        $target_dir = "../img/restaurants/";
         $target_file = $target_dir . $filename;
 
         if (move_uploaded_file($file["tmp_name"], $target_file)) {
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
             $stmt->bind_param("isi", $restaurant_id, $filename, $is_main);
             $stmt->execute();
 
-            header("Location: restaurant_panel.php?image_uploaded=1");
+            header("Location: ../restaurant_dashboard.php?image_uploaded=1");
             exit;
         } else {
             $message = "Dosya yüklenemedi.";

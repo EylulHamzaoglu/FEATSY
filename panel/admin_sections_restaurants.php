@@ -22,7 +22,7 @@ $restaurants = get_all_restaurants_with_owners();
                 <td><?= $rest['id'] ?></td>
                 <td><?= htmlspecialchars($rest['name']) ?></td>
                 <td><?= htmlspecialchars($rest['owner_email'] ?? '-') ?></td>
-                <td><?= htmlspecialchars($rest['price_range_id']) ?></td>
+                <td><?= htmlspecialchars($rest['price_description']) ?></td>
                 <td><?= htmlspecialchars($rest['opening_hours']) ?></td>
                 <td>
                     <?= $rest['is_active'] ? '<span class="badge bg-success">Aktif</span>' : '<span class="badge bg-secondary">Pasif</span>' ?>

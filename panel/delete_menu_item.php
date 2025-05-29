@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db/functions.php';
+include '../db/functions.php';
 
 if (!isset($_SESSION['user_id']) || !is_restaurant_owner($_SESSION['user_id'])) {
     header("Location: index.php");
@@ -19,6 +19,6 @@ $stmt = $conn->prepare("DELETE FROM restaurant_menu_items WHERE id = ? AND resta
 $stmt->bind_param("ii", $id, $restaurant_id);
 $stmt->execute();
 
-header("Location: restaurant_panel.php?deleted=1");
+header("Location: ../restaurant_dashboard.php?deleted=1");
 exit;
 ?>
