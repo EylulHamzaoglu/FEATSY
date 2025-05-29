@@ -1,5 +1,5 @@
 <?php
-include 'db/functions.php';
+include '../db/functions.php';
 
 $success = "";
 $error = "";
@@ -79,6 +79,7 @@ if (!empty($_POST['feature_ids'])) {
     <title>Restoran Kaydı</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<a href="../admin_panel.php" class="btn btn-outline-secondary">← Admin Panele Dön</a>
 <body class="bg-light py-5">
 <div class="container">
     <div class="card p-4 shadow">

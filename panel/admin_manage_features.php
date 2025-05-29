@@ -46,6 +46,8 @@ $features = $conn->query("SELECT * FROM features ORDER BY id DESC");
         <button type="submit" class="btn btn-primary">Ekle</button>
     </form>
 
+<a href="../admin_panel.php" class="btn btn-outline-secondary">← Admin Panele Dön</a>
+
     <table class="table table-bordered">
         <thead class="table-dark">
             <tr>

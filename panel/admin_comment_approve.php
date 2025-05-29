@@ -11,8 +11,8 @@ $success = approve_comment(1, $comment_id);
 
 // 3. İşlem sonucuna göre yönlendir
 if ($success) {
-    header("Location: admin_panel.php?comment_deleted=1");
+    header("Location: ../admin_panel.php?comment_approve=1");
 } else {
-    header("Location: admin_panel.php?comment_deleted=0");
+    header("Location: ../admin_panel.php?comment_approve=0");
 }
 exit;

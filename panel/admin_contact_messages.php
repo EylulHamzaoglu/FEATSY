@@ -30,6 +30,8 @@ $messages = $conn->query("
 <body class="p-4">
     <h3 class="mb-4">📬 İletişim Formu Mesajları</h3>
 
+<a href="../admin_panel.php" class="btn btn-outline-secondary">← Admin Panele Dön</a>
+
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
             <tr>

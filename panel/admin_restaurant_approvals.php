@@ -34,6 +34,8 @@ $result = $conn->query("SELECT r.*, u.username, u.mail FROM restaurants r
 <body class="p-4">
     <h3 class="mb-4">🍽️ Onay Bekleyen Restoranlar</h3>
 
+<a href="../admin_panel.php" class="btn btn-outline-secondary">← Admin Panele Dön</a>
+
     <?php if ($result->num_rows === 0): ?>
         <div class="alert alert-success">Onay bekleyen restoran bulunmamaktadır.</div>
     <?php else: ?>

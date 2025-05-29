@@ -38,6 +38,8 @@ $prices = $conn->query("SELECT * FROM price_ranges ORDER BY min_price ASC");
 <body class="p-4">
     <h3 class="mb-4">💰 Fiyat Aralığı Yönetimi</h3>
 
+<a href="../admin_panel.php" class="btn btn-outline-secondary">← Admin Panele Dön</a>
+
     <form method="POST" class="row g-2 align-items-end mb-4">
         <div class="col-md-3">
             <label class="form-label">Min Fiyat</label>

@@ -131,32 +131,35 @@ if (!isset($_SESSION['user_id']) || !is_admin($_SESSION['user_id'])) {
 <div class="accordion-item">
   <h2 class="accordion-header">
     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseApprovals">
-      ✅ Restoran & Kullanıcı Onayları
+      ✅ Restoran Onayları
     </button>
   </h2>
   <div id="collapseApprovals" class="accordion-collapse collapse">
     <div class="accordion-body">
       <ul>
-        <li><a href="panel/admin_user_approvals.php">👤 Kullanıcı Onayları</a></li>
+        
         <li><a href="panel/admin_restaurant_approvals.php">🍽️ Restoran Onayları</a></li>
       </ul>
     </div>
   </div>
 </div>
 
+
+<!-- Restoran Kaydı -->
 <div class="accordion-item">
   <h2 class="accordion-header">
-    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseApproval">
-      💬 Admin Yorum Onayları
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRestaurantAdd">
+      📄 Restoran Kaydı
     </button>
   </h2>
-  <div id="collapseApproval" class="accordion-collapse collapse">
+  <div id="collapseRestaurantAdd" class="accordion-collapse collapse">
     <div class="accordion-body">
-      <a href="panel/admin_comment_approvals.php">Yorumları Görüntüle</a>
+      <ul>
+        <li><a href="panel/register_restaurant.php">➕ Yeni Restoran Ekle</a></li>
+      </ul>
     </div>
   </div>
 </div>
-
 
 
 
