@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
 <head>
   <meta charset="UTF-8">
   <title>Görsel Yükle</title>
-  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
 </head>
 <body class="container py-5">
   <h1>Restoran Görseli Yükle</h1>

@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("ssdii", $section, $name, $price, $id, $restaurant_id);
     $stmt->execute();
 
-    header("Location: restaurant_panel.php?updated=1");
+     header("Location: ../restaurant_dashboard.php?updated=1");
     exit;
 }
 ?>
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Menü Ürünü Düzenle</title>
-    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
 </head>
 <body class="container py-5">
     <h1>Menü Ürünü Düzenle</h1>
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="number" step="0.01" name="price" value="<?= htmlspecialchars($item['price']) ?>" class="form-control" required>
         </div>
         <button type="submit" class="btn btn-primary">Güncelle</button>
-        <a href="restaurant_panel.php" class="btn btn-secondary">Geri Dön</a>
+        <a href="restaurant_dashboard.php" class="btn btn-secondary">Geri Dön</a>
     </form>
 </body>
 </html>
