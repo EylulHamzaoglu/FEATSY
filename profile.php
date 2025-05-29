@@ -143,8 +143,8 @@ $profile = get_user_profile($user_id); // Bu fonksiyon veritabanından kullanıc
 
   <!-- Phone -->
   <div class="mb-3">
-    <label for="phone" class="form-label">Telefın Numarası</label>
-    <input type="text" name="phone" id="phone" class="form-control"
+    <label for="phone" class="form-label">Telefon Numarası</label>
+    <input type="tel" name="phone" id="phone" class="form-control"
       value="<?php echo htmlspecialchars($profile['phone'] ?? ''); ?>">
   </div>
 

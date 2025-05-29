@@ -23,10 +23,10 @@ $stmt = $conn->prepare("UPDATE users SET username = ?, name = ?, surname = ?, ph
 $stmt->bind_param("sssssi", $username, $first_name, $last_name, $phone, $birth_date, $user_id);
 
 if ($stmt->execute()) {
-    header("Location: profile.php?success=1");
+    header("Location: ../profile.php?success=1");
     exit;
 } else {
-    header("Location: profile.php?error=1");
+    header("Location: ../profile.php?error=1");
     exit;
 }
 ?>
